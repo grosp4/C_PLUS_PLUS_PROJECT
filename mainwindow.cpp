@@ -1,13 +1,49 @@
+/******************************************************************************/
+/** \file       MainWindow.c
+ *  \brief      Controls the GUI an all elements which are taking interactions with it
+ *******************************************************************************
+ *
+ *  \brief     Controls the GUI an all elements which are taking interactions with it
+ *
+ *  \mainpage   -
+ *
+ *  \details    -
+ *
+ *  \addtogroup  MainWindow.c
+ *  \brief      -
+ *
+ *  \authors    grosp4
+ *
+ *  \date       16.04.2015
+ *
+ *  \remark     Last Modification
+ *               \li grosp4, 16.04.2015, Created
+ *
+ *
+ *
+ ******************************************************************************/
+
+/* Includes ------------------------------------------------------------------*/
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+
+/* Private typedef -----------------------------------------------------------*/
+/* Private define ------------------------------------------------------------*/
+/* Private macro -------------------------------------------------------------*/
+/* Private variables ---------------------------------------------------------*/
+
 
 /* initialize counting variable */
 int NumberOfMeasurements = 0;
 int MaxNumberOfMeasurements = 0;
+char myString[] = "Error";
 
 /* initialize measurement array */
 /* it will be used as following: 10 measurements, 4 values each measurement: X,Y TOP, X,Y BOTTOM */
 int  MeasurementValues [10][4] = {0} ;
+
+/* Private function prototypes -----------------------------------------------*/
+/* Private functions ---------------------------------------------------------*/
 
 
 /* Constructor */
@@ -19,13 +55,24 @@ MainWindow::MainWindow(QWidget *parent) :
 
 
     /* get relativ values of the picture*/
-     QPixmap Pixmap_X(qApp->applicationDirPath() + "/pictures/madeingermany.jpeg");
-       ui->PictureLabel->setPixmap(Pixmap_X);
+    QPixmap Pixmap_X(qApp->applicationDirPath() + "//madeingermany.jpg");
+
+    if (Pixmap_X.isNull())
+    {
+        ui->PictureLabel->setText("Picture could not be loaded");
+    }
+    else
+    {
+        ui->PictureLabel->setPixmap(Pixmap_X);
+    }
+
 
     /* connect a signal to a slot function to change a value of a label */
     connect(ui->getvaluesbutton,SIGNAL(clicked()),this,SLOT(getValueButtonClicked()));
     connect(ui->backButton,SIGNAL(clicked()),this,SLOT(getBackButtonClicked()));
     connect(ui->nextButon,SIGNAL(clicked()),this,SLOT(getNextButtonClicked()));
+    connect(ui->portButton,SIGNAL(clicked()),this,SLOT(getPortValue()));
+
 
 }
 
@@ -35,7 +82,7 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-
+/************************************************************** MainWindow Functions ************************************************************/
 
 void MainWindow::getValueButtonClicked()
 {
@@ -163,12 +210,39 @@ int MainWindow::setamountofmeasurements(int increase)
 {
     if (increase)
     {
-        NumberOfMeasurements = NumberOfMeasurements + 1;
-        MaxNumberOfMeasurements = MaxNumberOfMeasurements +1;
+        if ( NumberOfMeasurements < 10)
+        {
+            NumberOfMeasurements = NumberOfMeasurements + 1;
+            MaxNumberOfMeasurements = MaxNumberOfMeasurements +1;
+        }
+        else
+        {
+            NumberOfMeasurements = NumberOfMeasurements;
+        }
+
     }
     else
     {
-         NumberOfMeasurements = NumberOfMeasurements - 1;
+        if(NumberOfMeasurements > 0 )
+        {
+            NumberOfMeasurements = NumberOfMeasurements - 1;
+        }
+        else
+        {
+            NumberOfMeasurements = NumberOfMeasurements;
+        }
     }
    return  NumberOfMeasurements;
+}
+
+
+
+/* read portnumber and forward it */
+void MainWindow::getPortValue()
+{
+    QString myString;
+    myString = ui->PortEdit->text();
+    ui->PortLabel->setText(myString);
+    ui->statusLabel->clear();
+    ui->statusLabel->setText("Port has been set to " + myString );
 }

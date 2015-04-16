@@ -19,5 +19,5 @@ HEADERS  += mainwindow.h
 
 FORMS    += mainwindow.ui
 
-IMAGES += pictures/madeingermany.png
+IMAGES += madeingermany.png
 

@@ -227,16 +227,6 @@
      </rect>
     </property>
    </widget>
-   <widget class="QSpinBox" name="spinBox">
-    <property name="geometry">
-     <rect>
-      <x>100</x>
-      <y>40</y>
-      <width>42</width>
-      <height>22</height>
-     </rect>
-    </property>
-   </widget>
    <widget class="Line" name="line">
     <property name="geometry">
      <rect>
@@ -451,7 +441,7 @@
      <bool>true</bool>
     </property>
    </widget>
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
       <x>1180</x>
@@ -491,7 +481,7 @@
      </item>
     </layout>
    </widget>
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
       <x>1010</x>
@@ -544,7 +534,7 @@
      <string>BACK</string>
     </property>
    </widget>
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
       <x>360</x>
@@ -570,27 +560,56 @@
      </item>
     </layout>
    </widget>
+   <widget class="QLineEdit" name="PortEdit">
+    <property name="geometry">
+     <rect>
+      <x>80</x>
+      <y>40</y>
+      <width>113</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>set number</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="portButton">
+    <property name="geometry">
+     <rect>
+      <x>80</x>
+      <y>70</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>accept</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="statusLabel">
+    <property name="geometry">
+     <rect>
+      <x>980</x>
+      <y>700</y>
+      <width>301</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>status message appear here</string>
+    </property>
+   </widget>
+   <zorder>layoutWidget</zorder>
+   <zorder>layoutWidget</zorder>
+   <zorder>layoutWidget</zorder>
    <zorder>PortLabel</zorder>
    <zorder>TeamnameLabel</zorder>
-   <zorder>desiredXTop</zorder>
-   <zorder>desiredYTop</zorder>
-   <zorder>desiredXBottom</zorder>
-   <zorder>desiredYBottom</zorder>
    <zorder>RealvaluesLabel</zorder>
-   <zorder>Teamname_7</zorder>
-   <zorder>Teamname_8</zorder>
-   <zorder>Teamname_9</zorder>
-   <zorder>Teamname_10</zorder>
-   <zorder>realXTopValue</zorder>
-   <zorder>realYTopValue</zorder>
-   <zorder>realXBottomValue</zorder>
-   <zorder>realYBottomValue</zorder>
    <zorder>layoutWidget</zorder>
    <zorder>getvaluesbutton</zorder>
    <zorder>generateOutputfile</zorder>
    <zorder>sendButton</zorder>
    <zorder>Commandfield</zorder>
-   <zorder>spinBox</zorder>
    <zorder>line</zorder>
    <zorder>line_2</zorder>
    <zorder>line_3</zorder>
@@ -598,16 +617,16 @@
    <zorder>line_5</zorder>
    <zorder>layoutWidget_2</zorder>
    <zorder>CommandlineLabel</zorder>
-   <zorder>backButton</zorder>
    <zorder>nextButon</zorder>
    <zorder>backButton</zorder>
    <zorder>ObersavationLabel</zorder>
    <zorder>NumberLabel</zorder>
-   <zorder>WhereTheElementShouldBeLabel</zorder>
-   <zorder>WhereTheElementIsLabel</zorder>
    <zorder>PictureLabel</zorder>
    <zorder>SignWhereItShouldBeLabel</zorder>
    <zorder>SignWhereItIsLabel</zorder>
+   <zorder>PortEdit</zorder>
+   <zorder>portButton</zorder>
+   <zorder>statusLabel</zorder>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
