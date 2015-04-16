@@ -17,6 +17,7 @@ public:
 public slots:
     void getValueButtonClicked();
     void getBackButtonClicked();
+    void getNextButtonClicked();
 
 private:
     Ui::MainWindow *ui;

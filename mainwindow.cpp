@@ -3,6 +3,7 @@
 
 /* initialize counting variable */
 int NumberOfMeasurements = 0;
+int MaxNumberOfMeasurements = 0;
 
 /* initialize measurement array */
 /* it will be used as following: 10 measurements, 4 values each measurement: X,Y TOP, X,Y BOTTOM */
@@ -24,7 +25,7 @@ MainWindow::MainWindow(QWidget *parent) :
     /* connect a signal to a slot function to change a value of a label */
     connect(ui->getvaluesbutton,SIGNAL(clicked()),this,SLOT(getValueButtonClicked()));
     connect(ui->backButton,SIGNAL(clicked()),this,SLOT(getBackButtonClicked()));
-   // connect(ui->nextButon,SIGNAL(clicked()),this,SLOT(getNextButtonClicked()));
+    connect(ui->nextButon,SIGNAL(clicked()),this,SLOT(getNextButtonClicked()));
 
 }
 
@@ -76,6 +77,7 @@ void MainWindow::getValueButtonClicked()
 
 }
 
+/* goes back and shows old values */
 void MainWindow::getBackButtonClicked()
 {
     int value = 9999;
@@ -88,11 +90,54 @@ void MainWindow::getBackButtonClicked()
     ui->realYBottomValue->clear();
     ui->realYBottomValue->setNum(value);
 
+    /* get saved number and write it into the label */
+    value = MeasurementValues[NumberOfMeasurements][2];
+    ui->realXBottomValue->clear();
+    ui->realXBottomValue->setNum(value);
+
+    /* get saved number and write it into the label */
+    value = MeasurementValues[NumberOfMeasurements][1];
+    ui->realYTopValue->clear();
+    ui->realYTopValue->setNum(value);
+
+    /* get saved number and write it into the label */
+    value = MeasurementValues[NumberOfMeasurements][0];
+    ui->realXTopValue->clear();
+    ui->realXTopValue->setNum(value);
 
 }
 
 
+/* goes forward and shows values which are measured or 0 if not */
+void MainWindow::getNextButtonClicked()
+{
+    int value = 9999;
+    /* increase number of Measurements */
+    value = setamountofmeasurements(1);
+    ui->NumberLabel->setNum(value);
 
+
+    /* get saved number and write it into the label */
+    value = MeasurementValues[NumberOfMeasurements][3];
+    ui->realYBottomValue->clear();
+    ui->realYBottomValue->setNum(value);
+
+    /* get saved number and write it into the label */
+    value = MeasurementValues[NumberOfMeasurements][2];
+    ui->realXBottomValue->clear();
+    ui->realXBottomValue->setNum(value);
+
+    /* get saved number and write it into the label */
+    value = MeasurementValues[NumberOfMeasurements][1];
+    ui->realYTopValue->clear();
+    ui->realYTopValue->setNum(value);
+
+    /* get saved number and write it into the label */
+    value = MeasurementValues[NumberOfMeasurements][0];
+    ui->realXTopValue->clear();
+    ui->realXTopValue->setNum(value);
+
+}
 
 
 
@@ -119,6 +164,7 @@ int MainWindow::setamountofmeasurements(int increase)
     if (increase)
     {
         NumberOfMeasurements = NumberOfMeasurements + 1;
+        MaxNumberOfMeasurements = MaxNumberOfMeasurements +1;
     }
     else
     {
