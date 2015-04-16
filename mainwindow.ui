@@ -207,24 +207,14 @@
    <widget class="QPushButton" name="sendButton">
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>630</y>
+      <x>90</x>
+      <y>600</y>
       <width>75</width>
       <height>23</height>
      </rect>
     </property>
     <property name="text">
      <string>send</string>
-    </property>
-   </widget>
-   <widget class="QTextEdit" name="Commandfield">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>600</y>
-      <width>171</width>
-      <height>16</height>
-     </rect>
     </property>
    </widget>
    <widget class="Line" name="line">
@@ -599,6 +589,16 @@
      <string>status message appear here</string>
     </property>
    </widget>
+   <widget class="QLineEdit" name="commandEdit">
+    <property name="geometry">
+     <rect>
+      <x>90</x>
+      <y>570</y>
+      <width>151</width>
+      <height>20</height>
+     </rect>
+    </property>
+   </widget>
    <zorder>layoutWidget</zorder>
    <zorder>layoutWidget</zorder>
    <zorder>layoutWidget</zorder>
@@ -609,7 +609,6 @@
    <zorder>getvaluesbutton</zorder>
    <zorder>generateOutputfile</zorder>
    <zorder>sendButton</zorder>
-   <zorder>Commandfield</zorder>
    <zorder>line</zorder>
    <zorder>line_2</zorder>
    <zorder>line_3</zorder>
@@ -627,6 +626,7 @@
    <zorder>PortEdit</zorder>
    <zorder>portButton</zorder>
    <zorder>statusLabel</zorder>
+   <zorder>commandEdit</zorder>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">

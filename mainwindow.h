@@ -35,11 +35,15 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
+
+
 public slots:
     void getValueButtonClicked();
     void getBackButtonClicked();
     void getNextButtonClicked();
     void getPortValue();
+    void getCommandlineValue();
+
 
 private:
     Ui::MainWindow *ui;
@@ -47,6 +51,8 @@ private:
     int setamountofmeasurements(int increase);
     int getamountofmeasurements();
     void getPortNumber();
+
+
 
 };
 

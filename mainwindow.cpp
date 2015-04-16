@@ -26,7 +26,7 @@
 /* Includes ------------------------------------------------------------------*/
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-
+#include <QtGui>
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
 /* Private macro -------------------------------------------------------------*/
@@ -41,7 +41,7 @@ char myString[] = "Error";
 /* initialize measurement array */
 /* it will be used as following: 10 measurements, 4 values each measurement: X,Y TOP, X,Y BOTTOM */
 int  MeasurementValues [10][4] = {0} ;
-
+int  DesiredValues [10][4] = {0} ;
 /* Private function prototypes -----------------------------------------------*/
 /* Private functions ---------------------------------------------------------*/
 
@@ -72,7 +72,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->backButton,SIGNAL(clicked()),this,SLOT(getBackButtonClicked()));
     connect(ui->nextButon,SIGNAL(clicked()),this,SLOT(getNextButtonClicked()));
     connect(ui->portButton,SIGNAL(clicked()),this,SLOT(getPortValue()));
-
+    connect(ui->sendButton,SIGNAL(clicked()),this,SLOT(getCommandlineValue()));
 
 }
 
@@ -218,6 +218,7 @@ int MainWindow::setamountofmeasurements(int increase)
         else
         {
             NumberOfMeasurements = NumberOfMeasurements;
+
         }
 
     }
@@ -242,7 +243,17 @@ void MainWindow::getPortValue()
 {
     QString myString;
     myString = ui->PortEdit->text();
-    ui->PortLabel->setText(myString);
     ui->statusLabel->clear();
     ui->statusLabel->setText("Port has been set to " + myString );
+}
+
+
+/* read commandline and forward it */
+void MainWindow::getCommandlineValue()
+{
+    QString myString;
+    myString = ui->commandEdit->text();
+    ui->statusLabel->clear();
+    ui->statusLabel->setText("Command" + myString +" has been sent" );
+    ui->commandEdit->clear();
 }
