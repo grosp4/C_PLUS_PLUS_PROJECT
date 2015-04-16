@@ -17,7 +17,9 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
 
 
-
+    /* get relativ values of the picture*/
+     QPixmap Pixmap_X(qApp->applicationDirPath() + "/pictures/madeingermany.jpeg");
+       ui->PictureLabel->setPixmap(Pixmap_X);
 
     /* connect a signal to a slot function to change a value of a label */
     connect(ui->getvaluesbutton,SIGNAL(clicked()),this,SLOT(getValueButtonClicked()));
