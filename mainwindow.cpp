@@ -27,6 +27,9 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include <QtGui>
+#include "testthread.hpp"
+#include "debug_configurations.hpp"
+
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
 /* Private macro -------------------------------------------------------------*/
@@ -47,9 +50,16 @@ int  DesiredValues [10][4] = {0} ;
 
 
 /* Constructor */
+#ifdef TEST_THREAD_HELLO_WORLD
+MainWindow::MainWindow(QWidget *parent, testthread *OtherTestThread) :
+    QMainWindow(parent), MyTestThread(OtherTestThread),
+    ui(new Ui::MainWindow)
+#else
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
+#endif
+
 {
     ui->setupUi(this);
 
@@ -256,4 +266,8 @@ void MainWindow::getCommandlineValue()
     ui->statusLabel->clear();
     ui->statusLabel->setText("Command" + myString +" has been sent" );
     ui->commandEdit->clear();
+
+#ifdef TEST_THREAD_HELLO_WORLD
+    MyTestThread->print();
+#endif
 }

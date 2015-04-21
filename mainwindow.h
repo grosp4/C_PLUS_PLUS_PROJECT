@@ -23,6 +23,8 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include "debug_configurations.hpp"
+#include "testthread.hpp"
 
 namespace Ui {
 class MainWindow;
@@ -33,9 +35,18 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
 public:
+#ifdef TEST_THREAD_HELLO_WORLD
+    explicit MainWindow(QWidget *parent = 0, testthread *OtherTestThread = 0);
+#else
     explicit MainWindow(QWidget *parent = 0);
+#endif
+
     ~MainWindow();
 
+#ifdef TEST_THREAD_HELLO_WORLD
+public:
+    testthread *MyTestThread; // holder for TestThread
+#endif
 
 public slots:
     void getValueButtonClicked();

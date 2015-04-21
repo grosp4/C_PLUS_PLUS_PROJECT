@@ -20,6 +20,7 @@
  *
  *  \remark     Last Modification
  *               \li grosp4, 16.04.2015, Created
+ *               \li bartj2, 21.04.2015, added test thread
  *
  *
  *
@@ -30,6 +31,10 @@
 /* Includes ------------------------------------------------------------------*/
 #include "mainwindow.h"
 #include <QApplication>
+#include <QThread>
+#include "debug_configurations.hpp"
+#include "testthread.hpp"
+#include <iostream>
 
 
 /* Private functions ---------------------------------------------------------*/
@@ -37,8 +42,17 @@
 int main(int argc, char *argv[])
 {
 
+#ifdef TEST_THREAD_HELLO_WORLD // ################################################
+    // Create new thread:
+    std::cout << "\n\nStart Test Thread..." << std::endl;
+    testthread MyTestThread;
+    MyTestThread.start();
+#endif
+
     QApplication a(argc, argv);
     MainWindow GUI;
     GUI.show();
+
     return a.exec();
+
 }
