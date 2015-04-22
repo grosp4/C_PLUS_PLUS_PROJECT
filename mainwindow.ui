@@ -599,6 +599,47 @@
      </rect>
     </property>
    </widget>
+   <widget class="QLabel" name="ConsoleLabel">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>130</y>
+      <width>41</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Console</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+    </property>
+   </widget>
+   <widget class="QLabel" name="ConsoleLabelToWriteTo">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>150</y>
+      <width>200</width>
+      <height>350</height>
+     </rect>
+    </property>
+    <property name="autoFillBackground">
+     <bool>false</bool>
+    </property>
+    <property name="text">
+     <string>Text will be shown here...</string>
+    </property>
+    <property name="scaledContents">
+     <bool>false</bool>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+    </property>
+    <property name="wordWrap">
+     <bool>false</bool>
+    </property>
+   </widget>
    <zorder>layoutWidget</zorder>
    <zorder>layoutWidget</zorder>
    <zorder>layoutWidget</zorder>
@@ -627,6 +668,8 @@
    <zorder>portButton</zorder>
    <zorder>statusLabel</zorder>
    <zorder>commandEdit</zorder>
+   <zorder>ConsoleLabel</zorder>
+   <zorder>ConsoleLabelToWriteTo</zorder>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">

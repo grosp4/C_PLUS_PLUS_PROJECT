@@ -40,6 +40,7 @@
 int NumberOfMeasurements = 0;
 int MaxNumberOfMeasurements = 0;
 char myString[] = "Error";
+int consoleHasBeenUsed  = 0;
 
 /* initialize measurement array */
 /* it will be used as following: 10 measurements, 4 values each measurement: X,Y TOP, X,Y BOTTOM */
@@ -83,6 +84,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->nextButon,SIGNAL(clicked()),this,SLOT(getNextButtonClicked()));
     connect(ui->portButton,SIGNAL(clicked()),this,SLOT(getPortValue()));
     connect(ui->sendButton,SIGNAL(clicked()),this,SLOT(getCommandlineValue()));
+    connect(ui->sendButton,SIGNAL(clicked()),this,SLOT(WriteInScrollAreaSlot()));
 
 }
 
@@ -265,9 +267,37 @@ void MainWindow::getCommandlineValue()
     myString = ui->commandEdit->text();
     ui->statusLabel->clear();
     ui->statusLabel->setText("Command" + myString +" has been sent" );
-    ui->commandEdit->clear();
+
+
 
 #ifdef TEST_THREAD_HELLO_WORLD
     MyTestThread->print();
 #endif
+}
+
+
+void MainWindow::WriteInScrollArea(int testvalue)
+{
+    QString myString = QString::number(testvalue);
+    QString tempString;
+    if (consoleHasBeenUsed == 0)
+    {
+        ui->ConsoleLabelToWriteTo->clear();
+        consoleHasBeenUsed = 1;
+    }
+
+
+        //myString = ui->commandEdit->text();
+        tempString = ui->ConsoleLabelToWriteTo->text();
+        ui->ConsoleLabelToWriteTo->setText(tempString + "\n" + myString   );
+        ui->commandEdit->clear();
+
+
+
+}
+
+
+void MainWindow::WriteInScrollAreaSlot()
+{
+    WriteInScrollArea(2);
 }
