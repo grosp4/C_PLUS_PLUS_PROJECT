@@ -47,12 +47,17 @@ int main(int argc, char *argv[])
     std::cout << "\n\nStart Test Thread..." << std::endl;
     testthread MyTestThread;
     MyTestThread.start();
-#endif
+
 
     QApplication a(argc, argv);
-    MainWindow GUI;
-    GUI.show();
+    MainWindow GUI( &MyTestThread );
 
+#else
+    QApplication a(argc, argv);
+    MainWindow GUI;
+#endif
+
+    GUI.show();   
     return a.exec();
 
 }

@@ -24,6 +24,9 @@
 #include <iostream>
 #include <QMutex>
 
+
+int testthread::OvisDemo = 0;
+
 /*******************************************************************************
  *  Constructor :    testthread()
  ******************************************************************************/
@@ -84,9 +87,9 @@ void testthread::run()
  ******************************************************************************/
 void testthread::print()
 {
-    //CounterMutex->lock();
+    CounterMutex->lock();
     // say hello :
-    std::cout << "\nHello, another thread called me. Counter = " << std::endl;// << TestCounter << std::endl;
-    //TestCounter +=10;
-//    CounterMutex->unlock();
+    std::cout << "\nHello, another thread called me. Counter = " << TestCounter << std::endl;
+    TestCounter +=10;
+    CounterMutex->unlock();
 }

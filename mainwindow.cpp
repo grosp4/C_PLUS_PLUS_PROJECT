@@ -51,7 +51,7 @@ int  DesiredValues [10][4] = {0} ;
 
 /* Constructor */
 #ifdef TEST_THREAD_HELLO_WORLD
-MainWindow::MainWindow(QWidget *parent, testthread *OtherTestThread) :
+MainWindow::MainWindow(testthread *OtherTestThread, QWidget *parent) :
     QMainWindow(parent), MyTestThread(OtherTestThread),
     ui(new Ui::MainWindow)
 #else

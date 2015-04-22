@@ -36,7 +36,7 @@ class MainWindow : public QMainWindow
 
 public:
 #ifdef TEST_THREAD_HELLO_WORLD
-    explicit MainWindow(QWidget *parent = 0, testthread *OtherTestThread = 0);
+    explicit MainWindow(testthread *OtherTestThread, QWidget *parent = 0);
 #else
     explicit MainWindow(QWidget *parent = 0);
 #endif

@@ -29,6 +29,8 @@
 
 class testthread : public QThread
 {
+    static int OvisDemo;
+
     public:
     testthread(  );
     //virtual ~testthread();? noetig??
