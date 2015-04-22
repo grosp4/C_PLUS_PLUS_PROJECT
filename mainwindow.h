@@ -43,10 +43,13 @@ public:
 
     ~MainWindow();
 
-#ifdef TEST_THREAD_HELLO_WORLD
+
 public:
+    #ifdef TEST_THREAD_HELLO_WORLD
     testthread *MyTestThread; // holder for TestThread
-#endif
+    #endif
+    void WriteInScrollArea(int testvalue);
+
 
 public slots:
     void getValueButtonClicked();
@@ -54,7 +57,7 @@ public slots:
     void getNextButtonClicked();
     void getPortValue();
     void getCommandlineValue();
-
+    void WriteInScrollAreaSlot();
 
 private:
     Ui::MainWindow *ui;
