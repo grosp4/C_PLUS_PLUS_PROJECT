@@ -278,16 +278,16 @@ void MainWindow::getCommandlineValue()
 
 void MainWindow::WriteInScrollArea(int testvalue)
 {
-    QString tempString = QString::number(testvalue);
-
+    QString myString = QString::number(testvalue);
+    QString tempString;
     if (consoleHasBeenUsed == 0)
     {
         ui->ConsoleLabelToWriteTo->clear();
         consoleHasBeenUsed = 1;
     }
 
-        QString myString;
-        myString = ui->commandEdit->text();
+
+        //myString = ui->commandEdit->text();
         tempString = ui->ConsoleLabelToWriteTo->text();
         ui->ConsoleLabelToWriteTo->setText(tempString + "\n" + myString   );
         ui->commandEdit->clear();
