@@ -14,11 +14,19 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-    testthread.cpp
+    testthread.cpp \
+    HexamiteRS232PortClass.cpp \
+    rs232.c \
+    UltrasonicTagClass.cpp \
+    UltrasonicThread.cpp
 
 HEADERS  += mainwindow.h \
     debug_configurations.hpp \
-    testthread.hpp
+    testthread.hpp \
+    HexamiteRS232PortClass.h \
+    rs232.h \
+    UltrasonicTagClass.hpp \
+    UltrasonicThread.hpp
 
 FORMS    += mainwindow.ui
 

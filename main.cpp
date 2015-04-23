@@ -35,12 +35,13 @@
 #include "debug_configurations.hpp"
 #include "testthread.hpp"
 #include <iostream>
-
+#include "UltrasonicThread.hpp"
 
 /* Private functions ---------------------------------------------------------*/
 
 int main(int argc, char *argv[])
 {
+
 
 #ifdef TEST_THREAD_HELLO_WORLD // ################################################
     // Create new thread:
@@ -54,8 +55,19 @@ int main(int argc, char *argv[])
 
 
 #else
+
+
     QApplication a(argc, argv);
-    MainWindow GUI;
+
+    UltrasonicThread NewUltrasonicThread;
+    MainWindow GUI(&NewUltrasonicThread);
+
+    NewUltrasonicThread.start();
+
+
+
+
+
 #endif
 
     GUI.show();   

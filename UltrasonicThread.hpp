@@ -1,4 +1,4 @@
-/** \file       debug_configurations.hpp
+/** \file       UltrasonicThread.hpp
  *  \brief
  *******************************************************************************
  *
@@ -6,30 +6,52 @@
  *
  *  \brief
  *
- *  \authors    bartj2
+ *  \authors
  *
- *  \date       21.04.2015
+ *  \date
  *
  *  \remark     Last Modification
- *               \li bartj2, 21.04.2015 created
+ *               \li
  *
  ******************************************************************************/
 /* Define to prevent recursive inclusion --------------------------------------*/
-#ifndef DEBUG_CONFIGURATIONS_HPP
-#define DEBUG_CONFIGURATIONS_HPP
+#ifndef ULTRASONICTHREAD_HPP
+#define ULTRASONICTHREAD_HPP
 
 /* Imports Library */
+#include <string>
+#include <QThread>
+#include <QString>
+#include "HexamiteRS232PortClass.h"
 
 /* Class Constant Declaration--------------------------------------------------*/
 
-
-// debug Sessions:
-//#define TEST_THREAD_HELLO_WORLD
+/* Define Coordinate System for Left Team */
 
 /* Class Type declaration -----------------------------------------------------*/
 /* Class Data declaration -----------------------------------------------------*/
+
+
 /* Class definition -----------------------------------------------------------*/
 
+class UltrasonicThread : public QThread
+{
+    Q_OBJECT
 
-#endif // DEBUG_CONFIGURATIONS_HPP
+public:
+    UltrasonicThread();
+    ~UltrasonicThread();
 
+public:
+    virtual void run();
+
+signals:
+    void newSerialMsgAvaiable(QString NewSerialMsg);
+
+
+public:
+    HexamiteRS232Port *MySerialPort;
+
+};
+
+#endif // ULTRASONICTHREAD_H

@@ -56,9 +56,10 @@ MainWindow::MainWindow(testthread *OtherTestThread, QWidget *parent) :
     QMainWindow(parent), MyTestThread(OtherTestThread),
     ui(new Ui::MainWindow)
 #else
-MainWindow::MainWindow(QWidget *parent) :
+MainWindow::MainWindow(UltrasonicThread *NewUltrasonicThread, QWidget *parent) :
     QMainWindow(parent),
-    ui(new Ui::MainWindow)
+    ui(new Ui::MainWindow),
+    MyUltrasonicThread(NewUltrasonicThread)
 #endif
 
 {
@@ -97,7 +98,14 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->sendButton,SIGNAL(clicked()),this,SLOT(getCommandlineValue()));
     connect(ui->sendButton,SIGNAL(clicked()),this,SLOT(WriteInScrollAreaSlot()));
 
+    // Communication for serial message stream to GUI:
+    connect( MyUltrasonicThread, SIGNAL(newSerialMsgAvaiable(QString)),
+             this, SLOT(WriteInScrollArea(QString)));
+
+#ifdef TEST_THREAD_HELLO_WORLD
     connect(ui->getvaluesbutton, SIGNAL(clicked()), MyTestThread, SLOT(print()) );
+#endif
+
 }
 
 /* Destructor */
@@ -308,9 +316,9 @@ void MainWindow::getCommandlineValue()
 
 
 /* Transform a integer into a string to write it to the mssage area */
-void MainWindow::WriteInScrollArea(int testvalue)
+void MainWindow::WriteInScrollArea(QString myString)
 {
-    QString myString = QString::number(testvalue);
+    //QString myString = QString::number(testvalue);
     QString tempString;
 
     /* activate the console and delete the dumy text */

@@ -25,6 +25,7 @@
 #include <QMainWindow>
 #include "debug_configurations.hpp"
 #include "testthread.hpp"
+#include "UltrasonicThread.hpp"
 
 namespace Ui {
 class MainWindow;
@@ -38,7 +39,7 @@ public:
 #ifdef TEST_THREAD_HELLO_WORLD
     explicit MainWindow(testthread *OtherTestThread, QWidget *parent = 0);
 #else
-    explicit MainWindow(QWidget *parent = 0);
+    explicit MainWindow(UltrasonicThread *NewUltrasonicThread, QWidget *parent = 0);
 #endif
 
     ~MainWindow();
@@ -48,7 +49,7 @@ public:
     #ifdef TEST_THREAD_HELLO_WORLD
     testthread *MyTestThread; // holder for TestThread
     #endif
-    void WriteInScrollArea(int testvalue);
+
 
 
 public slots:
@@ -58,9 +59,11 @@ public slots:
     void getPortValue();
     void getCommandlineValue();
     void WriteInScrollAreaSlot();
+    void WriteInScrollArea(QString myString);
 
 private:
     Ui::MainWindow *ui;
+    UltrasonicThread *MyUltrasonicThread;
     int getvalues();
     int setamountofmeasurements(int increase);
     int getamountofmeasurements();
