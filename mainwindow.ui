@@ -234,9 +234,9 @@
     <property name="geometry">
      <rect>
       <x>270</x>
-      <y>0</y>
+      <y>-10</y>
       <width>20</width>
-      <height>731</height>
+      <height>741</height>
      </rect>
     </property>
     <property name="orientation">
@@ -247,9 +247,9 @@
     <property name="geometry">
      <rect>
       <x>940</x>
-      <y>0</y>
+      <y>-10</y>
       <width>41</width>
-      <height>751</height>
+      <height>761</height>
      </rect>
     </property>
     <property name="orientation">
@@ -634,7 +634,7 @@
      <property name="geometry">
       <rect>
        <x>0</x>
-       <y>-29</y>
+       <y>0</y>
        <width>212</width>
        <height>339</height>
       </rect>
@@ -661,6 +661,22 @@
       </item>
      </layout>
     </widget>
+   </widget>
+   <widget class="QLabel" name="calibrationStatusLabel">
+    <property name="geometry">
+     <rect>
+      <x>970</x>
+      <y>540</y>
+      <width>301</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>ready to calibrate</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+    </property>
    </widget>
    <zorder>layoutWidget</zorder>
    <zorder>layoutWidget</zorder>
@@ -692,6 +708,7 @@
    <zorder>commandEdit</zorder>
    <zorder>ConsoleLabel</zorder>
    <zorder>scrollArea</zorder>
+   <zorder>calibrationStatusLabel</zorder>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">

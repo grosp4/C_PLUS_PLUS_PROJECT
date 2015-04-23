@@ -44,8 +44,8 @@ int consoleHasBeenUsed  = 0;
 
 /* initialize measurement array */
 /* it will be used as following: 10 measurements, 4 values each measurement: X,Y TOP, X,Y BOTTOM */
-int  MeasurementValues [10][4] = {0} ;
-int  DesiredValues [10][4] = {0} ;
+int  MeasurementValues [20][4] = {0} ;
+int  DesiredValues [20][4] = {0} ;
 /* Private function prototypes -----------------------------------------------*/
 /* Private functions ---------------------------------------------------------*/
 
@@ -114,7 +114,6 @@ void MainWindow::getValueButtonClicked()
   int value = 9999;
 
   /* update number of observations */
-  value = setamountofmeasurements(1);
   value = getamountofmeasurements();
   ui->NumberLabel->setNum(value);
 
@@ -144,7 +143,7 @@ void MainWindow::getValueButtonClicked()
   /* Save in Array */
   MeasurementValues[NumberOfMeasurements][3] = value;
 
-
+    ui->calibrationStatusLabel->setText("Values have been added to database \ntake next values with NEXT ");
 
 }
 
@@ -176,6 +175,9 @@ void MainWindow::getBackButtonClicked()
     ui->realXTopValue->clear();
     ui->realXTopValue->setNum(value);
 
+
+    /* update calibrationStatusLabel */
+    ui->calibrationStatusLabel->setText("Ready to calibrate");
 }
 
 
@@ -208,6 +210,8 @@ void MainWindow::getNextButtonClicked()
     ui->realXTopValue->clear();
     ui->realXTopValue->setNum(value);
 
+    /* update calibrationStatusLabel */
+    ui->calibrationStatusLabel->setText("Ready to calibrate");
 }
 
 
@@ -234,27 +238,42 @@ int MainWindow::setamountofmeasurements(int increase)
 {
     if (increase)
     {
-        if ( NumberOfMeasurements < 10)
+        if ( NumberOfMeasurements < 11)
         {
             NumberOfMeasurements = NumberOfMeasurements + 1;
             MaxNumberOfMeasurements = MaxNumberOfMeasurements +1;
+            ui->TeamnameLabel->setText(("TEAM LEFT"));
         }
+        if ( (NumberOfMeasurements >= 11)&& (NumberOfMeasurements < 20) )
+        {
+            NumberOfMeasurements = NumberOfMeasurements + 1;
+            MaxNumberOfMeasurements = MaxNumberOfMeasurements +1;
+           ui->TeamnameLabel->setText(("TEAM RIGHT"));
+
+        }
+
         else
         {
             NumberOfMeasurements = NumberOfMeasurements;
-
         }
 
     }
     else
     {
-        if(NumberOfMeasurements > 0 )
+        if((NumberOfMeasurements > 1) && (NumberOfMeasurements < 12) )
         {
             NumberOfMeasurements = NumberOfMeasurements - 1;
+            ui->TeamnameLabel->setText(("TEAM LEFT"));
+        }
+        if(NumberOfMeasurements >= 12 )
+        {
+            NumberOfMeasurements = NumberOfMeasurements - 1;
+            ui->TeamnameLabel->setText(("TEAM RIGHT"));
         }
         else
         {
             NumberOfMeasurements = NumberOfMeasurements;
+
         }
     }
    return  NumberOfMeasurements;
