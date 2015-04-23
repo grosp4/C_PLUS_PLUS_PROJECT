@@ -29,16 +29,18 @@
 
 class testthread : public QThread
 {
+    Q_OBJECT
+
     static int OvisDemo;
 
     public:
     testthread(  );
-    //virtual ~testthread();? noetig??
+    virtual ~testthread(){}; //? noetig??
 
     private:
-    void run();
+    virtual void run();
 
-    public:
+    public slots:
     void print();
 
     public:

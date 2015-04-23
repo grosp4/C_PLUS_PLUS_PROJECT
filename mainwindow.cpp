@@ -65,6 +65,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
 
 
+
     /* get relativ values of the picture*/
     QPixmap Pixmap_X(qApp->applicationDirPath() + "//madeingermany.jpg");
 
@@ -86,6 +87,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->sendButton,SIGNAL(clicked()),this,SLOT(getCommandlineValue()));
     connect(ui->sendButton,SIGNAL(clicked()),this,SLOT(WriteInScrollAreaSlot()));
 
+    connect(ui->getvaluesbutton, SIGNAL(clicked()), MyTestThread, SLOT(print()) );
 }
 
 /* Destructor */

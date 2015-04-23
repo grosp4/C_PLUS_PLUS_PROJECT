@@ -24,7 +24,7 @@
 
 
 // debug Sessions:
-//#define TEST_THREAD_HELLO_WORLD
+#define TEST_THREAD_HELLO_WORLD
 
 /* Class Type declaration -----------------------------------------------------*/
 /* Class Data declaration -----------------------------------------------------*/
