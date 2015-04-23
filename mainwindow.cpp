@@ -78,6 +78,16 @@ MainWindow::MainWindow(QWidget *parent) :
     }
 
 
+
+    /* set scroll layout for scroll area */
+    ui->scrollAreaWidgetContents->setSizePolicy(QSizePolicy::Expanding,QSizePolicy::Expanding);
+    ui->scrollAreaWidgetContents->resize(ui->scrollArea->size().width() ,ui->scrollArea->size().height());
+    ui->scrollArea->setWidgetResizable(true);
+    ui->scrollArea->setWidget(ui->scrollAreaWidgetContents);
+    ui->scrollAreaWidgetContents->adjustSize();
+
+
+
     /* connect a signal to a slot function to change a value of a label */
     connect(ui->getvaluesbutton,SIGNAL(clicked()),this,SLOT(getValueButtonClicked()));
     connect(ui->backButton,SIGNAL(clicked()),this,SLOT(getBackButtonClicked()));
@@ -260,7 +270,7 @@ void MainWindow::getPortValue()
 }
 
 
-/* read commandline and forward it */
+/* read commandline and forward it to the status message */
 void MainWindow::getCommandlineValue()
 {
     QString myString;
@@ -276,28 +286,57 @@ void MainWindow::getCommandlineValue()
 }
 
 
+/* Transform a integer into a string to write it to the mssage area */
 void MainWindow::WriteInScrollArea(int testvalue)
 {
     QString myString = QString::number(testvalue);
     QString tempString;
+
+    /* activate the console and delete the dumy text */
     if (consoleHasBeenUsed == 0)
     {
         ui->ConsoleLabelToWriteTo->clear();
+        tempString = ui->ConsoleLabelToWriteTo->text();
+        ui->ConsoleLabelToWriteTo->setText(tempString + "\n" + myString   );
+        ui->commandEdit->clear();
         consoleHasBeenUsed = 1;
     }
-
-
+    else
+    {
         //myString = ui->commandEdit->text();
         tempString = ui->ConsoleLabelToWriteTo->text();
         ui->ConsoleLabelToWriteTo->setText(tempString + "\n" + myString   );
         ui->commandEdit->clear();
+    }
+
+
 
 
 
 }
 
-
+/* get command of commandline and write it to console message area*/
 void MainWindow::WriteInScrollAreaSlot()
 {
-    WriteInScrollArea(2);
+    QString tempString;
+    QString myString;
+
+    if (consoleHasBeenUsed == 0)
+    {
+        myString = ui->commandEdit->text();
+        ui->commandEdit->clear();
+        ui->ConsoleLabelToWriteTo->clear();
+        ui->ConsoleLabelToWriteTo->setText(myString );
+        ui->commandEdit->clear();
+        consoleHasBeenUsed = 1;
+    }
+
+    else
+    {
+        myString = ui->commandEdit->text();
+        tempString = ui->ConsoleLabelToWriteTo->text();
+        ui->ConsoleLabelToWriteTo->setText(tempString + "\n" + myString   );
+        ui->commandEdit->clear();
+    }
+
 }
