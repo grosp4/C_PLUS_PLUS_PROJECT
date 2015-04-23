@@ -102,6 +102,12 @@ MainWindow::MainWindow(UltrasonicThread *NewUltrasonicThread, QWidget *parent) :
     connect( MyUltrasonicThread, SIGNAL(newSerialMsgAvaiable(QString)),
              this, SLOT(WriteInScrollArea(QString)));
 
+    // Communication for printing current real values to GUI:
+    connect( MyUltrasonicThread, SIGNAL(newRealValueTopAvaiable(int,int)),
+             this, SLOT(printCurrentRealValueTop(int,int)));
+    connect( MyUltrasonicThread, SIGNAL(newRealValueBottomAvaiable(int,int)),
+             this, SLOT(printCurrentRealValueBottom(int,int)));
+
 #ifdef TEST_THREAD_HELLO_WORLD
     connect(ui->getvaluesbutton, SIGNAL(clicked()), MyTestThread, SLOT(print()) );
 #endif
@@ -368,4 +374,22 @@ void MainWindow::WriteInScrollAreaSlot()
         ui->commandEdit->clear();
     }
 
+}
+
+/* print Current Real Value of Top Device to GUI */
+void MainWindow::printCurrentRealValueTop(int XTop, int YTop)
+{
+    ui->realXTopValue->clear();
+    ui->realXTopValue->setNum(XTop);
+    ui->realYTopValue->clear();
+    ui->realYTopValue->setNum(YTop);
+}
+
+/* print current real value of top device to GUI */
+void MainWindow::printCurrentRealValueBottom(int XBottom, int YBottom)
+{
+    ui->realXBottomValue->clear();
+    ui->realXBottomValue->setNum(XBottom);
+    ui->realYBottomValue->clear();
+    ui->realYBottomValue->setNum(YBottom);
 }

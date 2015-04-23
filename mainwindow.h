@@ -60,6 +60,8 @@ public slots:
     void getCommandlineValue();
     void WriteInScrollAreaSlot();
     void WriteInScrollArea(QString myString);
+    void printCurrentRealValueTop(int XTop, int YTop);
+    void printCurrentRealValueBottom(int XBottom, int YBottom);
 
 private:
     Ui::MainWindow *ui;

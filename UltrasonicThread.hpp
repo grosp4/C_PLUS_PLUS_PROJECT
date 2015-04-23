@@ -47,7 +47,8 @@ public:
 
 signals:
     void newSerialMsgAvaiable(QString NewSerialMsg);
-
+    void newRealValueTopAvaiable(int X, int Y );
+    void newRealValueBottomAvaiable( int X, int Y);
 
 public:
     HexamiteRS232Port *MySerialPort;
