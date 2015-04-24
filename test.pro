@@ -18,7 +18,8 @@ SOURCES += main.cpp\
     HexamiteRS232PortClass.cpp \
     rs232.c \
     UltrasonicTagClass.cpp \
-    UltrasonicThread.cpp
+    UltrasonicThread.cpp \
+    MeasurementPoint.cpp
 
 HEADERS  += mainwindow.h \
     debug_configurations.hpp \
@@ -26,9 +27,13 @@ HEADERS  += mainwindow.h \
     HexamiteRS232PortClass.h \
     rs232.h \
     UltrasonicTagClass.hpp \
-    UltrasonicThread.hpp
+    UltrasonicThread.hpp \
+    MeasurementPoint.h
 
 FORMS    += mainwindow.ui
 
-IMAGES += madeingermany.png
+IMAGES += madeingermany.jpeg
+
+RESOURCES += \
+    picturefile.qrc
 

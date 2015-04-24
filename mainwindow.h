@@ -50,8 +50,7 @@ public:
     #ifdef TEST_THREAD_HELLO_WORLD
     testthread *MyTestThread; // holder for TestThread
     #endif
-
-
+   void paintEvent(QPaintEvent *e);
 
 public slots:
     void getValueButtonClicked();
@@ -63,6 +62,8 @@ public slots:
     void printSerialMsg(QString myString);
     void printRealValueTop(int XTop, int YTop);
     void printRealValueBottom(int XBottom, int YBottom);
+
+
 
 private:
     Ui::MainWindow *ui;

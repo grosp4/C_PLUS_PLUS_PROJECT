@@ -49,7 +49,7 @@
     <property name="geometry">
      <rect>
       <x>960</x>
-      <y>40</y>
+      <y>30</y>
       <width>321</width>
       <height>21</height>
      </rect>
@@ -130,7 +130,7 @@
      <rect>
       <x>970</x>
       <y>320</y>
-      <width>311</width>
+      <width>71</width>
       <height>21</height>
      </rect>
     </property>
@@ -398,8 +398,8 @@
      <rect>
       <x>310</x>
       <y>570</y>
-      <width>47</width>
-      <height>41</height>
+      <width>50</width>
+      <height>50</height>
      </rect>
     </property>
     <property name="text">
@@ -417,8 +417,8 @@
      <rect>
       <x>310</x>
       <y>620</y>
-      <width>47</width>
-      <height>41</height>
+      <width>50</width>
+      <height>50</height>
      </rect>
     </property>
     <property name="text">
@@ -434,9 +434,9 @@
    <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
-      <x>1180</x>
+      <x>1150</x>
       <y>360</y>
-      <width>54</width>
+      <width>61</width>
       <height>111</height>
      </rect>
     </property>
@@ -624,11 +624,17 @@
       <height>312</height>
      </rect>
     </property>
+    <property name="acceptDrops">
+     <bool>true</bool>
+    </property>
     <property name="verticalScrollBarPolicy">
      <enum>Qt::ScrollBarAlwaysOn</enum>
     </property>
     <property name="widgetResizable">
      <bool>false</bool>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignBottom|Qt::AlignLeading|Qt::AlignLeft</set>
     </property>
     <widget class="QWidget" name="scrollAreaWidgetContents">
      <property name="geometry">
@@ -672,10 +678,76 @@
      </rect>
     </property>
     <property name="text">
-     <string>ready to calibrate</string>
+     <string>Please start calibration by pressing &quot;NEXT&quot;</string>
     </property>
     <property name="alignment">
      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+    </property>
+   </widget>
+   <widget class="QWidget" name="layoutWidget_3">
+    <property name="geometry">
+     <rect>
+      <x>1220</x>
+      <y>360</y>
+      <width>61</width>
+      <height>111</height>
+     </rect>
+    </property>
+    <layout class="QVBoxLayout" name="real_values_2">
+     <item>
+      <widget class="QLabel" name="realXTopValue_2">
+       <property name="text">
+        <string>0</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="realYTopValue_2">
+       <property name="text">
+        <string>0</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="realXBottomValue_2">
+       <property name="text">
+        <string>0</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="realYBottomValue_2">
+       <property name="text">
+        <string>0</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QLabel" name="RealvaluesLabel_2">
+    <property name="geometry">
+     <rect>
+      <x>1220</x>
+      <y>330</y>
+      <width>31</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>taken</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="RealvaluesLabel_3">
+    <property name="geometry">
+     <rect>
+      <x>1150</x>
+      <y>330</y>
+      <width>31</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>now</string>
     </property>
    </widget>
    <zorder>layoutWidget</zorder>
@@ -709,6 +781,9 @@
    <zorder>ConsoleLabel</zorder>
    <zorder>scrollArea</zorder>
    <zorder>calibrationStatusLabel</zorder>
+   <zorder>layoutWidget_3</zorder>
+   <zorder>RealvaluesLabel_2</zorder>
+   <zorder>RealvaluesLabel_3</zorder>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
@@ -725,14 +800,6 @@
     </property>
    </widget>
    <addaction name="menuNavigation_calibration_tool"/>
-  </widget>
-  <widget class="QToolBar" name="mainToolBar">
-   <attribute name="toolBarArea">
-    <enum>TopToolBarArea</enum>
-   </attribute>
-   <attribute name="toolBarBreak">
-    <bool>false</bool>
-   </attribute>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
  </widget>
