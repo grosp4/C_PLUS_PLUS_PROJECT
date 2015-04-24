@@ -50,8 +50,9 @@ signals:
     void printRealValueTop(int X, int Y );
     void printRealValueBottom( int X, int Y);
 
-public:
+private:
     HexamiteRS232Port *MySerialPort;
+    UltrasonicThread *MyUltrasonicThread;
 
 };
 

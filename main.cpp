@@ -59,10 +59,10 @@ int main(int argc, char *argv[])
 
     QApplication a(argc, argv);
 
-    UltrasonicThread NewUltrasonicThread;
-    MainWindow GUI(&NewUltrasonicThread);
-
-    NewUltrasonicThread.start();
+    //UltrasonicThread NewUltrasonicThread;
+    //MainWindow GUI(&NewUltrasonicThread);
+    MainWindow GUI;
+    //NewUltrasonicThread.start();
 
 
 

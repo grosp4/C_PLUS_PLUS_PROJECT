@@ -39,7 +39,8 @@ public:
 #ifdef TEST_THREAD_HELLO_WORLD
     explicit MainWindow(testthread *OtherTestThread, QWidget *parent = 0);
 #else
-    explicit MainWindow(UltrasonicThread *NewUltrasonicThread, QWidget *parent = 0);
+    //explicit MainWindow(UltrasonicThread *NewUltrasonicThread, QWidget *parent = 0);
+    explicit MainWindow(QWidget *parent = 0);
 #endif
 
     ~MainWindow();

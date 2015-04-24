@@ -56,15 +56,17 @@ MainWindow::MainWindow(testthread *OtherTestThread, QWidget *parent) :
     QMainWindow(parent), MyTestThread(OtherTestThread),
     ui(new Ui::MainWindow)
 #else
-MainWindow::MainWindow(UltrasonicThread *NewUltrasonicThread, QWidget *parent) :
+MainWindow::MainWindow( QWidget *parent) :
     QMainWindow(parent),
-    ui(new Ui::MainWindow),
-    MyUltrasonicThread(NewUltrasonicThread)
+    ui(new Ui::MainWindow)//,
+    //MyUltrasonicThread(NewUltrasonicThread)
 #endif
 
 {
     ui->setupUi(this);
 
+    UltrasonicThread *MyUltrasonicThread = new UltrasonicThread;
+    MyUltrasonicThread->start();
 
 
     /* get relativ values of the picture*/
@@ -117,6 +119,8 @@ MainWindow::MainWindow(UltrasonicThread *NewUltrasonicThread, QWidget *parent) :
 /* Destructor */
 MainWindow::~MainWindow()
 {
+    //MyUltrasonicThread->terminate(); // programmabsturz hier!
+    //delete MyUltrasonicThread;
     delete ui;
 }
 
