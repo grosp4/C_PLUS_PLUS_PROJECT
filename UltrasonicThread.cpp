@@ -98,7 +98,7 @@ void UltrasonicThread::run()
     {
         //DEBUG:
         //std::cout << "Hello, I am the Ultrasonic Thread." << std::endl;
-        //msleep(1000);
+        msleep(1000);
 
 
 
