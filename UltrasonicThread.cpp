@@ -84,7 +84,7 @@ void UltrasonicThread::run()
     UltrasonicTagClass TagRobotSmallEnemy("P21");		/*!<  ID Tag Number T21 */
 
     /* Set Team start Position for the UltrasonicTag Class */
-    UltrasonicTagClass::setTeamStartPosition(TeamRight);
+    UltrasonicTagClass::setTeamStartPosition(TeamLeft);
 
     /* Initialize USART-Interface with COM-Port 4 */
     MySerialPort = new HexamiteRS232Port(4);
@@ -111,13 +111,13 @@ void UltrasonicThread::run()
         //strUnfilteredData->clear();
 
         /* Put data on screen */
-        std::cout << sSerialData1 << std::endl;
-        std::cout << sSerialData2 << std::endl;
-        std::cout << sSerialData3 << std::endl;
-        emit newSerialMsgAvaiable( QString("") );
-        emit newSerialMsgAvaiable( QString(sSerialData1.c_str()) );
-        emit newSerialMsgAvaiable( QString(sSerialData2.c_str()) );
-        emit newSerialMsgAvaiable( QString(sSerialData3.c_str()) );
+//        std::cout << sSerialData1 << std::endl;
+//        std::cout << sSerialData2 << std::endl;
+//        std::cout << sSerialData3 << std::endl;
+        emit printSerialMsg( QString("") );
+        emit printSerialMsg( QString(sSerialData1.c_str()) );
+        emit printSerialMsg( QString(sSerialData2.c_str()) );
+        emit printSerialMsg( QString(sSerialData3.c_str()) );
 
 
 
@@ -126,19 +126,19 @@ void UltrasonicThread::run()
         {
              TagRobotBigEnemy.calculatePosition();
 
-             std::cout <<  "Enemy Big Robot"  << std::endl;
-             std::cout <<  "X-Position: " << TagRobotBigEnemy.getX_Position() << std::endl;
-             std::cout <<  "Y-Position: " << TagRobotBigEnemy.getY_Position() << std::endl;
-             emit newRealValueTopAvaiable(TagRobotBigEnemy.getX_Position(), TagRobotBigEnemy.getY_Position());
+//             std::cout <<  "Enemy Big Robot"  << std::endl;
+//             std::cout <<  "X-Position: " << TagRobotBigEnemy.getX_Position() << std::endl;
+//             std::cout <<  "Y-Position: " << TagRobotBigEnemy.getY_Position() << std::endl;
+             emit printRealValueTop(TagRobotBigEnemy.getX_Position(), TagRobotBigEnemy.getY_Position());
         }
         else if(TagRobotSmallEnemy.checkSerialMessage(sSerialData1, sSerialData2, sSerialData3))
         {
              TagRobotSmallEnemy.calculatePosition();
 
-             std::cout <<  "Enemy Small Robot"  << std::endl;
-             std::cout <<  "X-Position: " << TagRobotSmallEnemy.getX_Position() << std::endl;
-             std::cout <<  "Y-Position: " << TagRobotSmallEnemy.getY_Position() << std::endl;
-             emit newRealValueBottomAvaiable(TagRobotSmallEnemy.getX_Position(), TagRobotSmallEnemy.getY_Position());
+//             std::cout <<  "Enemy Small Robot"  << std::endl;
+//             std::cout <<  "X-Position: " << TagRobotSmallEnemy.getX_Position() << std::endl;
+//             std::cout <<  "Y-Position: " << TagRobotSmallEnemy.getY_Position() << std::endl;
+             emit printRealValueBottom(TagRobotSmallEnemy.getX_Position(), TagRobotSmallEnemy.getY_Position());
         }
 
     }

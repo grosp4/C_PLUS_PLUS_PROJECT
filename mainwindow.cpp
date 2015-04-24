@@ -99,14 +99,14 @@ MainWindow::MainWindow(UltrasonicThread *NewUltrasonicThread, QWidget *parent) :
     connect(ui->sendButton,SIGNAL(clicked()),this,SLOT(WriteInScrollAreaSlot()));
 
     // Communication for serial message stream to GUI:
-    connect( MyUltrasonicThread, SIGNAL(newSerialMsgAvaiable(QString)),
-             this, SLOT(WriteInScrollArea(QString)));
+    connect( MyUltrasonicThread, SIGNAL(printSerialMsg(QString)),
+             this, SLOT(printSerialMsg(QString)));
 
     // Communication for printing current real values to GUI:
-    connect( MyUltrasonicThread, SIGNAL(newRealValueTopAvaiable(int,int)),
-             this, SLOT(printCurrentRealValueTop(int,int)));
-    connect( MyUltrasonicThread, SIGNAL(newRealValueBottomAvaiable(int,int)),
-             this, SLOT(printCurrentRealValueBottom(int,int)));
+    connect( MyUltrasonicThread, SIGNAL(printRealValueTop(int,int)),
+             this, SLOT(printRealValueTop(int,int)));
+    connect( MyUltrasonicThread, SIGNAL(printRealValueBottom(int,int)),
+             this, SLOT(printRealValueBottom(int,int)));
 
 #ifdef TEST_THREAD_HELLO_WORLD
     connect(ui->getvaluesbutton, SIGNAL(clicked()), MyTestThread, SLOT(print()) );
@@ -322,7 +322,7 @@ void MainWindow::getCommandlineValue()
 
 
 /* Transform a integer into a string to write it to the mssage area */
-void MainWindow::WriteInScrollArea(QString myString)
+void MainWindow::printSerialMsg(QString myString)
 {
     //QString myString = QString::number(testvalue);
     QString tempString;
@@ -377,7 +377,7 @@ void MainWindow::WriteInScrollAreaSlot()
 }
 
 /* print Current Real Value of Top Device to GUI */
-void MainWindow::printCurrentRealValueTop(int XTop, int YTop)
+void MainWindow::printRealValueTop(int XTop, int YTop)
 {
     ui->realXTopValue->clear();
     ui->realXTopValue->setNum(XTop);
@@ -386,7 +386,7 @@ void MainWindow::printCurrentRealValueTop(int XTop, int YTop)
 }
 
 /* print current real value of top device to GUI */
-void MainWindow::printCurrentRealValueBottom(int XBottom, int YBottom)
+void MainWindow::printRealValueBottom(int XBottom, int YBottom)
 {
     ui->realXBottomValue->clear();
     ui->realXBottomValue->setNum(XBottom);
