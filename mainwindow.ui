@@ -32,8 +32,8 @@
    <widget class="QLabel" name="PortLabel">
     <property name="geometry">
      <rect>
-      <x>0</x>
-      <y>40</y>
+      <x>-20</x>
+      <y>30</y>
       <width>101</width>
       <height>20</height>
      </rect>
@@ -207,7 +207,7 @@
    <widget class="QPushButton" name="sendButton">
     <property name="geometry">
      <rect>
-      <x>90</x>
+      <x>10</x>
       <y>600</y>
       <width>75</width>
       <height>23</height>
@@ -233,10 +233,10 @@
    <widget class="Line" name="line_2">
     <property name="geometry">
      <rect>
-      <x>270</x>
+      <x>190</x>
       <y>-10</y>
       <width>20</width>
-      <height>741</height>
+      <height>541</height>
      </rect>
     </property>
     <property name="orientation">
@@ -326,7 +326,7 @@
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>570</y>
+      <y>540</y>
       <width>81</width>
       <height>16</height>
      </rect>
@@ -377,10 +377,10 @@
    <widget class="QLabel" name="PictureLabel">
     <property name="geometry">
      <rect>
-      <x>280</x>
-      <y>0</y>
-      <width>681</width>
-      <height>531</height>
+      <x>199</x>
+      <y>60</y>
+      <width>761</width>
+      <height>469</height>
      </rect>
     </property>
     <property name="text">
@@ -553,9 +553,9 @@
    <widget class="QLineEdit" name="PortEdit">
     <property name="geometry">
      <rect>
-      <x>80</x>
-      <y>40</y>
-      <width>113</width>
+      <x>60</x>
+      <y>30</y>
+      <width>111</width>
       <height>20</height>
      </rect>
     </property>
@@ -566,8 +566,8 @@
    <widget class="QPushButton" name="portButton">
     <property name="geometry">
      <rect>
-      <x>80</x>
-      <y>70</y>
+      <x>60</x>
+      <y>60</y>
       <width>75</width>
       <height>23</height>
      </rect>
@@ -579,20 +579,20 @@
    <widget class="QLabel" name="statusLabel">
     <property name="geometry">
      <rect>
-      <x>980</x>
+      <x>970</x>
       <y>700</y>
-      <width>301</width>
+      <width>311</width>
       <height>20</height>
      </rect>
     </property>
     <property name="text">
-     <string>status message appear here</string>
+     <string>status messages will appear here</string>
     </property>
    </widget>
    <widget class="QLineEdit" name="commandEdit">
     <property name="geometry">
      <rect>
-      <x>90</x>
+      <x>10</x>
       <y>570</y>
       <width>151</width>
       <height>20</height>
@@ -602,8 +602,8 @@
    <widget class="QLabel" name="ConsoleLabel">
     <property name="geometry">
      <rect>
-      <x>30</x>
-      <y>130</y>
+      <x>10</x>
+      <y>120</y>
       <width>41</width>
       <height>20</height>
      </rect>
@@ -618,9 +618,9 @@
    <widget class="QScrollArea" name="scrollArea">
     <property name="geometry">
      <rect>
-      <x>30</x>
-      <y>160</y>
-      <width>231</width>
+      <x>10</x>
+      <y>150</y>
+      <width>171</width>
       <height>312</height>
      </rect>
     </property>
@@ -652,7 +652,7 @@
          <number>3</number>
         </property>
         <property name="text">
-         <string>TextLabel</string>
+         <string>James Norrington</string>
         </property>
         <property name="scaledContents">
          <bool>false</bool>
@@ -750,6 +750,19 @@
      <string>now</string>
     </property>
    </widget>
+   <widget class="Line" name="line_6">
+    <property name="geometry">
+     <rect>
+      <x>190</x>
+      <y>520</y>
+      <width>20</width>
+      <height>191</height>
+     </rect>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Vertical</enum>
+    </property>
+   </widget>
    <zorder>layoutWidget</zorder>
    <zorder>layoutWidget</zorder>
    <zorder>layoutWidget</zorder>
@@ -784,22 +797,7 @@
    <zorder>layoutWidget_3</zorder>
    <zorder>RealvaluesLabel_2</zorder>
    <zorder>RealvaluesLabel_3</zorder>
-  </widget>
-  <widget class="QMenuBar" name="menuBar">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>1280</width>
-     <height>21</height>
-    </rect>
-   </property>
-   <widget class="QMenu" name="menuNavigation_calibration_tool">
-    <property name="title">
-     <string>Navigation calibration tool </string>
-    </property>
-   </widget>
-   <addaction name="menuNavigation_calibration_tool"/>
+   <zorder>line_6</zorder>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
  </widget>
