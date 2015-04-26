@@ -29,6 +29,9 @@
 #include "MsgQueue.hpp"
 #include "CalibrationMeasurement.h"
 
+#define MAX_MEASUREMENT_POINTS_PER_SITE     ( 10 )
+#define MAX_MEASUREMENT_POINTS              ( MAX_MEASUREMENT_POINTS_PER_SITE*2 )
+
 namespace Ui {
 class MainWindow;
 }
@@ -72,7 +75,7 @@ private:
     Ui::MainWindow *ui;
     MsgQueue *MyMsgQueueRealValuesTop;
     MsgQueue *MyMsgQueueRealValuesBottom;
-    CalibrationMeasurement MyCalibrationMeasurement;
+    CalibrationMeasurement *MyCalibrationMeasurement;
     UltrasonicThread *MyUltrasonicThread;
     int getvalues();
     int setamountofmeasurements(int increase);

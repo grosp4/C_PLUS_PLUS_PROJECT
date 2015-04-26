@@ -21,6 +21,7 @@
 
 /* Imports Library */
 #include <string>
+#include <QObject>
 
 /* Class Constant Declaration--------------------------------------------------*/
 
@@ -28,8 +29,9 @@
 /* Class Type declaration -----------------------------------------------------*/
 /* Class Data declaration -----------------------------------------------------*/
 /* Class definition -----------------------------------------------------------*/
-class MeasurementPoint
+class MeasurementPoint : public QObject
 {
+    Q_OBJECT
 public:
     MeasurementPoint(int XDesiredinit, int YDesiredInit);
     MeasurementPoint();
