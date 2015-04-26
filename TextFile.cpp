@@ -91,7 +91,13 @@ void TextFile::write( MeasurementPoint &NextPoint )
         if( FileLeft->open( QIODevice::Append ) == true )
         {
             QTextStream stream( FileLeft );
-            stream << NextPoint.XDesired <<";" << NextPoint.YDesired << ";" << "\r\n";
+            stream << NextPoint.XDesired <<";"
+                   << NextPoint.YDesired << ";"
+                   << NextPoint.XRealTop << ";"
+                   << NextPoint.YRealTop << ";"
+                   << NextPoint.XRealBottom << ";"
+                   << NextPoint.YRealBottom << ";"
+                   << "\r\n";
             FileLeft->close();
         }
     }
@@ -101,7 +107,13 @@ void TextFile::write( MeasurementPoint &NextPoint )
         if( FileRight->open( QIODevice::Append ) == true )
         {
             QTextStream stream( FileRight );
-            stream << "NextStream" << endl;
+            stream << NextPoint.XDesired <<";"
+                   << NextPoint.YDesired << ";"
+                   << NextPoint.XRealTop << ";"
+                   << NextPoint.YRealTop << ";"
+                   << NextPoint.XRealBottom << ";"
+                   << NextPoint.YRealBottom << ";"
+                   << "\r\n";
             FileRight->close();
         }
     }

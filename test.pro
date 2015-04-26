@@ -34,7 +34,8 @@ HEADERS  += mainwindow.h \
     MeasurementPoint.h \
     MsgQueue.hpp \
     CalibrationMeasurement.h \
-    TextFile.h
+    TextFile.h \
+    globaldefines.h
 
 FORMS    += mainwindow.ui
 
@@ -42,4 +43,6 @@ IMAGES += madeingermany.jpeg
 
 RESOURCES += \
     picturefile.qrc
+
+CONFIG += c++11
 
