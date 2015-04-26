@@ -36,7 +36,9 @@
  *  \return       None
  *
  ******************************************************************************/
-UltrasonicThread::UltrasonicThread()
+UltrasonicThread::UltrasonicThread( MsgQueue *QueueRealValuesTop, MsgQueue *QueueRealValuesBottom ):
+    MyQueueRealValuesTop( QueueRealValuesTop ),
+    MyQueueRealValuesBottom( QueueRealValuesBottom )
 {
 
 }
@@ -130,6 +132,7 @@ void UltrasonicThread::run()
 //             std::cout <<  "X-Position: " << TagRobotBigEnemy.getX_Position() << std::endl;
 //             std::cout <<  "Y-Position: " << TagRobotBigEnemy.getY_Position() << std::endl;
              emit printRealValueTop(TagRobotBigEnemy.getX_Position(), TagRobotBigEnemy.getY_Position());
+             this->MyQueueRealValuesTop->send(TagRobotBigEnemy.getX_Position(), TagRobotBigEnemy.getY_Position() );
         }
         else if(TagRobotSmallEnemy.checkSerialMessage(sSerialData1, sSerialData2, sSerialData3))
         {
@@ -139,6 +142,7 @@ void UltrasonicThread::run()
 //             std::cout <<  "X-Position: " << TagRobotSmallEnemy.getX_Position() << std::endl;
 //             std::cout <<  "Y-Position: " << TagRobotSmallEnemy.getY_Position() << std::endl;
              emit printRealValueBottom(TagRobotSmallEnemy.getX_Position(), TagRobotSmallEnemy.getY_Position());
+             this->MyQueueRealValuesBottom->send( TagRobotSmallEnemy.getX_Position(), TagRobotSmallEnemy.getY_Position() );
         }
 
     }

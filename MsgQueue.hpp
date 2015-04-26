@@ -1,12 +1,12 @@
-/** \file       MeasurementPoint.hpp
+/** \file       MsgQueue.hpp
  *  \brief
  *******************************************************************************
  *
- *  \class      MeasurementPoint
+ *  \class
  *
  *  \brief
  *
- *  \authors    grosp4
+ *  \authors
  *
  *  \date
  *
@@ -15,41 +15,36 @@
  *
  ******************************************************************************/
 /* Define to prevent recursive inclusion --------------------------------------*/
-#ifndef MEASUREMENTPOINT_H
-#define MEASUREMENTPOINT_H
-
+#ifndef MSGQUEUE_HPP
+#define MSGQUEUE_HPP
 
 /* Imports Library */
 #include <string>
-
+#include <QMutex>
 /* Class Constant Declaration--------------------------------------------------*/
 
+/* Define Coordinate System for Left Team */
 
 /* Class Type declaration -----------------------------------------------------*/
 /* Class Data declaration -----------------------------------------------------*/
 /* Class definition -----------------------------------------------------------*/
-class MeasurementPoint
+
+
+class MsgQueue
 {
 public:
-    MeasurementPoint();
-    ~MeasurementPoint();
+    MsgQueue();
+    ~MsgQueue();
+
+private:
+    QMutex MsgQueueMutex;
+    int XRealValue;
+    int YRealValue;
 
 public:
-    int XDesired;
-    int YDesired;
-
-    int XRealTop;
-    int YRealTop;
-
-    int XRealBottom;
-    int YRealBottom;
-
-    int iPointNumber;
-    int TeamSite;
-
-public:
-    void getValues();
+    void send(int X, int Y);
+    void receive(int *X, int *Y);
 
 };
 
-#endif // MEASUREMENTPOINT_H
+#endif // MSGQUEUE_HPP

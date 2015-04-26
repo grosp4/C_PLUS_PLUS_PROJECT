@@ -31,6 +31,8 @@
 #include "debug_configurations.hpp"
 #include <QPainter>
 #include <qwidget.h>
+#include "MsgQueue.hpp"
+#include <iostream>
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -76,7 +78,11 @@ MainWindow::MainWindow( QWidget *parent) :
 {
     ui->setupUi(this);
 
-    UltrasonicThread *MyUltrasonicThread = new UltrasonicThread;
+    // create msgQueues for RealValuesTop and ..Bottom:
+    this->MyMsgQueueRealValuesTop = new MsgQueue;
+    this->MyMsgQueueRealValuesBottom = new MsgQueue;
+    UltrasonicThread *MyUltrasonicThread =
+            new UltrasonicThread( this->MyMsgQueueRealValuesTop, this->MyMsgQueueRealValuesBottom);
     MyUltrasonicThread->start();
 
     /* set scroll layout for scroll area */
@@ -185,6 +191,14 @@ void MainWindow::getValueButtonClicked()
 
   ui->calibrationStatusLabel->setText("Values have been added to database \ntake next values with NEXT ");
 
+  int XBottom = 0;
+  int YBottom = 0;
+  int XTop = 0;
+  int YTop = 0;
+  MyMsgQueueRealValuesTop->receive(&XTop, &YTop);
+  MyMsgQueueRealValuesBottom->receive(&XBottom, &YBottom);
+  std::cout << "Top: X = " << XTop << ", Y = " << YTop << std::endl;
+  std::cout << "Bottom: X = " << XBottom << ", Y = " << YBottom << std::endl;
 }
 
 

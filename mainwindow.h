@@ -26,6 +26,7 @@
 #include "debug_configurations.hpp"
 #include "testthread.hpp"
 #include "UltrasonicThread.hpp"
+#include "MsgQueue.hpp"
 
 namespace Ui {
 class MainWindow;
@@ -67,6 +68,9 @@ public slots:
 
 private:
     Ui::MainWindow *ui;
+    MsgQueue *MyMsgQueueRealValuesTop;
+    MsgQueue *MyMsgQueueRealValuesBottom;
+
     UltrasonicThread *MyUltrasonicThread;
     int getvalues();
     int setamountofmeasurements(int increase);

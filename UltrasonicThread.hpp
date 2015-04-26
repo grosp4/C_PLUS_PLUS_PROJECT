@@ -23,6 +23,7 @@
 #include <QThread>
 #include <QString>
 #include "HexamiteRS232PortClass.h"
+#include "MsgQueue.hpp"
 
 /* Class Constant Declaration--------------------------------------------------*/
 
@@ -39,7 +40,7 @@ class UltrasonicThread : public QThread
     Q_OBJECT
 
 public:
-    UltrasonicThread();
+    UltrasonicThread( MsgQueue *QueueRealValuesTop, MsgQueue *QueueRealValuesBottom );
     ~UltrasonicThread();
 
 public:
@@ -51,9 +52,11 @@ signals:
     void printRealValueBottom( int X, int Y);
 
 private:
+    MsgQueue *MyQueueRealValuesTop;
+    MsgQueue *MyQueueRealValuesBottom;
     HexamiteRS232Port *MySerialPort;
     UltrasonicThread *MyUltrasonicThread;
 
 };
 
-#endif // ULTRASONICTHREAD_H
+#endif // ULTRASONICTHREAD_HPP

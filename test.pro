@@ -19,7 +19,8 @@ SOURCES += main.cpp\
     rs232.c \
     UltrasonicTagClass.cpp \
     UltrasonicThread.cpp \
-    MeasurementPoint.cpp
+    MeasurementPoint.cpp \
+    MsgQueue.cpp
 
 HEADERS  += mainwindow.h \
     debug_configurations.hpp \
@@ -28,7 +29,8 @@ HEADERS  += mainwindow.h \
     rs232.h \
     UltrasonicTagClass.hpp \
     UltrasonicThread.hpp \
-    MeasurementPoint.h
+    MeasurementPoint.h \
+    MsgQueue.hpp
 
 FORMS    += mainwindow.ui
 
