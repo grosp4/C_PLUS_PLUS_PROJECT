@@ -67,8 +67,8 @@ public slots:
     void printSerialMsg(QString myString);
     void printRealValueTop(int XTop, int YTop);
     void printRealValueBottom(int XBottom, int YBottom);
-
-
+    void mousePressEvent(QMouseEvent *event);
+    int callme();
 
 private:
     Ui::MainWindow *ui;
@@ -81,9 +81,12 @@ private:
     int getamountofmeasurements();
     void getPortNumber();
 
+    bool mpaintflag = 0 ;
 
 
 };
+
+enum {FALSE = 0, TRUE = 1 };
 
 
 #endif // MAINWINDOW_H
