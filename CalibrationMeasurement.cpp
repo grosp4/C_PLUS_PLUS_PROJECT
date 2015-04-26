@@ -21,7 +21,7 @@
 /* Imports Library */
 #include <string>
 #include <iostream>
-
+#include "UltrasonicTagClass.hpp"
 
 
 
@@ -42,8 +42,20 @@
 CalibrationMeasurement::CalibrationMeasurement()
 {
     MeasurementPoints[0].XDesired = 100;
-    MeasurementPoints[0].YDesired = 100;
+    MeasurementPoints[0].YDesired = 200;
     // init all Points....
+
+    for( int idx = 0; idx < 20; idx++)
+    {
+        if( idx < 10 )
+        {
+            MeasurementPoints[idx].TeamSite = TeamLeft;
+        }
+        else
+        {
+            MeasurementPoints[idx].TeamSite = TeamRight;
+        }
+    }
 
 }
 
@@ -63,16 +75,22 @@ CalibrationMeasurement::~CalibrationMeasurement()
 }
 
 /*******************************************************************************
- *  Method :    generateOutputFile()
+ *  Method :    generateOutputFile
  ******************************************************************************/
-/** \brief
+/** \brief      generates/creates a .txt file to save all measured values and
+ *              points for further matlab processing.
  *
- *  \author
+ *  \author     bartj2
  *
  *  \return       None
  *
  ******************************************************************************/
 void CalibrationMeasurement::generateOutputFile()
 {
+    CalibrationOutputFile = new TextFile;
 
+    for( int iCounter = 0; iCounter < 20; iCounter++ )
+    {
+        CalibrationOutputFile->write( MeasurementPoints[iCounter] );
+    }
 }

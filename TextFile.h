@@ -20,6 +20,9 @@
 
 /* Imports Library */
 #include <string>
+#include <QFile>
+#include "MeasurementPoint.h"
+#include <QObject>
 
 /* Class Constant Declaration--------------------------------------------------*/
 
@@ -28,12 +31,16 @@
 /* Class Type declaration -----------------------------------------------------*/
 /* Class Data declaration -----------------------------------------------------*/
 /* Class definition -----------------------------------------------------------*/
-class TextFile
+class TextFile : public QObject
 {
+    Q_OBJECT
 public:
     TextFile();
     ~TextFile();
-    void write();
+    void write(MeasurementPoint &NextPoint);
+
+    QFile *FileLeft;
+    QFile *FileRight;
 };
 
 #endif // TEXTFILE_H

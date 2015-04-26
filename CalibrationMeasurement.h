@@ -21,9 +21,9 @@
 /* Imports Library */
 #include <string>
 #include <iostream>
-#include <QVarLengthArray>
 #include "MeasurementPoint.h"
 #include "TextFile.h"
+#include <QObject>
 
 /* Class Constant Declaration--------------------------------------------------*/
 
@@ -33,17 +33,19 @@
 /* Class Data declaration -----------------------------------------------------*/
 /* Class definition -----------------------------------------------------------*/
 
-class CalibrationMeasurement
+class CalibrationMeasurement : public QObject
 {
+    Q_OBJECT
+
 public:
     CalibrationMeasurement();
     ~CalibrationMeasurement();
 
 public:
     MeasurementPoint MeasurementPoints[20];
-    TextFile CalibrationOutputFile;
+    TextFile *CalibrationOutputFile;
 
-public:
+public slots:
     void generateOutputFile();
 
 };

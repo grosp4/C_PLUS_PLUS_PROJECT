@@ -33,6 +33,7 @@
 #include <qwidget.h>
 #include "MsgQueue.hpp"
 #include <iostream>
+#include "TextFile.h"
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -79,11 +80,15 @@ MainWindow::MainWindow( QWidget *parent) :
     ui->setupUi(this);
 
     // create msgQueues for RealValuesTop and ..Bottom:
-    this->MyMsgQueueRealValuesTop = new MsgQueue;
-    this->MyMsgQueueRealValuesBottom = new MsgQueue;
-    UltrasonicThread *MyUltrasonicThread =
+    MyMsgQueueRealValuesTop = new MsgQueue;
+    MyMsgQueueRealValuesBottom = new MsgQueue;
+    MyUltrasonicThread =
             new UltrasonicThread( this->MyMsgQueueRealValuesTop, this->MyMsgQueueRealValuesBottom);
     MyUltrasonicThread->start();
+
+    // create whole measurement data:
+    MyCalibrationMeasurement = new CalibrationMeasurement;
+
 
     /* set scroll layout for scroll area */
     ui->scrollAreaWidgetContents->setSizePolicy(QSizePolicy::Expanding,QSizePolicy::Expanding);
@@ -100,6 +105,8 @@ MainWindow::MainWindow( QWidget *parent) :
     connect(ui->portButton,SIGNAL(clicked()),this,SLOT(getPortValue()));
     connect(ui->sendButton,SIGNAL(clicked()),this,SLOT(getCommandlineValue()));
     connect(ui->sendButton,SIGNAL(clicked()),this,SLOT(WriteInScrollAreaSlot()));
+    connect(ui->generateOutputfile, SIGNAL(clicked()),
+            MyCalibrationMeasurement, SLOT(generateOutputFile()));
 
 
 
@@ -573,3 +580,4 @@ void MainWindow::paintEvent(QPaintEvent *e)
 
 
 }
+

@@ -21,6 +21,8 @@
 /* Imports Library */
 #include <string>
 #include <QMutex>
+#include <QObject>
+
 /* Class Constant Declaration--------------------------------------------------*/
 
 /* Define Coordinate System for Left Team */
@@ -30,8 +32,10 @@
 /* Class definition -----------------------------------------------------------*/
 
 
-class MsgQueue
+class MsgQueue : public QObject
 {
+    Q_OBJECT
+
 public:
     MsgQueue();
     ~MsgQueue();
