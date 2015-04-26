@@ -198,8 +198,10 @@ void MainWindow::getValueButtonClicked()
   int YBottom = 0;
   int XTop = 0;
   int YTop = 0;
+
   MyMsgQueueRealValuesTop->receive(&XTop, &YTop);
   MyMsgQueueRealValuesBottom->receive(&XBottom, &YBottom);
+  //MyCalibrationMeasurement.MeasurementPoints[NumberOfMeasurements].XRealTop = XTop;
   std::cout << "Top: X = " << XTop << ", Y = " << YTop << std::endl;
   std::cout << "Bottom: X = " << XBottom << ", Y = " << YBottom << std::endl;
 }

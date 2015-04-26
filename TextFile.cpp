@@ -1,16 +1,15 @@
-/******************************************************************************/
-/** \file       MeasurementPoint.cpp
+/** \file       TextFile.cpp
  *  \brief
  *
  *******************************************************************************
  *
- *  \class      MeasurementPoint
+ *  \class
  *
  *  \brief
  *
- *  \authors    grosp4, bartj2
+ *  \authors
  *
- *  \date       24.04.2015
+ *  \date
  *
  *  \remark     Last Modification
  *               \li
@@ -22,48 +21,31 @@
 /* Imports Library */
 #include <string>
 #include <iostream>
-#include "MeasurementPoint.h"
+#include "TextFile.h"
 
 /*******************************************************************************
- *  Constructor : MeasurementPoint
+ *  Constructor :
  ******************************************************************************/
 /** \brief        Constructor of the Class
  *
- *  \author       grosp4
+ *  \author
  *
  *  \return       None
  *
  ******************************************************************************/
-
-MeasurementPoint::MeasurementPoint(int XDesiredInit, int YDesiredInit):
-    XDesired(XDesiredInit),
-    YDesired(YDesiredInit)
+TextFile::TextFile()
 {
 
 }
 
-MeasurementPoint::MeasurementPoint()
-{
 
-}
-/*******************************************************************************
- *  Deconstrunctor :
- ******************************************************************************/
-/** \brief        Deconstrunctor of the Class
- *
- *  \author       grosp4
- *
- *  \return       None
- *
- ******************************************************************************/
-
-MeasurementPoint::~MeasurementPoint()
+TextFile::~TextFile()
 {
 
 }
 
 /*******************************************************************************
- *  Method :
+ *  Method : write
  ******************************************************************************/
 /** \brief
  *
@@ -72,4 +54,7 @@ MeasurementPoint::~MeasurementPoint()
  *  \return       None
  *
  ******************************************************************************/
+void TextFile::write( )
+{
 
+}

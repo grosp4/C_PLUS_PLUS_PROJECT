@@ -1,4 +1,4 @@
-/** \file       CalibrationMeasurement.hpp
+/** \file       Template.hpp
  *  \brief
  *******************************************************************************
  *
@@ -6,7 +6,7 @@
  *
  *  \brief
  *
- *  \authors    bartj2
+ *  \authors
  *
  *  \date
  *
@@ -15,15 +15,11 @@
  *
  ******************************************************************************/
 /* Define to prevent recursive inclusion --------------------------------------*/
-#ifndef CALIBRATIONMEASUREMENT_H
-#define CALIBRATIONMEASUREMENT_H
+#ifndef TEXTFILE_H
+#define TEXTFILE_H
 
 /* Imports Library */
 #include <string>
-#include <iostream>
-#include <QVarLengthArray>
-#include "MeasurementPoint.h"
-#include "TextFile.h"
 
 /* Class Constant Declaration--------------------------------------------------*/
 
@@ -32,20 +28,12 @@
 /* Class Type declaration -----------------------------------------------------*/
 /* Class Data declaration -----------------------------------------------------*/
 /* Class definition -----------------------------------------------------------*/
-
-class CalibrationMeasurement
+class TextFile
 {
 public:
-    CalibrationMeasurement();
-    ~CalibrationMeasurement();
-
-public:
-    MeasurementPoint MeasurementPoints[20];
-    TextFile CalibrationOutputFile;
-
-public:
-    void generateOutputFile();
-
+    TextFile();
+    ~TextFile();
+    void write();
 };
 
-#endif // CALIBRATIONMEASUREMENT_H
+#endif // TEXTFILE_H
