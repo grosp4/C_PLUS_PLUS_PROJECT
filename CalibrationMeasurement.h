@@ -1,12 +1,12 @@
-/** \file       MeasurementPoint.hpp
+/** \file       CalibrationMeasurement.hpp
  *  \brief
  *******************************************************************************
  *
- *  \class      MeasurementPoint
+ *  \class
  *
  *  \brief
  *
- *  \authors    grosp4
+ *  \authors    bartj2
  *
  *  \date
  *
@@ -15,42 +15,32 @@
  *
  ******************************************************************************/
 /* Define to prevent recursive inclusion --------------------------------------*/
-#ifndef MEASUREMENTPOINT_H
-#define MEASUREMENTPOINT_H
-
+#ifndef CALIBRATIONMEASUREMENT_H
+#define CALIBRATIONMEASUREMENT_H
 
 /* Imports Library */
 #include <string>
+#include <iostream>
+#include <QVarLengthArray>
+#include "MeasurementPoint.h"
 
 /* Class Constant Declaration--------------------------------------------------*/
 
+/* Define Coordinate System for Left Team */
 
 /* Class Type declaration -----------------------------------------------------*/
 /* Class Data declaration -----------------------------------------------------*/
 /* Class definition -----------------------------------------------------------*/
-class MeasurementPoint
+
+class CalibrationMeasurement
 {
 public:
-    MeasurementPoint(int XDesiredinit, int YDesiredInit);
-    MeasurementPoint();
-    ~MeasurementPoint();
+    CalibrationMeasurement();
+    ~CalibrationMeasurement();
 
 public:
-    int XDesired;
-    int YDesired;
-
-    int XRealTop;
-    int YRealTop;
-
-    int XRealBottom;
-    int YRealBottom;
-
-    //int iPointNumber;
-    int TeamSite;
-
-public:
-    void getValues();
-
+    MeasurementPoint MeasurementPoints[20];
+    //TextFile CalibrationOutputFile;
 };
 
-#endif // MEASUREMENTPOINT_H
+#endif // CALIBRATIONMEASUREMENT_H
