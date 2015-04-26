@@ -94,23 +94,23 @@ MainWindow::MainWindow( QWidget *parent) :
     ui->scrollArea->setWidget(ui->scrollAreaWidgetContents);
     ui->scrollAreaWidgetContents->adjustSize();
 
-    /* connect a signal to a slot function to change a value of a label */
+    /* connect a signal to a slot  */
     connect(ui->getvaluesbutton,SIGNAL(clicked()),this,SLOT(getValueButtonClicked()));
-
     connect(ui->backButton,SIGNAL(clicked()),this,SLOT(getBackButtonClicked()));
     connect(ui->nextButon,SIGNAL(clicked()),this,SLOT(getNextButtonClicked()));
     connect(ui->portButton,SIGNAL(clicked()),this,SLOT(getPortValue()));
     connect(ui->sendButton,SIGNAL(clicked()),this,SLOT(getCommandlineValue()));
     connect(ui->sendButton,SIGNAL(clicked()),this,SLOT(WriteInScrollAreaSlot()));
 
-    QHBoxLayout *hlayout1 = new QHBoxLayout;
-    hlayout1->addWidget(ui->PictureLabel);
-    setLayout(hlayout1);
+
+
+
+
+
 
     // Communication for serial message stream to GUI:
     connect( MyUltrasonicThread, SIGNAL(printSerialMsg(QString)),
              this, SLOT(printSerialMsg(QString)));
-
     // Communication for printing current real values to GUI:
     connect( MyUltrasonicThread, SIGNAL(printRealValueTop(int,int)),
              this, SLOT(printRealValueTop(int,int)));
@@ -147,18 +147,18 @@ MainWindow::~MainWindow()
 
 
 /*******************************************************************************
- *  Method :getBackButtonClicked
+ *  Method :getValueButtonClicked
  ******************************************************************************/
-/** \brief
+/** \brief        stores the values given by ultrasonic thread to GUI in local data
  *
- *  \author
+ *  \author       grosp4
  *
  *  \return       None
  *
  ******************************************************************************/
 void MainWindow::getValueButtonClicked()
 {
-    /* Call function to get values, cleanr the label write them into our labels */
+    /* Call function to get values, clean the label write them into our labels */
   int value = 9999;
   QString valuesbymeasurement;
 
@@ -192,7 +192,7 @@ void MainWindow::getValueButtonClicked()
   /* Save in Array */
   MeasurementValues[NumberOfMeasurements][3] = valuesbymeasurement;
 
-  ui->calibrationStatusLabel->setText("Values have been added to database \ntake next values with NEXT ");
+  ui->calibrationStatusLabel->setText("Values have been added to database \ntake next values by pressing NEXT ");
 
   int XBottom = 0;
   int YBottom = 0;
@@ -213,9 +213,10 @@ void MainWindow::getValueButtonClicked()
 /*******************************************************************************
  *  Method :getBackButtonClicked
  ******************************************************************************/
-/** \brief
+/** \brief        decreases the current number and refresh with new data the GUI
+ *                is used for the measurements points
  *
- *  \author
+ *  \author     grosp4
  *
  *  \return       None
  *
@@ -260,9 +261,10 @@ void MainWindow::getBackButtonClicked()
 /*******************************************************************************
  *  Method :getNextButtonClicked
  ******************************************************************************/
-/** \brief
+/** \brief        increases the current number and refresh with new data the GUI
+ *                is used for the measurements points
  *
- *  \author
+ *  \author       grosp4
  *
  *  \return       None
  *
@@ -302,11 +304,11 @@ void MainWindow::getNextButtonClicked()
 
 
 /*******************************************************************************
- *  Method :getvalues
+ *  Method :getvalues       - OBSOLETE -
  ******************************************************************************/
-/** \brief
+/** \brief        auxillary function for getting a random Number
  *
- *  \author
+ *  \author       grosp4
  *
  *  \return       None
  *
@@ -320,11 +322,11 @@ int MainWindow::getvalues()
 /*******************************************************************************
  *  Method :getamountofmeasurements
  ******************************************************************************/
-/** \brief
+/** \brief          returns the number of measurements
  *
- *  \author
+ *  \author         grosp4
  *
- *  \return       None
+ *  \return         None
  *
  ******************************************************************************/
 int MainWindow::getamountofmeasurements()
@@ -336,11 +338,12 @@ int MainWindow::getamountofmeasurements()
 /*******************************************************************************
  *  Method :setamountofmeasurements
  ******************************************************************************/
-/** \brief
+/** \brief          sets the amount of numbers of measurments in the data array
+ *                  has been hardcoded to the size of 20!
  *
- *  \author
+ *  \author         grosp4
  *
- *  \return       None
+ *  \return         None
  *
  ******************************************************************************/
 int MainWindow::setamountofmeasurements(int increase)
@@ -398,11 +401,12 @@ int MainWindow::setamountofmeasurements(int increase)
 /*******************************************************************************
  *  Method :getPortValue
  ******************************************************************************/
-/** \brief
+/** \brief          inreads the value of the number given by the User via GUI
+ *                  forwards this information to the RS232 function
  *
- *  \author
+ *  \author         grosp4
  *
- *  \return       None
+ *  \return         None
  *
  ******************************************************************************/
 void MainWindow::getPortValue()
@@ -417,11 +421,11 @@ void MainWindow::getPortValue()
 /*******************************************************************************
  *  Method :getCommandlineValue
  ******************************************************************************/
-/** \brief
+/** \brief          inreads commands given by the user via Commandline
  *
- *  \author
+ *  \author         grosp4
  *
- *  \return       None
+ *  \return         None
  *
  ******************************************************************************/
 void MainWindow::getCommandlineValue()
@@ -445,7 +449,7 @@ void MainWindow::getCommandlineValue()
 /** \brief        This function is called another thread to write values given by RS232
  *                into the Log console.
  *
- *  \author       bartj2
+ *  \author       bartj2, grosp4
  *
  *  \return       None
  *
@@ -485,7 +489,7 @@ void MainWindow::printSerialMsg(QString myString)
  *  Method :WriteInScrollAreaSlot
  ******************************************************************************/
 /** \brief          This function is called by signal to write the Commandline text
- *                  into the Log console.
+ *                  into the Log console. Autoscroll is active by default
  *
  *  \author         grosp4
  *
@@ -523,11 +527,11 @@ void MainWindow::WriteInScrollAreaSlot()
 /*******************************************************************************
  *  Method :printRealValueTop
  ******************************************************************************/
-/** \brief
+/** \brief          is called by another thread, sets values on the GUI, creates an event!
  *
- *  \author
+ *  \author         grosp4, bartj2
  *
- *  \return       None
+ *  \return         None
  *
  ******************************************************************************/
 void MainWindow::printRealValueTop(int XTop, int YTop)
@@ -536,74 +540,84 @@ void MainWindow::printRealValueTop(int XTop, int YTop)
     ui->realXTopValue->setNum(XTop);
     ui->realYTopValue->clear();
     ui->realYTopValue->setNum(YTop);
+
+    QApplication::postEvent(this,new QEvent(QEvent::Type(MyEvent)));
 }
 
 /*******************************************************************************
  *  Method :printRealValueBottom
  ******************************************************************************/
-/** \brief
+/** \brief       is called by another thread, sets values on the GUI, creates an event!
  *
- *  \author
+ *  \author      grosp4, bartj2
  *
- *  \return       None
+ *  \return      None
  *
  ******************************************************************************/
 void MainWindow::printRealValueBottom(int XBottom, int YBottom)
 {
+
+    YBottomValue = 50 + YBottomValue;
+    XBottomValue = 50 + XBottomValue;
     ui->realXBottomValue->clear();
     ui->realXBottomValue->setNum(XBottom);
     ui->realYBottomValue->clear();
     ui->realYBottomValue->setNum(YBottom);
 
+    QApplication::postEvent(this,new QEvent(QEvent::Type(MyEvent)));
 
 
-//    painter.drawPixmap(310,580,200,200,QPixmap(":/it_is.jpg"));
-//    painter.drawPixmap(310,640,40,40,QPixmap(":/it_should_be.png"));
-//    QMainWindow::paintingActive();
+
 }
 
 /*******************************************************************************
  *  Method :paintEvent
  ******************************************************************************/
-/** \brief
+/** \brief      gets called by any event, does some painting
  *
- *  \author
+ *  \author     grosp4
  *
- *  \return       None
+ *  \return     None
  *
  ******************************************************************************/
 void MainWindow::paintEvent(QPaintEvent *e)
 {
 
-      QPainter painter(this);
-      painter.drawPixmap(280,0,681,551,QPixmap(":/emily_batty_1.jpg"));
-      painter.drawPixmap(310,580,40,40,QPixmap(":/it_is.jpg"));
-      painter.drawPixmap(310,640,40,40,QPixmap(":/it_should_be.png"));
-      QMainWindow::paintEvent(e);
+    QPainter painter(this);
+    painter.drawPixmap(280,0,681,551,QPixmap(":/emily_batty_1.jpg"));
+    painter.drawPixmap(310, 585 ,40,40,QPixmap(":/it_is.jpg"));
+    painter.drawPixmap(310,640,40,40,QPixmap(":/it_should_be.png"));
+    QMainWindow::paintEvent(e);
 
-      if(mpaintflag)
+
+    if(mpaintflag)
+    {
+               QPainter painter(this);
+               painter.drawPixmap(XBottomValue,XBottomValue,40,40,QPixmap(":/it_is.jpg"));
+               mpaintflag = false;
+    }
+
+
+
+}
+
+/*******************************************************************************
+ *  Method :customEvent
+ ******************************************************************************/
+/** \brief         Overridden Slot that is called when a Custom Event is caught
+ *
+ *  \author        grosp4
+ *
+ *  \return        None
+ *
+ ******************************************************************************/
+void MainWindow::customEvent(QEvent* e)
+  {
+      if(e->type() == (QEvent::Type)1001)
       {
-                 QPainter painter(this);
+        ui->ConsoleLabelToWriteTo->setText("TEST COMMENT");
+        mpaintflag = true;
+        update();
 
-                 painter.drawPixmap(310,222,40,40,QPixmap(":/it_is.jpg"));
-                 mpaintflag = false;
       }
-
-
-
-}
-void MainWindow::mousePressEvent(QMouseEvent *event)
-{
-    if(event->button() == Qt::LeftButton)
-                {
-                  mpaintflag = true;
-                  update();
-                }
-
-}
-
-int MainWindow::callme()
-{
-  return 200;
-}
-
+  }

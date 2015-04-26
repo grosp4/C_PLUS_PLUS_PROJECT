@@ -53,6 +53,9 @@ public:
     testthread *MyTestThread; // holder for TestThread
     #endif
    void paintEvent(QPaintEvent *e);
+   void customEvent(QEvent* e);
+   static const int MyEvent=1001;
+
 
 public slots:
     void getValueButtonClicked();
@@ -64,8 +67,6 @@ public slots:
     void printSerialMsg(QString myString);
     void printRealValueTop(int XTop, int YTop);
     void printRealValueBottom(int XBottom, int YBottom);
-    void mousePressEvent(QMouseEvent *event);
-    int callme();
 
 private:
     Ui::MainWindow *ui;
@@ -78,8 +79,12 @@ private:
     int getamountofmeasurements();
     void getPortNumber();
 
+    /* private variables */
     bool mpaintflag = 0 ;
-
+    int XBottomValue = 0;
+    int XTopValue = 0;
+    int YTopValue = 0;
+    int YBottomValue = 0;
 
 };
 
