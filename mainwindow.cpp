@@ -38,6 +38,7 @@
 #include <QEvent>
 #include "TextFile.h"
 #include "UltrasonicTagClass.hpp"
+#include "globaldefines.h"
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/

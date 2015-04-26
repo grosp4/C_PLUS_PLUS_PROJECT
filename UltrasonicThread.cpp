@@ -94,7 +94,7 @@ void UltrasonicThread::run()
     /*  Turn on Hexamite synchronizer  */
     MySerialPort->turnHexamiteUsbSynchronizerOn();
 
-    std::string *strUnfilteredData = new std::string("...");
+    //std::string *strUnfilteredData = new std::string("...");
 
     while(1)
     {
