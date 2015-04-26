@@ -21,7 +21,8 @@ SOURCES += main.cpp\
     UltrasonicThread.cpp \
     MeasurementPoint.cpp \
     MsgQueue.cpp \
-    CalibrationMeasurement.cpp
+    CalibrationMeasurement.cpp \
+    TextFile.cpp
 
 HEADERS  += mainwindow.h \
     debug_configurations.hpp \
@@ -32,7 +33,8 @@ HEADERS  += mainwindow.h \
     UltrasonicThread.hpp \
     MeasurementPoint.h \
     MsgQueue.hpp \
-    CalibrationMeasurement.h
+    CalibrationMeasurement.h \
+    TextFile.h
 
 FORMS    += mainwindow.ui
 

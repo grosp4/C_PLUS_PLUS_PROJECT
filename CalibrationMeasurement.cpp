@@ -43,6 +43,7 @@ CalibrationMeasurement::CalibrationMeasurement()
 {
     MeasurementPoints[0].XDesired = 100;
     MeasurementPoints[0].YDesired = 100;
+    // init all Points....
 
 }
 
@@ -62,7 +63,7 @@ CalibrationMeasurement::~CalibrationMeasurement()
 }
 
 /*******************************************************************************
- *  Method :
+ *  Method :    generateOutputFile()
  ******************************************************************************/
 /** \brief
  *
@@ -71,3 +72,7 @@ CalibrationMeasurement::~CalibrationMeasurement()
  *  \return       None
  *
  ******************************************************************************/
+void CalibrationMeasurement::generateOutputFile()
+{
+
+}

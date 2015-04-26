@@ -23,6 +23,7 @@
 #include <iostream>
 #include <QVarLengthArray>
 #include "MeasurementPoint.h"
+#include "TextFile.h"
 
 /* Class Constant Declaration--------------------------------------------------*/
 
@@ -40,7 +41,11 @@ public:
 
 public:
     MeasurementPoint MeasurementPoints[20];
-    //TextFile CalibrationOutputFile;
+    TextFile CalibrationOutputFile;
+
+public:
+    void generateOutputFile();
+
 };
 
 #endif // CALIBRATIONMEASUREMENT_H

@@ -27,6 +27,7 @@
 #include "testthread.hpp"
 #include "UltrasonicThread.hpp"
 #include "MsgQueue.hpp"
+#include "CalibrationMeasurement.h"
 
 namespace Ui {
 class MainWindow;
@@ -70,7 +71,7 @@ private:
     Ui::MainWindow *ui;
     MsgQueue *MyMsgQueueRealValuesTop;
     MsgQueue *MyMsgQueueRealValuesBottom;
-
+    CalibrationMeasurement MyCalibrationMeasurement;
     UltrasonicThread *MyUltrasonicThread;
     int getvalues();
     int setamountofmeasurements(int increase);
