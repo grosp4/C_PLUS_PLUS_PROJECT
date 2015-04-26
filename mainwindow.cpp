@@ -81,6 +81,9 @@ MainWindow::MainWindow( QWidget *parent) :
 
 {
     ui->setupUi(this);
+    QString windowTitle = " Chuck Norris jokes are coming soon";
+    this->setWindowTitle(windowTitle);
+
 
     // create msgQueues for RealValuesTop and ..Bottom:
     MyMsgQueueRealValuesTop = new MsgQueue;
@@ -347,7 +350,7 @@ int MainWindow::getamountofmeasurements()
  *  Method :setamountofmeasurements
  ******************************************************************************/
 /** \brief          sets the amount of numbers of measurments in the data array
- *                  has been hardcoded to the size of 20!
+ *
  *
  *  \author         grosp4
  *
@@ -358,7 +361,7 @@ int MainWindow::setamountofmeasurements(int increase)
 {
     if (increase)
     {
-        if ( (NumberOfMeasurements >= 10)&& (NumberOfMeasurements < 20) )
+        if ( (NumberOfMeasurements >= MAX_MEASUREMENT_POINTS_PER_SITE)&& (NumberOfMeasurements < MAX_MEASUREMENT_POINTS) )
         {
             NumberOfMeasurements = NumberOfMeasurements + 1;
             MaxNumberOfMeasurements = MaxNumberOfMeasurements +1;
@@ -367,7 +370,7 @@ int MainWindow::setamountofmeasurements(int increase)
         }
 
 
-        if ( NumberOfMeasurements < 10)
+        if ( NumberOfMeasurements < MAX_MEASUREMENT_POINTS_PER_SITE)
         {
             NumberOfMeasurements = NumberOfMeasurements + 1;
             MaxNumberOfMeasurements = MaxNumberOfMeasurements +1;
@@ -383,16 +386,16 @@ int MainWindow::setamountofmeasurements(int increase)
     }
     else
     {
-        if((NumberOfMeasurements > 1) && (NumberOfMeasurements < 12) )
+        if((NumberOfMeasurements > 1) && (NumberOfMeasurements < (MAX_MEASUREMENT_POINTS_PER_SITE +2 ) ) )
         {
             NumberOfMeasurements = NumberOfMeasurements - 1;
-             MaxNumberOfMeasurements = MaxNumberOfMeasurements - 1;
+            MaxNumberOfMeasurements = MaxNumberOfMeasurements - 1;
             ui->TeamnameLabel->setText(("TEAM LEFT"));
         }
-        if(NumberOfMeasurements >= 12 )
+        if(NumberOfMeasurements >= (MAX_MEASUREMENT_POINTS_PER_SITE +2) )
         {
             NumberOfMeasurements = NumberOfMeasurements - 1;
-             MaxNumberOfMeasurements = MaxNumberOfMeasurements - 1;
+            MaxNumberOfMeasurements = MaxNumberOfMeasurements - 1;
             ui->TeamnameLabel->setText(("TEAM RIGHT"));
         }
         else
@@ -591,18 +594,38 @@ void MainWindow::printRealValueBottom(int XBottom, int YBottom)
 void MainWindow::paintEvent(QPaintEvent *e)
 {
 
+    /* prints at every refresh static pictures */
     QPainter painter(this);
-    painter.drawPixmap(280,0,681,551,QPixmap(":/emily_batty_1.jpg"));
     painter.drawPixmap(310, 585 ,40,40,QPixmap(":/it_is.jpg"));
     painter.drawPixmap(310,640,40,40,QPixmap(":/it_should_be.png"));
     QMainWindow::paintEvent(e);
 
 
+    /* prints initial field at startup */
+    if (consoleHasBeenUsed == 0)
+    {
+        painter.drawPixmap(199,60,761,469,QPixmap(":/Map_Left"));
+    }
+
+    /* if a custom event has been called */
     if(mpaintflag)
     {
-               QPainter painter(this);
-               painter.drawPixmap(XBottomValue,XBottomValue,40,40,QPixmap(":/it_is.jpg"));
-               mpaintflag = false;
+        /* if the event is called while we have less than MAX_MEASUREMENT_POINTS_PER_SITE */
+        if( NumberOfMeasurements <= MAX_MEASUREMENT_POINTS_PER_SITE)
+        {
+          painter.drawPixmap(199,60,761,469,QPixmap(":/Map_Left"));
+        }
+        else
+        {
+           painter.drawPixmap(199,60,761,469,QPixmap(":/Map_Right"));
+        }
+
+        /* Update graphics data on GUI */
+       QPainter painter(this);
+       painter.drawPixmap(XBottomValue,XBottomValue,40,40,QPixmap(":/it_is.jpg"));
+
+       /* reset flag for painting*/
+       mpaintflag = false;
     }
 
 
@@ -623,7 +646,7 @@ void MainWindow::customEvent(QEvent* e)
   {
       if(e->type() == (QEvent::Type)1001)
       {
-        ui->ConsoleLabelToWriteTo->setText("TEST COMMENT");
+          /* if the specific custom event has been called, set the painting flag */
         mpaintflag = true;
         update();
 
