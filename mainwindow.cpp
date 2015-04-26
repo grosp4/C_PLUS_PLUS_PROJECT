@@ -33,7 +33,9 @@
 #include <qwidget.h>
 #include "MsgQueue.hpp"
 #include <iostream>
-
+#include <QScrollBar>
+#include <QScrollArea>
+#include <QEvent>
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
 /* Private macro -------------------------------------------------------------*/
@@ -101,8 +103,9 @@ MainWindow::MainWindow( QWidget *parent) :
     connect(ui->sendButton,SIGNAL(clicked()),this,SLOT(getCommandlineValue()));
     connect(ui->sendButton,SIGNAL(clicked()),this,SLOT(WriteInScrollAreaSlot()));
 
-
-
+    QHBoxLayout *hlayout1 = new QHBoxLayout;
+    hlayout1->addWidget(ui->PictureLabel);
+    setLayout(hlayout1);
 
     // Communication for serial message stream to GUI:
     connect( MyUltrasonicThread, SIGNAL(printSerialMsg(QString)),
@@ -370,11 +373,13 @@ int MainWindow::setamountofmeasurements(int increase)
         if((NumberOfMeasurements > 1) && (NumberOfMeasurements < 12) )
         {
             NumberOfMeasurements = NumberOfMeasurements - 1;
+             MaxNumberOfMeasurements = MaxNumberOfMeasurements - 1;
             ui->TeamnameLabel->setText(("TEAM LEFT"));
         }
         if(NumberOfMeasurements >= 12 )
         {
             NumberOfMeasurements = NumberOfMeasurements - 1;
+             MaxNumberOfMeasurements = MaxNumberOfMeasurements - 1;
             ui->TeamnameLabel->setText(("TEAM RIGHT"));
         }
         else
@@ -435,19 +440,21 @@ void MainWindow::getCommandlineValue()
 /*******************************************************************************
  *  Method :printSerialMsg
  ******************************************************************************/
-/** \brief
+/** \brief        This function is called another thread to write values given by RS232
+ *                into the Log console.
  *
- *  \author
+ *  \author       bartj2
  *
  *  \return       None
  *
  ******************************************************************************/
 void MainWindow::printSerialMsg(QString myString)
 {
-    //QString myString = QString::number(testvalue);
-    QString tempString;
 
-    /* activate the console and delete the dumy text */
+    QString tempString;
+    QScrollBar *sb = ui->scrollArea->verticalScrollBar();
+
+    /* activate the console and delete the dummy text */
     if (consoleHasBeenUsed == 0)
     {
         ui->ConsoleLabelToWriteTo->clear();
@@ -458,11 +465,11 @@ void MainWindow::printSerialMsg(QString myString)
     }
     else
     {
-        //myString = ui->commandEdit->text();
+
         tempString = ui->ConsoleLabelToWriteTo->text();
         ui->ConsoleLabelToWriteTo->setText(tempString + "\n" + myString   );
         ui->commandEdit->clear();
-
+        sb->setValue(sb->maximum());
 
     }
 
@@ -475,17 +482,20 @@ void MainWindow::printSerialMsg(QString myString)
 /*******************************************************************************
  *  Method :WriteInScrollAreaSlot
  ******************************************************************************/
-/** \brief
+/** \brief          This function is called by signal to write the Commandline text
+ *                  into the Log console.
  *
- *  \author
+ *  \author         grosp4
  *
- *  \return       None
+ *  \return         None
  *
  ******************************************************************************/
 void MainWindow::WriteInScrollAreaSlot()
 {
     QString tempString;
     QString myString;
+    QScrollBar *sb = ui->scrollArea->verticalScrollBar();
+
 
     if (consoleHasBeenUsed == 0)
     {
@@ -503,8 +513,7 @@ void MainWindow::WriteInScrollAreaSlot()
         tempString = ui->ConsoleLabelToWriteTo->text();
         ui->ConsoleLabelToWriteTo->setText(tempString + "\n" + myString   );
         ui->commandEdit->clear();
-
-
+        sb->setValue(sb->maximum());
     }
 
 }
@@ -544,7 +553,8 @@ void MainWindow::printRealValueBottom(int XBottom, int YBottom)
     ui->realYBottomValue->clear();
     ui->realYBottomValue->setNum(YBottom);
 
-//    QPainter painter(this);
+
+
 //    painter.drawPixmap(310,580,200,200,QPixmap(":/it_is.jpg"));
 //    painter.drawPixmap(310,640,40,40,QPixmap(":/it_should_be.png"));
 //    QMainWindow::paintingActive();
@@ -569,5 +579,29 @@ void MainWindow::paintEvent(QPaintEvent *e)
       painter.drawPixmap(310,640,40,40,QPixmap(":/it_should_be.png"));
       QMainWindow::paintEvent(e);
 
+      if(mpaintflag)
+      {
+                 QPainter painter(this);
+
+                 painter.drawPixmap(310,222,40,40,QPixmap(":/it_is.jpg"));
+                 mpaintflag = false;
+      }
+
+
 
 }
+void MainWindow::mousePressEvent(QMouseEvent *event)
+{
+    if(event->button() == Qt::LeftButton)
+                {
+                  mpaintflag = true;
+                  update();
+                }
+
+}
+
+int MainWindow::callme()
+{
+  return 200;
+}
+
