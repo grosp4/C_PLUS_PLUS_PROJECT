@@ -563,14 +563,15 @@ void MainWindow::paintEvent(QPaintEvent *e)
     /* prints at every refresh static pictures */
     QPainter painter(this);
     painter.drawPixmap(310, 575 ,30,30,QPixmap(":/it_is.png"));
-    painter.drawPixmap(310,620,30,30,QPixmap(":/it_should_be.jpg"));
+  //  painter.drawPixmap(310,620,30,30,QPixmap(":/it_should_be.jpg"));
+     painter.drawPixmap(0,0,30,30,QPixmap(":/it_should_be.jpg"));
     QMainWindow::paintEvent(e);
 
 
     /* prints initial field at startup */
     if (consoleHasBeenUsed == 0)
     {
-        //painter.drawPixmap(199,60,761,469,QPixmap(":/Map_Left"));
+        painter.drawPixmap(199,60,761,469,QPixmap(":/Map_Left"));
     }
 
     /* if a custom event has been called */
@@ -579,21 +580,23 @@ void MainWindow::paintEvent(QPaintEvent *e)
         /* if the event is called while we have less than MAX_MEASUREMENT_POINTS_PER_SITE */
         if( NumberOfMeasurements <= MAX_MEASUREMENT_POINTS_PER_SITE)
         {
-          //painter.drawPixmap(199,60,761,469,QPixmap(":/Map_Left"));
+          painter.drawPixmap(199,60,761,469,QPixmap(":/Map_Left"));
         }
         else
         {
-           painter.drawPixmap(199,60,761,469,QPixmap(":/Map_Right"));
+          painter.drawPixmap(199,60,761,469,QPixmap(":/Map_Right"));
         }
 
         /* Update graphics data on GUI */
        QPainter painter(this);
-       painter.drawPixmap( OFFSET_X_VALUE_PICTURE_LABEL + (GraphicsXBottomValue / RATIO_PICTURE_TO_COORDINATES), OFFSET_X_VALUE_PICTURE_LABEL + (GraphicsYBottomValue / RATIO_PICTURE_TO_COORDINATES) ,30, 30, QPixmap(":/it_is.png"));
-       painter.drawPixmap(OFFSET_X_VALUE_PICTURE_LABEL + (GraphicsXTopValue / RATIO_PICTURE_TO_COORDINATES) , OFFSET_X_VALUE_PICTURE_LABEL +(GraphicsYTopValue / RATIO_PICTURE_TO_COORDINATES), 30, 30, QPixmap(":/it_is.png"));
+       painter.drawPixmap(OFFSET_GRAPHICS_X + OFFSET_X_INSIDE_PICTURE_TO_GAMEFIELD + OFFSET_X_VALUE_PICTURE_LABEL + (GraphicsXBottomValue / RATIO_PICTURE_TO_COORDINATES_X), (OFFSET_GRAPHICS_Y + OFFSET_Y_INSIDE_PICTURE_TO_GAMEFIELD + OFFSET_Y_VALUE_PICTURE_LABEL) + (GraphicsYBottomValue / RATIO_PICTURE_TO_COORDINATES_Y) ,30, 30, QPixmap(":/it_is.png"));
+       painter.drawPixmap(OFFSET_GRAPHICS_X + OFFSET_X_INSIDE_PICTURE_TO_GAMEFIELD + OFFSET_X_VALUE_PICTURE_LABEL + (GraphicsXTopValue / RATIO_PICTURE_TO_COORDINATES_X) , (OFFSET_GRAPHICS_Y + OFFSET_Y_INSIDE_PICTURE_TO_GAMEFIELD + OFFSET_Y_VALUE_PICTURE_LABEL) +(GraphicsYTopValue / RATIO_PICTURE_TO_COORDINATES_Y), 30, 30, QPixmap(":/it_is.png"));
 
+//         std::cout << (OFFSET_X_INSIDE_PICTURE_TO_GAMEFIELD + OFFSET_X_VALUE_PICTURE_LABEL + (GraphicsXTopValue / RATIO_PICTURE_TO_COORDINATES)) << std::endl;
+//         std::cout << ( OFFSET_X_INSIDE_PICTURE_TO_GAMEFIELD + OFFSET_X_VALUE_PICTURE_LABEL +(GraphicsYTopValue / RATIO_PICTURE_TO_COORDINATES))<< std::endl;
        /* print desired coordinates */
-       painter.drawPixmap(OFFSET_X_VALUE_PICTURE_LABEL + (DesiredValues[NumberOfMeasurements][0] / RATIO_PICTURE_TO_COORDINATES), OFFSET_X_VALUE_PICTURE_LABEL + (DesiredValues[NumberOfMeasurements][1] / RATIO_PICTURE_TO_COORDINATES), 30, 30, QPixmap(":/it_should_be.jpg"));
-       painter.drawPixmap(OFFSET_X_VALUE_PICTURE_LABEL + (DesiredValues[NumberOfMeasurements][2] / RATIO_PICTURE_TO_COORDINATES), OFFSET_X_VALUE_PICTURE_LABEL + (DesiredValues[NumberOfMeasurements][3] / RATIO_PICTURE_TO_COORDINATES), 30, 30, QPixmap(":/it_should_be.jpg"));
+       painter.drawPixmap(OFFSET_GRAPHICS_X + OFFSET_X_INSIDE_PICTURE_TO_GAMEFIELD + OFFSET_X_VALUE_PICTURE_LABEL + (DesiredValues[NumberOfMeasurements][0] / RATIO_PICTURE_TO_COORDINATES_X), OFFSET_GRAPHICS_Y + OFFSET_Y_INSIDE_PICTURE_TO_GAMEFIELD + OFFSET_Y_VALUE_PICTURE_LABEL + (DesiredValues[NumberOfMeasurements][1] / RATIO_PICTURE_TO_COORDINATES_Y), 30, 30, QPixmap(":/it_should_be.jpg"));
+       painter.drawPixmap(OFFSET_GRAPHICS_X + OFFSET_X_INSIDE_PICTURE_TO_GAMEFIELD + OFFSET_X_VALUE_PICTURE_LABEL + (DesiredValues[NumberOfMeasurements][2] / RATIO_PICTURE_TO_COORDINATES_X), OFFSET_GRAPHICS_Y + OFFSET_Y_INSIDE_PICTURE_TO_GAMEFIELD + OFFSET_Y_VALUE_PICTURE_LABEL + (DesiredValues[NumberOfMeasurements][3] / RATIO_PICTURE_TO_COORDINATES_Y), 30, 30, QPixmap(":/it_should_be.jpg"));
 
        /* reset flag for painting*/
        mpaintflag = false;
