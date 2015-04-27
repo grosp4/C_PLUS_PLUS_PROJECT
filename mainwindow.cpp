@@ -388,7 +388,7 @@ void MainWindow::getPortValue()
     myString = ui->PortEdit->text();
     ui->statusLabel->clear();
     ui->statusLabel->setText("Port has been set to " + myString );
-    this->MyUltrasonicThread->MySerialPort->changeHexamiteRS232Port(myString.toInt());
+    //this->MyUltrasonicThread->MySerialPort->changeHexamiteRS232Port(myString.toInt());
 }
 
 
