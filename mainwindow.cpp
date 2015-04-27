@@ -566,7 +566,7 @@ void MainWindow::paintEvent(QPaintEvent *e)
     /* prints initial field at startup */
     if (consoleHasBeenUsed == 0)
     {
-        painter.drawPixmap(199,60,761,469,QPixmap(":/Map_Left"));
+        //painter.drawPixmap(199,60,761,469,QPixmap(":/Map_Left"));
     }
 
     /* if a custom event has been called */
@@ -575,7 +575,7 @@ void MainWindow::paintEvent(QPaintEvent *e)
         /* if the event is called while we have less than MAX_MEASUREMENT_POINTS_PER_SITE */
         if( NumberOfMeasurements <= MAX_MEASUREMENT_POINTS_PER_SITE)
         {
-          painter.drawPixmap(199,60,761,469,QPixmap(":/Map_Left"));
+          //painter.drawPixmap(199,60,761,469,QPixmap(":/Map_Left"));
         }
         else
         {
