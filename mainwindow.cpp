@@ -55,7 +55,42 @@ int consoleHasBeenUsed  = 0;
 /* initialize measurement array */
 /* it will be used as following: 10 measurements, 4 values each measurement: X,Y TOP, X,Y BOTTOM */
 QString  MeasurementValues [21][4] = {"0"} ;
-int  DesiredValues [21][4] = {0} ;
+QString Fun[9] ={
+"When Alexander Bell invented the telephone he had 3 missed calls from Chuck Norris",
+"There used to be a street named after Chuck Norris, but it was changed because nobody crosses Chuck Norris and lives.",
+"Chuck Norris died 20 years ago, Death just hasn't built up the courage to tell him yet.",
+"Chuck Norris has already been to Mars; that's why there are no signs of life.",
+"Some magicans can walk on water, Chuck Norris can swim through land.",
+"Chuck Norris and Superman once fought each other on a bet. The loser had to start wearing his underwear on the outside of his pants.",
+"Chuck Norris has a grizzly bear carpet in his room. The bear isn't dead it is just afriad to move.",
+"Chuck Norris once urinated in a semi truck's gas tank as a joke....that truck is now known as Optimus Prime.",
+"Chuck Norris counted to infinity - twice."
+};
+
+int  DesiredValues [21][4] = {
+{0,0,0,0},              // only used for initial drawing of "where it should be"
+{250,1000,250,1000},    // 1, tean left starts here
+{870,1355,870,1355},    // 2
+{90,1750,90,1750},      // 3
+{450,300,450,300},      // 4
+{1250,830,1250,830},    // 5
+{1250,200,1250,200},    // 6
+{0,0,0,0},
+{0,0,0,0},
+{0,0,0,0},
+{0,0,0,0},                // 10, team right starts at next
+{2750,1000,2750,1000},    // 1
+{2130,1355,2130,1355},    // 2
+{2910,1750,2910,1750},    // 3
+{2550,300,2550,300},      // 4
+{1750,830,1750,830},      // 5
+{1750,200,1750,200},      // 6
+{0,0,0,0},
+{0,0,0,0},
+{0,0,0,0},
+{0,0,0,0},                // 20, end (total size array is 21)
+
+                            };
 /* Private function prototypes -----------------------------------------------*/
 /* Private functions ---------------------------------------------------------*/
 
@@ -83,7 +118,8 @@ MainWindow::MainWindow( QWidget *parent) :
 
 {
     ui->setupUi(this);
-    QString windowTitle = " Chuck Norris jokes are coming soon";
+    QString windowTitle = Fun[getvalues()];
+
     this->setWindowTitle(windowTitle);
 
 
@@ -230,6 +266,12 @@ void MainWindow::getBackButtonClicked()
     ui->realYBottomValue_2->clear();
     ui->realYBottomValue_2->setNum(MyCalibrationMeasurement->MeasurementPoints[NumberOfMeasurements].YRealBottom);
 
+    /* set desired values */
+    ui->desiredXTopValue->setNum(DesiredValues[NumberOfMeasurements][0]);
+    ui->desiredYTopValue->setNum(DesiredValues[NumberOfMeasurements][1]);
+    ui->desiredXBottomValue->setNum(DesiredValues[NumberOfMeasurements][2]);
+    ui->desiredYBottomValue->setNum(DesiredValues[NumberOfMeasurements][3]);
+
     /* update calibrationStatusLabel */
     ui->calibrationStatusLabel->setText("Ready to calibrate");
 }
@@ -263,6 +305,13 @@ void MainWindow::getNextButtonClicked()
     ui->realYBottomValue_2->clear();
     ui->realYBottomValue_2->setNum(MyCalibrationMeasurement->MeasurementPoints[NumberOfMeasurements].YRealBottom);
 
+    /* set desired values */
+    ui->desiredXTopValue->setNum(DesiredValues[NumberOfMeasurements][0]);
+    ui->desiredYTopValue->setNum(DesiredValues[NumberOfMeasurements][1]);
+    ui->desiredXBottomValue->setNum(DesiredValues[NumberOfMeasurements][2]);
+    ui->desiredYBottomValue->setNum(DesiredValues[NumberOfMeasurements][3]);
+
+
     /* update calibrationStatusLabel */
     ui->calibrationStatusLabel->setText("Ready to calibrate");
 }
@@ -281,7 +330,7 @@ void MainWindow::getNextButtonClicked()
  ******************************************************************************/
 int MainWindow::getvalues()
 {
-   int value = rand() % 100;
+   int value = rand() % 10;
    return  value;
 }
 
@@ -535,8 +584,8 @@ void MainWindow::printRealValueTop(int XTop, int YTop)
 void MainWindow::printRealValueBottom(int XBottom, int YBottom)
 {
 
-    GraphicsYBottomValue = XBottom;
-    GraphicsXBottomValue = YBottom;
+    GraphicsXBottomValue = XBottom;
+    GraphicsYBottomValue = YBottom;
     ui->realXBottomValue->clear();
     ui->realXBottomValue->setNum(XBottom);
     ui->realYBottomValue->clear();
@@ -563,9 +612,8 @@ void MainWindow::paintEvent(QPaintEvent *e)
 
     /* prints at every refresh static pictures */
     QPainter painter(this);
-    painter.drawPixmap(310, 575 ,30,30,QPixmap(":/it_is.png"));
-  //  painter.drawPixmap(310,620,30,30,QPixmap(":/it_should_be.jpg"));
-     painter.drawPixmap(0,0,30,30,QPixmap(":/it_should_be.jpg"));
+    painter.drawPixmap(310, 620 ,30,30,QPixmap(":/it_is.png"));
+    painter.drawPixmap(310,575,30,30,QPixmap(":/it_should_be.jpg"));
     QMainWindow::paintEvent(e);
 
 
@@ -590,14 +638,12 @@ void MainWindow::paintEvent(QPaintEvent *e)
 
         /* Update graphics data on GUI */
        QPainter painter(this);
-       painter.drawPixmap(OFFSET_GRAPHICS_X + OFFSET_X_INSIDE_PICTURE_TO_GAMEFIELD + OFFSET_X_VALUE_PICTURE_LABEL + (GraphicsXBottomValue / RATIO_PICTURE_TO_COORDINATES_X), (OFFSET_GRAPHICS_Y + OFFSET_Y_INSIDE_PICTURE_TO_GAMEFIELD + OFFSET_Y_VALUE_PICTURE_LABEL) + (GraphicsYBottomValue / RATIO_PICTURE_TO_COORDINATES_Y) ,30, 30, QPixmap(":/it_is.png"));
-       painter.drawPixmap(OFFSET_GRAPHICS_X + OFFSET_X_INSIDE_PICTURE_TO_GAMEFIELD + OFFSET_X_VALUE_PICTURE_LABEL + (GraphicsXTopValue / RATIO_PICTURE_TO_COORDINATES_X) , (OFFSET_GRAPHICS_Y + OFFSET_Y_INSIDE_PICTURE_TO_GAMEFIELD + OFFSET_Y_VALUE_PICTURE_LABEL) +(GraphicsYTopValue / RATIO_PICTURE_TO_COORDINATES_Y), 30, 30, QPixmap(":/it_is.png"));
 
-//         std::cout << (OFFSET_X_INSIDE_PICTURE_TO_GAMEFIELD + OFFSET_X_VALUE_PICTURE_LABEL + (GraphicsXTopValue / RATIO_PICTURE_TO_COORDINATES)) << std::endl;
-//         std::cout << ( OFFSET_X_INSIDE_PICTURE_TO_GAMEFIELD + OFFSET_X_VALUE_PICTURE_LABEL +(GraphicsYTopValue / RATIO_PICTURE_TO_COORDINATES))<< std::endl;
        /* print desired coordinates */
-       painter.drawPixmap(OFFSET_GRAPHICS_X + OFFSET_X_INSIDE_PICTURE_TO_GAMEFIELD + OFFSET_X_VALUE_PICTURE_LABEL + (DesiredValues[NumberOfMeasurements][0] / RATIO_PICTURE_TO_COORDINATES_X), OFFSET_GRAPHICS_Y + OFFSET_Y_INSIDE_PICTURE_TO_GAMEFIELD + OFFSET_Y_VALUE_PICTURE_LABEL + (DesiredValues[NumberOfMeasurements][1] / RATIO_PICTURE_TO_COORDINATES_Y), 30, 30, QPixmap(":/it_should_be.jpg"));
-       painter.drawPixmap(OFFSET_GRAPHICS_X + OFFSET_X_INSIDE_PICTURE_TO_GAMEFIELD + OFFSET_X_VALUE_PICTURE_LABEL + (DesiredValues[NumberOfMeasurements][2] / RATIO_PICTURE_TO_COORDINATES_X), OFFSET_GRAPHICS_Y + OFFSET_Y_INSIDE_PICTURE_TO_GAMEFIELD + OFFSET_Y_VALUE_PICTURE_LABEL + (DesiredValues[NumberOfMeasurements][3] / RATIO_PICTURE_TO_COORDINATES_Y), 30, 30, QPixmap(":/it_should_be.jpg"));
+       painter.drawPixmap(OFFSET_X_VALUE_PICTURE_LABEL + OFFSET_GRAPHICS_X + (DesiredValues[NumberOfMeasurements][0] / RATIO_PICTURE_TO_COORDINATES_X),  OFFSET_Y_VALUE_PICTURE_LABEL + OFFSET_GRAPHICS_Y + (DesiredValues[NumberOfMeasurements][1] / RATIO_PICTURE_TO_COORDINATES_Y), 30, 30, QPixmap(":/it_should_be.jpg"));
+       painter.drawPixmap(OFFSET_X_VALUE_PICTURE_LABEL + OFFSET_GRAPHICS_X + (DesiredValues[NumberOfMeasurements][2] / RATIO_PICTURE_TO_COORDINATES_X),  OFFSET_Y_VALUE_PICTURE_LABEL + OFFSET_GRAPHICS_Y + (DesiredValues[NumberOfMeasurements][3] / RATIO_PICTURE_TO_COORDINATES_Y), 30, 30, QPixmap(":/it_should_be.jpg"));
+       painter.drawPixmap( OFFSET_X_VALUE_PICTURE_LABEL + OFFSET_GRAPHICS_X + (GraphicsXBottomValue / RATIO_PICTURE_TO_COORDINATES_X), OFFSET_Y_VALUE_PICTURE_LABEL + OFFSET_GRAPHICS_Y + (GraphicsYBottomValue / RATIO_PICTURE_TO_COORDINATES_Y) ,30, 30, QPixmap(":/it_is.png"));
+       painter.drawPixmap( OFFSET_X_VALUE_PICTURE_LABEL + OFFSET_GRAPHICS_X + (GraphicsXTopValue / RATIO_PICTURE_TO_COORDINATES_X) , OFFSET_Y_VALUE_PICTURE_LABEL + OFFSET_GRAPHICS_Y + (GraphicsYTopValue / RATIO_PICTURE_TO_COORDINATES_Y), 30, 30, QPixmap(":/it_is.png"));
 
        /* reset flag for painting*/
        mpaintflag = false;

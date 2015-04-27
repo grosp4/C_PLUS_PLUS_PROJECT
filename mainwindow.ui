@@ -151,28 +151,28 @@
      <item>
       <widget class="QLabel" name="desiredXTopValue">
        <property name="text">
-        <string>0</string>
+        <string>xx</string>
        </property>
       </widget>
      </item>
      <item>
       <widget class="QLabel" name="desiredYTopValue">
        <property name="text">
-        <string>0</string>
+        <string>xx</string>
        </property>
       </widget>
      </item>
      <item>
       <widget class="QLabel" name="desiredXBottomValue">
        <property name="text">
-        <string>0</string>
+        <string>xx</string>
        </property>
       </widget>
      </item>
      <item>
       <widget class="QLabel" name="desiredYBottomValue">
        <property name="text">
-        <string>0</string>
+        <string>xx</string>
        </property>
       </widget>
      </item>
@@ -739,9 +739,11 @@
     </property>
     <property name="font">
      <font>
-      <family>Book Antiqua</family>
+      <family>Aparajita</family>
       <pointsize>20</pointsize>
-      <italic>false</italic>
+      <weight>50</weight>
+      <italic>true</italic>
+      <bold>false</bold>
      </font>
     </property>
     <property name="text">
