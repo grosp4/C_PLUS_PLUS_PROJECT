@@ -39,6 +39,7 @@
 #include "TextFile.h"
 #include "UltrasonicTagClass.hpp"
 #include "globaldefines.h"
+#include <time.h>
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -319,7 +320,7 @@ void MainWindow::getNextButtonClicked()
 
 
 /*******************************************************************************
- *  Method :getvalues       - OBSOLETE -
+ *  Method :getvalues       - FUN -
  ******************************************************************************/
 /** \brief        auxillary function for getting a random Number
  *
@@ -330,8 +331,10 @@ void MainWindow::getNextButtonClicked()
  ******************************************************************************/
 int MainWindow::getvalues()
 {
+   srand (time(NULL));
    int value = rand() % 100;
-   value = value /10;
+   value = value / 10;
+   std::cout << value << std::endl;
    return  value;
 }
 

@@ -47,6 +47,13 @@
 #define ULTRASONIC_ID_RECEIVER2		"R42"		/*!< ID's Receiver 2, Team Right: Bottom Left  / Team Left: Top Right */
 #define ULTRASONIC_ID_RECEIVER3		"R43"		/*!< ID's Receiver 3, Team Right: Top Left     / Team Left: Bottom Right */
 
+
+
+/* Playtable sizes */
+#define GLOBALS_PLAY_TABLE_WIDTH		3000	/*!< Width of the playing table (in [mm]) */
+#define GLOBALS_PLAY_TABLE_HEIGHT		2000	/*!< Height of the playing table (in [mm]) */
+
+
 /* Class Type declaration -----------------------------------------------------*/
 enum Team
 {
@@ -60,8 +67,8 @@ class UltrasonicTagClass
    private:
    void getDistance(std::string const& sSerialMessage, std::string const& sRecID, int *pDistance);	/*!<  Method to get the Distance out of the USART-String */
    std::string sTAG_ID;											/*!<  ID of the used Tag */
-   int iDistance1, iDistance2, iDistance3;						/*!<  Distance from each Receiver to Tag */
-   int iX_Position, iY_Position;								/*!<  Position of the Tag */
+   int iDistance1 = 0, iDistance2 = 0, iDistance3 = 0;						/*!<  Distance from each Receiver to Tag */
+   int iX_Position = 0, iY_Position = 0;								/*!<  Position of the Tag */
    static int iTeamStartPosition;								/*!<  Class attribute for StartPosition to get the calculation*/
 
    /* -- Public Methods/Data -- */

@@ -43,6 +43,7 @@ int  UltrasonicTagClass::iTeamStartPosition = TeamRight;
 UltrasonicTagClass::UltrasonicTagClass(std::string const& sNewTagID)
 : sTAG_ID(sNewTagID)
 {
+
 }
 
 /*******************************************************************************
@@ -147,6 +148,7 @@ void UltrasonicTagClass::calculatePosition()
 	int iX_Rec1 = 0, iY_Rec1 = 0;
 	int iX_Rec2 = 0, iY_Rec2 = 0;
 	int iX_Rec3 = 0, iY_Rec3 = 0;
+    int iY_PositionTemp = 0, iX_PositionTemp = 0;
 
 	int idetd = 0;
 	double dtmp  = 0;
@@ -211,7 +213,7 @@ void UltrasonicTagClass::calculatePosition()
 	dx[1][1] = ixn[1][0] * dd[0][1] + ixn[1][1] * dd[1][1];
 
 	/* calculate the x-Axis */
-	iX_Position = dx[0][0] * dx[1][1] - dx[0][1] * dx[1][0];
+    iX_PositionTemp = dx[0][0] * dx[1][1] - dx[0][1] * dx[1][0];
 
 	/* multiply the Matrix iyn with d */
 	d64y[0][0] = iyn[0][0] * dd[0][0] + iyn[0][1] * dd[1][0];
@@ -219,7 +221,14 @@ void UltrasonicTagClass::calculatePosition()
 	d64y[1][0] = iyn[1][0] * dd[0][0] + iyn[1][1] * dd[1][0];
 	d64y[1][1] = iyn[1][0] * dd[0][1] + iyn[1][1] * dd[1][1];
 	/* calculate the y-Axis */
-	iY_Position = d64y[0][0] * d64y[1][1] - d64y[0][1] * d64y[1][0];
+    iY_PositionTemp = d64y[0][0] * d64y[1][1] - d64y[0][1] * d64y[1][0];
+
+    /* check if new position out of the playing Table */
+    if((iX_PositionTemp >= 0) && (iX_PositionTemp <= GLOBALS_PLAY_TABLE_WIDTH) && (iY_PositionTemp >= 0) && (iY_PositionTemp <= GLOBALS_PLAY_TABLE_HEIGHT))
+    {
+        iX_Position = iX_PositionTemp;
+        iY_Position = iY_PositionTemp;
+    }
 
 	/* ----------------------------
 	* -- Reset Distance Variable --
