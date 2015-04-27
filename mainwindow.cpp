@@ -227,7 +227,7 @@ void MainWindow::getValueButtonClicked()
 /** \brief        decreases the current number and refresh with new data the GUI
  *                is used for the measurements points
  *
- *  \author     grosp4
+ *  \author       grosp4
  *
  *  \return       None
  *
@@ -547,6 +547,10 @@ void MainWindow::WriteInScrollAreaSlot()
  ******************************************************************************/
 void MainWindow::printRealValueTop(int XTop, int YTop)
 {
+    GraphicsXTopValue =XTop;
+    GraphicsYTopValue =YTop;
+
+
     ui->realXTopValue->clear();
     ui->realXTopValue->setNum(XTop);
     ui->realYTopValue->clear();
@@ -568,8 +572,8 @@ void MainWindow::printRealValueTop(int XTop, int YTop)
 void MainWindow::printRealValueBottom(int XBottom, int YBottom)
 {
 
-    YBottomValue = 50 + YBottomValue;
-    XBottomValue = 50 + XBottomValue;
+    GraphicsYBottomValue = XBottom;
+    GraphicsXBottomValue = YBottom;
     ui->realXBottomValue->clear();
     ui->realXBottomValue->setNum(XBottom);
     ui->realYBottomValue->clear();
@@ -596,8 +600,8 @@ void MainWindow::paintEvent(QPaintEvent *e)
 
     /* prints at every refresh static pictures */
     QPainter painter(this);
-    painter.drawPixmap(310, 585 ,40,40,QPixmap(":/it_is.jpg"));
-    painter.drawPixmap(310,640,40,40,QPixmap(":/it_should_be.png"));
+    painter.drawPixmap(310, 575 ,30,30,QPixmap(":/it_is.png"));
+    painter.drawPixmap(310,620,30,30,QPixmap(":/it_should_be.jpg"));
     QMainWindow::paintEvent(e);
 
 
@@ -622,7 +626,12 @@ void MainWindow::paintEvent(QPaintEvent *e)
 
         /* Update graphics data on GUI */
        QPainter painter(this);
-       painter.drawPixmap(XBottomValue,XBottomValue,40,40,QPixmap(":/it_is.jpg"));
+       painter.drawPixmap( OFFSET_X_VALUE_PICTURE_LABEL + (GraphicsXBottomValue / RATIO_PICTURE_TO_COORDINATES), OFFSET_X_VALUE_PICTURE_LABEL + (GraphicsYBottomValue / RATIO_PICTURE_TO_COORDINATES) ,30, 30, QPixmap(":/it_is.png"));
+       painter.drawPixmap(OFFSET_X_VALUE_PICTURE_LABEL + (GraphicsXTopValue / RATIO_PICTURE_TO_COORDINATES) , OFFSET_X_VALUE_PICTURE_LABEL +(GraphicsYTopValue / RATIO_PICTURE_TO_COORDINATES), 30, 30, QPixmap(":/it_is.png"));
+
+       /* print desired coordinates */
+       painter.drawPixmap(OFFSET_X_VALUE_PICTURE_LABEL + (DesiredValues[NumberOfMeasurements][0] / RATIO_PICTURE_TO_COORDINATES), OFFSET_X_VALUE_PICTURE_LABEL + (DesiredValues[NumberOfMeasurements][1] / RATIO_PICTURE_TO_COORDINATES), 30, 30, QPixmap(":/it_should_be.jpg"));
+       painter.drawPixmap(OFFSET_X_VALUE_PICTURE_LABEL + (DesiredValues[NumberOfMeasurements][2] / RATIO_PICTURE_TO_COORDINATES), OFFSET_X_VALUE_PICTURE_LABEL + (DesiredValues[NumberOfMeasurements][3] / RATIO_PICTURE_TO_COORDINATES), 30, 30, QPixmap(":/it_should_be.jpg"));
 
        /* reset flag for painting*/
        mpaintflag = false;

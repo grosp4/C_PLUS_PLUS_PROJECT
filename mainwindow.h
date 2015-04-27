@@ -31,6 +31,9 @@
 
 #define MAX_MEASUREMENT_POINTS_PER_SITE     ( 10 )
 #define MAX_MEASUREMENT_POINTS              ( MAX_MEASUREMENT_POINTS_PER_SITE*2 )
+#define RATIO_PICTURE_TO_COORDINATES        (4)
+#define OFFSET_X_VALUE_PICTURE_LABEL        (199)
+#define OFFSET_Y_VALUE_PICTURE_LABEL        (60)
 
 namespace Ui {
 class MainWindow;
@@ -84,11 +87,10 @@ private:
 
     /* private variables */
     bool mpaintflag = 0 ;
-    int XBottomValue = 0;
-    int XTopValue = 0;
-    int YTopValue = 0;
-    int YBottomValue = 0;
-
+    int GraphicsXBottomValue = 0;
+    int GraphicsXTopValue = 0;
+    int GraphicsYTopValue = 0;
+    int GraphicsYBottomValue = 0;
 };
 
 enum {FALSE = 0, TRUE = 1 };
