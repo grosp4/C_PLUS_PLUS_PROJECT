@@ -51,7 +51,7 @@ signals:
     void printRealValueTop(int X, int Y );
     void printRealValueBottom( int X, int Y);
 
-private:
+public:
     MsgQueue *MyQueueRealValuesTop;
     MsgQueue *MyQueueRealValuesBottom;
     HexamiteRS232Port *MySerialPort;
