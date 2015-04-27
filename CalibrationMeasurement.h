@@ -20,10 +20,12 @@
 
 /* Imports Library */
 #include <string>
+//#include "mainwindow.h"
 #include <iostream>
 #include "MeasurementPoint.h"
 #include "TextFile.h"
 #include <QObject>
+
 
 /* Class Constant Declaration--------------------------------------------------*/
 
@@ -42,7 +44,7 @@ public:
     ~CalibrationMeasurement();
 
 public:
-    MeasurementPoint MeasurementPoints[20];
+    MeasurementPoint MeasurementPoints[20]; // why is = {0} not possible???
     TextFile *CalibrationOutputFile;
 
 public slots:

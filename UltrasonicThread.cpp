@@ -25,6 +25,7 @@
 /* Imports Library */
 #include <string>
 #include <iostream>
+#include <QTime>
 
 /*******************************************************************************
  *  Constructor :
@@ -94,13 +95,15 @@ void UltrasonicThread::run()
     /*  Turn on Hexamite synchronizer  */
     MySerialPort->turnHexamiteUsbSynchronizerOn();
 
-    std::string *strUnfilteredData = new std::string("...");
+    //std::string *strUnfilteredData = new std::string("...");
+    QTime Stopwatch;
+    Stopwatch.start();
 
     while(1)
     {
         //DEBUG:
         //std::cout << "Hello, I am the Ultrasonic Thread." << std::endl;
-        msleep(1000);
+        //msleep(1000);
 
 
 
@@ -116,10 +119,18 @@ void UltrasonicThread::run()
 //        std::cout << sSerialData1 << std::endl;
 //        std::cout << sSerialData2 << std::endl;
 //        std::cout << sSerialData3 << std::endl;
-        emit printSerialMsg( QString("") );
-        emit printSerialMsg( QString(sSerialData1.c_str()) );
-        emit printSerialMsg( QString(sSerialData2.c_str()) );
-        emit printSerialMsg( QString(sSerialData3.c_str()) );
+        /* check if next printing is needed */
+        if( Stopwatch.elapsed() >= 1000 ) // if 1000ms elapsed since last start of stopwatch.
+        {
+            // print Msg:
+            emit printSerialMsg( QString("") );
+            emit printSerialMsg( QString(sSerialData1.c_str()) );
+            emit printSerialMsg( QString(sSerialData2.c_str()) );
+            emit printSerialMsg( QString(sSerialData3.c_str()) );
+            // restart Stopwatch:
+            Stopwatch.restart();
+        }
+
 
 
 

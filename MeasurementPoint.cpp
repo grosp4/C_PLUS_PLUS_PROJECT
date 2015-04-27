@@ -44,7 +44,12 @@ MeasurementPoint::MeasurementPoint(int XDesiredInit, int YDesiredInit):
 
 MeasurementPoint::MeasurementPoint()
 {
-
+//    XDesired = 0;
+//    YDesired = 0;
+//    XRealTop = 0;
+//    YRealTop = 0;
+//    XRealBottom = 0;
+//    YRealBottom = 0;
 }
 /*******************************************************************************
  *  Deconstrunctor :

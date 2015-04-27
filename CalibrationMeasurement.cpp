@@ -22,12 +22,10 @@
 #include <string>
 #include <iostream>
 #include "UltrasonicTagClass.hpp"
-
-
-
-
-
+#include "mainwindow.h"
 #include "CalibrationMeasurement.h"
+#include "globaldefines.h"
+
 
 /*******************************************************************************
  *  Constructor :
@@ -43,11 +41,12 @@ CalibrationMeasurement::CalibrationMeasurement()
 {
     MeasurementPoints[0].XDesired = 100;
     MeasurementPoints[0].YDesired = 200;
+    MeasurementPoints[1].XRealTop = 0;
     // init all Points....
 
-    for( int idx = 0; idx < 20; idx++)
+    for( int idx = 0; idx < MAX_MEASUREMENT_POINTS; idx++)
     {
-        if( idx < 10 )
+        if( idx < MAX_MEASUREMENT_POINTS_PER_SITE )
         {
             MeasurementPoints[idx].TeamSite = TeamLeft;
         }

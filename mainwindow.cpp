@@ -37,6 +37,8 @@
 #include <QScrollArea>
 #include <QEvent>
 #include "TextFile.h"
+#include "UltrasonicTagClass.hpp"
+#include "globaldefines.h"
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -92,9 +94,7 @@ MainWindow::MainWindow( QWidget *parent) :
             new UltrasonicThread( this->MyMsgQueueRealValuesTop, this->MyMsgQueueRealValuesBottom);
     MyUltrasonicThread->start();
 
-    // create whole measurement data:
     MyCalibrationMeasurement = new CalibrationMeasurement;
-
 
     /* set scroll layout for scroll area */
     ui->scrollAreaWidgetContents->setSizePolicy(QSizePolicy::Expanding,QSizePolicy::Expanding);
@@ -112,11 +112,6 @@ MainWindow::MainWindow( QWidget *parent) :
     connect(ui->sendButton,SIGNAL(clicked()),this,SLOT(WriteInScrollAreaSlot()));
     connect(ui->generateOutputfile, SIGNAL(clicked()),
             MyCalibrationMeasurement, SLOT(generateOutputFile()));
-
-
-
-
-
 
 
     // Communication for serial message stream to GUI:
@@ -160,61 +155,47 @@ MainWindow::~MainWindow()
 /*******************************************************************************
  *  Method :getValueButtonClicked
  ******************************************************************************/
-/** \brief        stores the values given by ultrasonic thread to GUI in local data
+/** \brief        stores the values given by ultrasonic thread to GUI in local
+ *                array and prints it to gui
  *
- *  \author       grosp4
+ *  \author       grosp4/bartj2
  *
  *  \return       None
  *
  ******************************************************************************/
 void MainWindow::getValueButtonClicked()
 {
-    /* Call function to get values, clean the label write them into our labels */
-  int value = 9999;
-  QString valuesbymeasurement;
-
   /* update number of observations */
-  value = getamountofmeasurements();
-  ui->NumberLabel->setNum(value);
+  //ui->NumberLabel->setNum(NumberOfMeasurements);
 
-
-  /* get data and save it */
-  valuesbymeasurement = ui->realXTopValue->text();
-  ui->realXTopValue_2->clear();
-  ui->realXTopValue_2->setText(valuesbymeasurement);
-  /* Save in Array */
-  MeasurementValues[NumberOfMeasurements][0] = valuesbymeasurement;
-
-  valuesbymeasurement = ui->realYTopValue->text();
-  ui->realYTopValue_2->clear();
-  ui->realYTopValue_2->setText(valuesbymeasurement);
-  /* Save in Array */
-  MeasurementValues[NumberOfMeasurements][1] = valuesbymeasurement;
-
-  valuesbymeasurement = ui->realXBottomValue->text();
-  ui->realXBottomValue_2->clear();
-  ui->realXBottomValue_2->setText(valuesbymeasurement);
-  /* Save in Array */
-  MeasurementValues[NumberOfMeasurements][2] = valuesbymeasurement;
-
-  valuesbymeasurement = ui->realYBottomValue->text();
-  ui->realYBottomValue_2->clear();
-  ui->realYBottomValue_2->setText(valuesbymeasurement);
-  /* Save in Array */
-  MeasurementValues[NumberOfMeasurements][3] = valuesbymeasurement;
-
-  ui->calibrationStatusLabel->setText("Values have been added to database \ntake next values by pressing NEXT ");
-
-  int XBottom = 0;
-  int YBottom = 0;
-  int XTop = 0;
-  int YTop = 0;
+  /* get UPS Position data */
+  int XTop = 0, YTop = 0, XBottom = 0, YBottom = 0;
 
   MyMsgQueueRealValuesTop->receive(&XTop, &YTop);
   MyMsgQueueRealValuesBottom->receive(&XBottom, &YBottom);
-  //MyCalibrationMeasurement.MeasurementPoints[NumberOfMeasurements].XRealTop = XTop;
-  std::cout << "Top: X = " << XTop << ", Y = " << YTop << std::endl;
-  std::cout << "Bottom: X = " << XBottom << ", Y = " << YBottom << std::endl;
+
+  /* save UPS Position data into array */
+  MyCalibrationMeasurement->MeasurementPoints[NumberOfMeasurements].XRealTop = XTop;
+  MyCalibrationMeasurement->MeasurementPoints[NumberOfMeasurements].YRealTop = YTop;
+  MyCalibrationMeasurement->MeasurementPoints[NumberOfMeasurements].XRealBottom = XBottom;
+  MyCalibrationMeasurement->MeasurementPoints[NumberOfMeasurements].YRealBottom = YBottom;
+
+  /* print UPS Position data to second row of GUI */
+  ui->realXTopValue_2->clear();
+  ui->realXTopValue_2->setNum(XTop);
+
+  ui->realYTopValue_2->clear();
+  ui->realYTopValue_2->setNum(YTop);
+
+  ui->realXBottomValue_2->clear();
+  ui->realXBottomValue_2->setNum(XBottom);
+
+  ui->realYBottomValue_2->clear();
+  ui->realYBottomValue_2->setNum(YBottom);
+
+  /* print User Info */
+  ui->calibrationStatusLabel->setText("Values have been added to database \ntake next values by pressing NEXT ");
+
 }
 
 
@@ -239,30 +220,15 @@ void MainWindow::getBackButtonClicked()
     value = setamountofmeasurements(0);
     ui->NumberLabel->setNum(value);
 
-
-    QString valuesbymeasurement;
-
-    /* get saved number and write it into the label */
-    valuesbymeasurement = MeasurementValues[NumberOfMeasurements][3];
-    ui->realYBottomValue_2->clear();
-    ui->realYBottomValue_2->setText(valuesbymeasurement);
-
-
-    /* get saved number and write it into the label */
-    valuesbymeasurement = MeasurementValues[NumberOfMeasurements][2];
-    ui->realXBottomValue_2->clear();
-    ui->realXBottomValue_2->setText(valuesbymeasurement);
-
-    /* get saved number and write it into the label */
-    valuesbymeasurement = MeasurementValues[NumberOfMeasurements][1];
-    ui->realYTopValue_2->clear();
-    ui->realYTopValue_2->setText(valuesbymeasurement);
-
-    /* get saved number and write it into the label */
-    valuesbymeasurement = MeasurementValues[NumberOfMeasurements][0];
+    /* get saved number and write them into the label */
     ui->realXTopValue_2->clear();
-    ui->realXTopValue_2->setText(valuesbymeasurement);
-
+    ui->realXTopValue_2->setNum(MyCalibrationMeasurement->MeasurementPoints[NumberOfMeasurements].XRealTop);
+    ui->realYTopValue_2->clear();
+    ui->realYTopValue_2->setNum(MyCalibrationMeasurement->MeasurementPoints[NumberOfMeasurements].YRealTop);
+    ui->realXBottomValue_2->clear();
+    ui->realXBottomValue_2->setNum(MyCalibrationMeasurement->MeasurementPoints[NumberOfMeasurements].XRealBottom);
+    ui->realYBottomValue_2->clear();
+    ui->realYBottomValue_2->setNum(MyCalibrationMeasurement->MeasurementPoints[NumberOfMeasurements].YRealBottom);
 
     /* update calibrationStatusLabel */
     ui->calibrationStatusLabel->setText("Ready to calibrate");
@@ -287,26 +253,15 @@ void MainWindow::getNextButtonClicked()
     value = setamountofmeasurements(1);
     ui->NumberLabel->setNum(value);
 
-    QString valuesbymeasurement;
-    /* get saved number and write it into the label */
-    valuesbymeasurement = MeasurementValues[NumberOfMeasurements][3];
-    ui->realYBottomValue_2->clear();
-    ui->realYBottomValue_2->setText(valuesbymeasurement);
-
-    /* get saved number and write it into the label */
-    valuesbymeasurement = MeasurementValues[NumberOfMeasurements][2];
-    ui->realXBottomValue_2->clear();
-    ui->realXBottomValue_2->setText(valuesbymeasurement);
-
-    /* get saved number and write it into the label */
-    valuesbymeasurement = MeasurementValues[NumberOfMeasurements][1];
-    ui->realYTopValue_2->clear();
-    ui->realYTopValue_2->setText(valuesbymeasurement);
-
-    /* get saved number and write it into the label */
-    valuesbymeasurement = MeasurementValues[NumberOfMeasurements][0];
+    /* get saved number and write them into the label */
     ui->realXTopValue_2->clear();
-    ui->realXTopValue_2->setText(valuesbymeasurement);
+    ui->realXTopValue_2->setNum(MyCalibrationMeasurement->MeasurementPoints[NumberOfMeasurements].XRealTop);
+    ui->realYTopValue_2->clear();
+    ui->realYTopValue_2->setNum(MyCalibrationMeasurement->MeasurementPoints[NumberOfMeasurements].YRealTop);
+    ui->realXBottomValue_2->clear();
+    ui->realXBottomValue_2->setNum(MyCalibrationMeasurement->MeasurementPoints[NumberOfMeasurements].XRealBottom);
+    ui->realYBottomValue_2->clear();
+    ui->realYBottomValue_2->setNum(MyCalibrationMeasurement->MeasurementPoints[NumberOfMeasurements].YRealBottom);
 
     /* update calibrationStatusLabel */
     ui->calibrationStatusLabel->setText("Ready to calibrate");
@@ -366,7 +321,8 @@ int MainWindow::setamountofmeasurements(int increase)
             NumberOfMeasurements = NumberOfMeasurements + 1;
             MaxNumberOfMeasurements = MaxNumberOfMeasurements +1;
             ui->TeamnameLabel->setText(("TEAM RIGHT"));
-
+            /* inform UPS Calculation Thread about change of team site */
+            UltrasonicTagClass::setTeamStartPosition(TeamRight);
         }
 
 
@@ -375,6 +331,8 @@ int MainWindow::setamountofmeasurements(int increase)
             NumberOfMeasurements = NumberOfMeasurements + 1;
             MaxNumberOfMeasurements = MaxNumberOfMeasurements +1;
             ui->TeamnameLabel->setText(("TEAM LEFT"));
+            /* inform UPS Calculation Thread about change of team site */
+            UltrasonicTagClass::setTeamStartPosition(TeamLeft);
         }
 
 
@@ -391,12 +349,16 @@ int MainWindow::setamountofmeasurements(int increase)
             NumberOfMeasurements = NumberOfMeasurements - 1;
             MaxNumberOfMeasurements = MaxNumberOfMeasurements - 1;
             ui->TeamnameLabel->setText(("TEAM LEFT"));
+            /* inform UPS Calculation Thread about change of team site */
+            UltrasonicTagClass::setTeamStartPosition(TeamLeft);
         }
         if(NumberOfMeasurements >= (MAX_MEASUREMENT_POINTS_PER_SITE +2) )
         {
             NumberOfMeasurements = NumberOfMeasurements - 1;
             MaxNumberOfMeasurements = MaxNumberOfMeasurements - 1;
             ui->TeamnameLabel->setText(("TEAM RIGHT"));
+            /* inform UPS Calculation Thread about change of team site */
+            UltrasonicTagClass::setTeamStartPosition(TeamRight);
         }
         else
         {
@@ -608,7 +570,7 @@ void MainWindow::paintEvent(QPaintEvent *e)
     /* prints initial field at startup */
     if (consoleHasBeenUsed == 0)
     {
-        painter.drawPixmap(199,60,761,469,QPixmap(":/Map_Left"));
+        //painter.drawPixmap(199,60,761,469,QPixmap(":/Map_Left"));
     }
 
     /* if a custom event has been called */
@@ -617,7 +579,7 @@ void MainWindow::paintEvent(QPaintEvent *e)
         /* if the event is called while we have less than MAX_MEASUREMENT_POINTS_PER_SITE */
         if( NumberOfMeasurements <= MAX_MEASUREMENT_POINTS_PER_SITE)
         {
-          painter.drawPixmap(199,60,761,469,QPixmap(":/Map_Left"));
+          //painter.drawPixmap(199,60,761,469,QPixmap(":/Map_Left"));
         }
         else
         {
