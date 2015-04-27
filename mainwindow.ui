@@ -753,19 +753,6 @@
      <set>Qt::AlignCenter</set>
     </property>
    </widget>
-   <widget class="QLabel" name="label_2">
-    <property name="geometry">
-     <rect>
-      <x>200</x>
-      <y>130</y>
-      <width>341</width>
-      <height>111</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>TextLabel</string>
-    </property>
-   </widget>
    <zorder>layoutWidget</zorder>
    <zorder>layoutWidget</zorder>
    <zorder>layoutWidget</zorder>
@@ -800,7 +787,6 @@
    <zorder>RealvaluesLabel_3</zorder>
    <zorder>line_6</zorder>
    <zorder>label</zorder>
-   <zorder>label_2</zorder>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
  </widget>
