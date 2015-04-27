@@ -28,9 +28,8 @@
 #include "UltrasonicThread.hpp"
 #include "MsgQueue.hpp"
 #include "CalibrationMeasurement.h"
+#include <globaldefines.h>
 
-#define MAX_MEASUREMENT_POINTS_PER_SITE     ( 10 )
-#define MAX_MEASUREMENT_POINTS              ( MAX_MEASUREMENT_POINTS_PER_SITE*2 )
 #define RATIO_PICTURE_TO_COORDINATES        (4)
 #define OFFSET_X_VALUE_PICTURE_LABEL        (199)
 #define OFFSET_Y_VALUE_PICTURE_LABEL        (60)
