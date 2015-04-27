@@ -330,7 +330,8 @@ void MainWindow::getNextButtonClicked()
  ******************************************************************************/
 int MainWindow::getvalues()
 {
-   int value = rand() % 10;
+   int value = rand() % 100;
+   value = value /10;
    return  value;
 }
 
