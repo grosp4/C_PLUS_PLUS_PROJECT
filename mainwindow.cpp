@@ -1,9 +1,9 @@
 /******************************************************************************/
 /** \file       MainWindow.c
- *  \brief      Controls the GUI an all elements which are taking interactions with it
+ *  \brief     Everything about the GUI
  *******************************************************************************
  *
- *  \brief     Controls the GUI an all elements which are taking interactions with it
+ *  \brief     Everything about the GUI
  *
  *  \mainpage   -
  *
@@ -17,7 +17,7 @@
  *  \date       16.04.2015
  *
  *  \remark     Last Modification
- *               \li grosp4, 16.04.2015, Created
+ *               \li grosp4, 03.05.2015, Updated
  *
  *
  *
@@ -43,20 +43,8 @@
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
-/* Private macro -------------------------------------------------------------*/
-/* Private variables ---------------------------------------------------------*/
-
-
-/* initialize counting variable */
-int NumberOfMeasurements = 0;
-int MaxNumberOfMeasurements = 0;
-char myString[] = "Error";
-int consoleHasBeenUsed  = 0;
-
-/* initialize measurement array */
-/* it will be used as following: 10 measurements, 4 values each measurement: X,Y TOP, X,Y BOTTOM */
-QString  MeasurementValues [21][4] = {"0"} ;
-QString Fun[9] ={
+/* Private Easteregg -------------------------------------------------------------*/
+QString Fun[9] = {
 "When Alexander Bell invented the telephone he had 3 missed calls from Chuck Norris",
 "There used to be a street named after Chuck Norris, but it was changed because nobody crosses Chuck Norris and lives.",
 "Chuck Norris died 20 years ago, Death just hasn't built up the courage to tell him yet.",
@@ -67,7 +55,10 @@ QString Fun[9] ={
 "Chuck Norris once urinated in a semi truck's gas tank as a joke....that truck is now known as Optimus Prime.",
 "Chuck Norris counted to infinity - twice."
 };
-
+/* Private variables ---------------------------------------------------------*/
+int iNumberOfMeasurements = 0;
+int iMaxNumberOfMeasurements = 0;
+int iconsoleHasBeenUsed  = 0;
 int  DesiredValues [21][4] = {
 {0,0,0,0},              // only used for initial drawing of "where it should be"
 {250,1000,250,1000},    // 1, tean left starts here
@@ -92,6 +83,11 @@ int  DesiredValues [21][4] = {
 {0,0,0,0},                // 20, end (total size array is 21)
 
                             };
+/* initialize measurement array */
+/* it will be used as following: 10 measurements, 4 values each measurement: X,Y TOP, X,Y BOTTOM */
+
+QString  MeasurementValues [21][4] = {"11"} ;
+
 /* Private function prototypes -----------------------------------------------*/
 /* Private functions ---------------------------------------------------------*/
 
@@ -202,33 +198,31 @@ MainWindow::~MainWindow()
  ******************************************************************************/
 void MainWindow::getValueButtonClicked()
 {
-  /* update number of observations */
-  //ui->NumberLabel->setNum(NumberOfMeasurements);
 
   /* get UPS Position data */
-  int XTop = 0, YTop = 0, XBottom = 0, YBottom = 0;
+  int iXTop = 0, iYTop = 0, iXBottom = 0, iYBottom = 0;
 
-  MyMsgQueueRealValuesTop->receive(&XTop, &YTop);
-  MyMsgQueueRealValuesBottom->receive(&XBottom, &YBottom);
+  MyMsgQueueRealValuesTop->receive(&iXTop, &iYTop);
+  MyMsgQueueRealValuesBottom->receive(&iXBottom, &iYBottom);
 
   /* save UPS Position data into array */
-  MyCalibrationMeasurement->MeasurementPoints[NumberOfMeasurements].XRealTop = XTop;
-  MyCalibrationMeasurement->MeasurementPoints[NumberOfMeasurements].YRealTop = YTop;
-  MyCalibrationMeasurement->MeasurementPoints[NumberOfMeasurements].XRealBottom = XBottom;
-  MyCalibrationMeasurement->MeasurementPoints[NumberOfMeasurements].YRealBottom = YBottom;
+  MyCalibrationMeasurement->MeasurementPoints[iNumberOfMeasurements].XRealTop = iXTop;
+  MyCalibrationMeasurement->MeasurementPoints[iNumberOfMeasurements].YRealTop = iYTop;
+  MyCalibrationMeasurement->MeasurementPoints[iNumberOfMeasurements].XRealBottom = iXBottom;
+  MyCalibrationMeasurement->MeasurementPoints[iNumberOfMeasurements].YRealBottom = iYBottom;
 
   /* print UPS Position data to second row of GUI */
   ui->realXTopValue_2->clear();
-  ui->realXTopValue_2->setNum(XTop);
+  ui->realXTopValue_2->setNum(iXTop);
 
   ui->realYTopValue_2->clear();
-  ui->realYTopValue_2->setNum(YTop);
+  ui->realYTopValue_2->setNum(iYTop);
 
   ui->realXBottomValue_2->clear();
-  ui->realXBottomValue_2->setNum(XBottom);
+  ui->realXBottomValue_2->setNum(iXBottom);
 
   ui->realYBottomValue_2->clear();
-  ui->realYBottomValue_2->setNum(YBottom);
+  ui->realYBottomValue_2->setNum(iYBottom);
 
   /* print User Info */
   ui->calibrationStatusLabel->setText("Values have been added to database \ntake next values by pressing NEXT ");
@@ -252,26 +246,26 @@ void MainWindow::getValueButtonClicked()
  ******************************************************************************/
 void MainWindow::getBackButtonClicked()
 {
-    int value = 9999;
+    int iValue = 9999;
     /* decrase number of Measurements */
-    value = setamountofmeasurements(0);
-    ui->NumberLabel->setNum(value);
+    iValue = setamountofmeasurements(0);
+    ui->NumberLabel->setNum(iValue);
 
     /* get saved number and write them into the label */
     ui->realXTopValue_2->clear();
-    ui->realXTopValue_2->setNum(MyCalibrationMeasurement->MeasurementPoints[NumberOfMeasurements].XRealTop);
+    ui->realXTopValue_2->setNum(MyCalibrationMeasurement->MeasurementPoints[iNumberOfMeasurements].XRealTop);
     ui->realYTopValue_2->clear();
-    ui->realYTopValue_2->setNum(MyCalibrationMeasurement->MeasurementPoints[NumberOfMeasurements].YRealTop);
+    ui->realYTopValue_2->setNum(MyCalibrationMeasurement->MeasurementPoints[iNumberOfMeasurements].YRealTop);
     ui->realXBottomValue_2->clear();
-    ui->realXBottomValue_2->setNum(MyCalibrationMeasurement->MeasurementPoints[NumberOfMeasurements].XRealBottom);
+    ui->realXBottomValue_2->setNum(MyCalibrationMeasurement->MeasurementPoints[iNumberOfMeasurements].XRealBottom);
     ui->realYBottomValue_2->clear();
-    ui->realYBottomValue_2->setNum(MyCalibrationMeasurement->MeasurementPoints[NumberOfMeasurements].YRealBottom);
+    ui->realYBottomValue_2->setNum(MyCalibrationMeasurement->MeasurementPoints[iNumberOfMeasurements].YRealBottom);
 
     /* set desired values */
-    ui->desiredXTopValue->setNum(DesiredValues[NumberOfMeasurements][0]);
-    ui->desiredYTopValue->setNum(DesiredValues[NumberOfMeasurements][1]);
-    ui->desiredXBottomValue->setNum(DesiredValues[NumberOfMeasurements][2]);
-    ui->desiredYBottomValue->setNum(DesiredValues[NumberOfMeasurements][3]);
+    ui->desiredXTopValue->setNum(DesiredValues[iNumberOfMeasurements][0]);
+    ui->desiredYTopValue->setNum(DesiredValues[iNumberOfMeasurements][1]);
+    ui->desiredXBottomValue->setNum(DesiredValues[iNumberOfMeasurements][2]);
+    ui->desiredYBottomValue->setNum(DesiredValues[iNumberOfMeasurements][3]);
 
     /* update calibrationStatusLabel */
     ui->calibrationStatusLabel->setText("Ready to calibrate");
@@ -291,26 +285,26 @@ void MainWindow::getBackButtonClicked()
  ******************************************************************************/
 void MainWindow::getNextButtonClicked()
 {
-    int value = 9999;
+    int iValue = 9999;
     /* increase number of Measurements */
-    value = setamountofmeasurements(1);
-    ui->NumberLabel->setNum(value);
+    iValue = setamountofmeasurements(1);
+    ui->NumberLabel->setNum(iValue);
 
     /* get saved number and write them into the label */
     ui->realXTopValue_2->clear();
-    ui->realXTopValue_2->setNum(MyCalibrationMeasurement->MeasurementPoints[NumberOfMeasurements].XRealTop);
+    ui->realXTopValue_2->setNum(MyCalibrationMeasurement->MeasurementPoints[iNumberOfMeasurements].XRealTop);
     ui->realYTopValue_2->clear();
-    ui->realYTopValue_2->setNum(MyCalibrationMeasurement->MeasurementPoints[NumberOfMeasurements].YRealTop);
+    ui->realYTopValue_2->setNum(MyCalibrationMeasurement->MeasurementPoints[iNumberOfMeasurements].YRealTop);
     ui->realXBottomValue_2->clear();
-    ui->realXBottomValue_2->setNum(MyCalibrationMeasurement->MeasurementPoints[NumberOfMeasurements].XRealBottom);
+    ui->realXBottomValue_2->setNum(MyCalibrationMeasurement->MeasurementPoints[iNumberOfMeasurements].XRealBottom);
     ui->realYBottomValue_2->clear();
-    ui->realYBottomValue_2->setNum(MyCalibrationMeasurement->MeasurementPoints[NumberOfMeasurements].YRealBottom);
+    ui->realYBottomValue_2->setNum(MyCalibrationMeasurement->MeasurementPoints[iNumberOfMeasurements].YRealBottom);
 
     /* set desired values */
-    ui->desiredXTopValue->setNum(DesiredValues[NumberOfMeasurements][0]);
-    ui->desiredYTopValue->setNum(DesiredValues[NumberOfMeasurements][1]);
-    ui->desiredXBottomValue->setNum(DesiredValues[NumberOfMeasurements][2]);
-    ui->desiredYBottomValue->setNum(DesiredValues[NumberOfMeasurements][3]);
+    ui->desiredXTopValue->setNum(DesiredValues[iNumberOfMeasurements][0]);
+    ui->desiredYTopValue->setNum(DesiredValues[iNumberOfMeasurements][1]);
+    ui->desiredXBottomValue->setNum(DesiredValues[iNumberOfMeasurements][2]);
+    ui->desiredYBottomValue->setNum(DesiredValues[iNumberOfMeasurements][3]);
 
 
     /* update calibrationStatusLabel */
@@ -326,16 +320,15 @@ void MainWindow::getNextButtonClicked()
  *
  *  \author       grosp4
  *
- *  \return       None
+ *  \return       iValue
  *
  ******************************************************************************/
 int MainWindow::getvalues()
 {
    srand (time(NULL));
-   int value = rand() % 100;
-   value = value / 10;
-   std::cout << value << std::endl;
-   return  value;
+   int iValue = rand() % 100;
+   iValue = iValue / 10;
+   return  iValue;
 }
 
 /*******************************************************************************
@@ -345,12 +338,12 @@ int MainWindow::getvalues()
  *
  *  \author         grosp4
  *
- *  \return         None
+ *  \return         iNumberOfMeasurements
  *
  ******************************************************************************/
 int MainWindow::getamountofmeasurements()
 {
-   return  NumberOfMeasurements;
+   return  iNumberOfMeasurements;
 }
 
 
@@ -362,28 +355,30 @@ int MainWindow::getamountofmeasurements()
  *
  *  \author         grosp4
  *
- *  \return         None
+ *  \return         iNumberOfMeasurements
  *
  ******************************************************************************/
 int MainWindow::setamountofmeasurements(int increase)
 {
     if (increase)
     {
-        if ( (NumberOfMeasurements >= MAX_MEASUREMENT_POINTS_PER_SITE)&& (NumberOfMeasurements < MAX_MEASUREMENT_POINTS) )
+        if ( (iNumberOfMeasurements >= MAX_MEASUREMENT_POINTS_PER_SITE)&& (iNumberOfMeasurements < MAX_MEASUREMENT_POINTS) )
         {
-            NumberOfMeasurements = NumberOfMeasurements + 1;
-            MaxNumberOfMeasurements = MaxNumberOfMeasurements +1;
+            iNumberOfMeasurements = iNumberOfMeasurements + 1;
+            iMaxNumberOfMeasurements = iMaxNumberOfMeasurements +1;
             ui->TeamnameLabel->setText(("TEAM RIGHT"));
+
             /* inform UPS Calculation Thread about change of team site */
             UltrasonicTagClass::setTeamStartPosition(TeamRight);
         }
 
 
-        if ( NumberOfMeasurements < MAX_MEASUREMENT_POINTS_PER_SITE)
+        if ( iNumberOfMeasurements < MAX_MEASUREMENT_POINTS_PER_SITE)
         {
-            NumberOfMeasurements = NumberOfMeasurements + 1;
-            MaxNumberOfMeasurements = MaxNumberOfMeasurements +1;
+            iNumberOfMeasurements = iNumberOfMeasurements + 1;
+            iMaxNumberOfMeasurements = iMaxNumberOfMeasurements +1;
             ui->TeamnameLabel->setText(("TEAM LEFT"));
+
             /* inform UPS Calculation Thread about change of team site */
             UltrasonicTagClass::setTeamStartPosition(TeamLeft);
         }
@@ -391,35 +386,37 @@ int MainWindow::setamountofmeasurements(int increase)
 
         else
         {
-            NumberOfMeasurements = NumberOfMeasurements;
+            iNumberOfMeasurements = iNumberOfMeasurements;
         }
 
     }
     else
     {
-        if((NumberOfMeasurements > 1) && (NumberOfMeasurements < (MAX_MEASUREMENT_POINTS_PER_SITE +2 ) ) )
+        if((iNumberOfMeasurements > 1) && (iNumberOfMeasurements < (MAX_MEASUREMENT_POINTS_PER_SITE +2 ) ) )
         {
-            NumberOfMeasurements = NumberOfMeasurements - 1;
-            MaxNumberOfMeasurements = MaxNumberOfMeasurements - 1;
+            iNumberOfMeasurements = iNumberOfMeasurements - 1;
+            iMaxNumberOfMeasurements = iMaxNumberOfMeasurements - 1;
             ui->TeamnameLabel->setText(("TEAM LEFT"));
+
             /* inform UPS Calculation Thread about change of team site */
             UltrasonicTagClass::setTeamStartPosition(TeamLeft);
         }
-        if(NumberOfMeasurements >= (MAX_MEASUREMENT_POINTS_PER_SITE +2) )
+        if(iNumberOfMeasurements >= (MAX_MEASUREMENT_POINTS_PER_SITE +2) )
         {
-            NumberOfMeasurements = NumberOfMeasurements - 1;
-            MaxNumberOfMeasurements = MaxNumberOfMeasurements - 1;
+            iNumberOfMeasurements = iNumberOfMeasurements - 1;
+            iMaxNumberOfMeasurements = iMaxNumberOfMeasurements - 1;
             ui->TeamnameLabel->setText(("TEAM RIGHT"));
+
             /* inform UPS Calculation Thread about change of team site */
             UltrasonicTagClass::setTeamStartPosition(TeamRight);
         }
         else
         {
-            NumberOfMeasurements = NumberOfMeasurements;
+            iNumberOfMeasurements = iNumberOfMeasurements;
 
         }
     }
-   return  NumberOfMeasurements;
+   return  iNumberOfMeasurements;
 }
 
 
@@ -488,13 +485,13 @@ void MainWindow::printSerialMsg(QString myString)
     QScrollBar *sb = ui->scrollArea->verticalScrollBar();
 
     /* activate the console and delete the dummy text */
-    if (consoleHasBeenUsed == 0)
+    if (iconsoleHasBeenUsed == 0)
     {
         ui->ConsoleLabelToWriteTo->clear();
         tempString = ui->ConsoleLabelToWriteTo->text();
         ui->ConsoleLabelToWriteTo->setText(tempString + "\n" + myString   );
         ui->commandEdit->clear();
-        consoleHasBeenUsed = 1;
+        iconsoleHasBeenUsed = 1;
     }
     else
     {
@@ -530,14 +527,14 @@ void MainWindow::WriteInScrollAreaSlot()
     QScrollBar *sb = ui->scrollArea->verticalScrollBar();
 
 
-    if (consoleHasBeenUsed == 0)
+    if (iconsoleHasBeenUsed == 0)
     {
         myString = ui->commandEdit->text();
         ui->commandEdit->clear();
         ui->ConsoleLabelToWriteTo->clear();
         ui->ConsoleLabelToWriteTo->setText(myString );
         ui->commandEdit->clear();
-        consoleHasBeenUsed = 1;
+        iconsoleHasBeenUsed = 1;
     }
 
     else
@@ -563,8 +560,8 @@ void MainWindow::WriteInScrollAreaSlot()
  ******************************************************************************/
 void MainWindow::printRealValueTop(int XTop, int YTop)
 {
-    GraphicsXTopValue =XTop;
-    GraphicsYTopValue =YTop;
+    iGraphicsXTopValue =XTop;
+    iGraphicsYTopValue =YTop;
 
 
     ui->realXTopValue->clear();
@@ -588,8 +585,8 @@ void MainWindow::printRealValueTop(int XTop, int YTop)
 void MainWindow::printRealValueBottom(int XBottom, int YBottom)
 {
 
-    GraphicsXBottomValue = XBottom;
-    GraphicsYBottomValue = YBottom;
+    iGraphicsXBottomValue = XBottom;
+    iGraphicsYBottomValue = YBottom;
     ui->realXBottomValue->clear();
     ui->realXBottomValue->setNum(XBottom);
     ui->realYBottomValue->clear();
@@ -622,16 +619,16 @@ void MainWindow::paintEvent(QPaintEvent *e)
 
 
     /* prints initial field at startup */
-    if (consoleHasBeenUsed == 0)
+    if (iconsoleHasBeenUsed == 0)
     {
         painter.drawPixmap(199,60,761,469,QPixmap(":/Map_Left"));
     }
 
     /* if a custom event has been called */
-    if(mpaintflag)
+    if(bpaintflag)
     {
         /* if the event is called while we have less than MAX_MEASUREMENT_POINTS_PER_SITE */
-        if( NumberOfMeasurements <= MAX_MEASUREMENT_POINTS_PER_SITE)
+        if( iNumberOfMeasurements <= MAX_MEASUREMENT_POINTS_PER_SITE)
         {
           painter.drawPixmap(199,60,761,469,QPixmap(":/Map_Left"));
         }
@@ -644,13 +641,13 @@ void MainWindow::paintEvent(QPaintEvent *e)
        QPainter painter(this);
 
        /* print desired coordinates */
-       painter.drawPixmap(OFFSET_X_VALUE_PICTURE_LABEL + OFFSET_GRAPHICS_X + (DesiredValues[NumberOfMeasurements][0] / RATIO_PICTURE_TO_COORDINATES_X),  OFFSET_Y_VALUE_PICTURE_LABEL + OFFSET_GRAPHICS_Y + (DesiredValues[NumberOfMeasurements][1] / RATIO_PICTURE_TO_COORDINATES_Y), 30, 30, QPixmap(":/it_should_be.jpg"));
-       painter.drawPixmap(OFFSET_X_VALUE_PICTURE_LABEL + OFFSET_GRAPHICS_X + (DesiredValues[NumberOfMeasurements][2] / RATIO_PICTURE_TO_COORDINATES_X),  OFFSET_Y_VALUE_PICTURE_LABEL + OFFSET_GRAPHICS_Y + (DesiredValues[NumberOfMeasurements][3] / RATIO_PICTURE_TO_COORDINATES_Y), 30, 30, QPixmap(":/it_should_be.jpg"));
-       painter.drawPixmap( OFFSET_X_VALUE_PICTURE_LABEL + OFFSET_GRAPHICS_X + (GraphicsXBottomValue / RATIO_PICTURE_TO_COORDINATES_X), OFFSET_Y_VALUE_PICTURE_LABEL + OFFSET_GRAPHICS_Y + (GraphicsYBottomValue / RATIO_PICTURE_TO_COORDINATES_Y) ,30, 30, QPixmap(":/it_is.png"));
-       painter.drawPixmap( OFFSET_X_VALUE_PICTURE_LABEL + OFFSET_GRAPHICS_X + (GraphicsXTopValue / RATIO_PICTURE_TO_COORDINATES_X) , OFFSET_Y_VALUE_PICTURE_LABEL + OFFSET_GRAPHICS_Y + (GraphicsYTopValue / RATIO_PICTURE_TO_COORDINATES_Y), 30, 30, QPixmap(":/it_is.png"));
+       painter.drawPixmap(OFFSET_X_VALUE_PICTURE_LABEL + OFFSET_GRAPHICS_X + (DesiredValues[iNumberOfMeasurements][0] / RATIO_PICTURE_TO_COORDINATES_X),  OFFSET_Y_VALUE_PICTURE_LABEL + OFFSET_GRAPHICS_Y + (DesiredValues[iNumberOfMeasurements][1] / RATIO_PICTURE_TO_COORDINATES_Y), 30, 30, QPixmap(":/it_should_be.jpg"));
+       painter.drawPixmap(OFFSET_X_VALUE_PICTURE_LABEL + OFFSET_GRAPHICS_X + (DesiredValues[iNumberOfMeasurements][2] / RATIO_PICTURE_TO_COORDINATES_X),  OFFSET_Y_VALUE_PICTURE_LABEL + OFFSET_GRAPHICS_Y + (DesiredValues[iNumberOfMeasurements][3] / RATIO_PICTURE_TO_COORDINATES_Y), 30, 30, QPixmap(":/it_should_be.jpg"));
+       painter.drawPixmap( OFFSET_X_VALUE_PICTURE_LABEL + OFFSET_GRAPHICS_X + (iGraphicsXBottomValue / RATIO_PICTURE_TO_COORDINATES_X), OFFSET_Y_VALUE_PICTURE_LABEL + OFFSET_GRAPHICS_Y + (iGraphicsYBottomValue / RATIO_PICTURE_TO_COORDINATES_Y) ,30, 30, QPixmap(":/it_is.png"));
+       painter.drawPixmap( OFFSET_X_VALUE_PICTURE_LABEL + OFFSET_GRAPHICS_X + (iGraphicsXTopValue / RATIO_PICTURE_TO_COORDINATES_X) , OFFSET_Y_VALUE_PICTURE_LABEL + OFFSET_GRAPHICS_Y + (iGraphicsYTopValue / RATIO_PICTURE_TO_COORDINATES_Y), 30, 30, QPixmap(":/it_is.png"));
 
        /* reset flag for painting*/
-       mpaintflag = false;
+       bpaintflag = false;
     }
 
 
@@ -672,7 +669,7 @@ void MainWindow::customEvent(QEvent* e)
       if(e->type() == (QEvent::Type)1001)
       {
           /* if the specific custom event has been called, set the painting flag */
-        mpaintflag = true;
+        bpaintflag = true;
         update();
 
       }

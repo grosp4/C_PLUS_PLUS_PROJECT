@@ -88,11 +88,11 @@ private:
     void getPortNumber();
 
     /* private variables */
-    bool mpaintflag = 0 ;
-    int GraphicsXBottomValue = 0;
-    int GraphicsXTopValue = 0;
-    int GraphicsYTopValue = 0;
-    int GraphicsYBottomValue = 0;
+    bool bpaintflag = 0 ;
+    int iGraphicsXBottomValue = 0;
+    int iGraphicsXTopValue = 0;
+    int iGraphicsYTopValue = 0;
+    int iGraphicsYBottomValue = 0;
 };
 
 enum {FALSE = 0, TRUE = 1 };
