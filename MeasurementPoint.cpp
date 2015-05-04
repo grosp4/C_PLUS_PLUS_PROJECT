@@ -44,6 +44,7 @@ MeasurementPoint::MeasurementPoint(int XDesiredInit, int YDesiredInit):
 
 MeasurementPoint::MeasurementPoint()
 {
+    // sometimes the gui crashes if the following code is uncommented.
 //    XDesired = 0;
 //    YDesired = 0;
 //    XRealTop = 0;
