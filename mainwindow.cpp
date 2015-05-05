@@ -59,30 +59,30 @@ QString Fun[9] = {
 int iNumberOfMeasurements = 0;
 int iMaxNumberOfMeasurements = 0;
 int iconsoleHasBeenUsed  = 0;
-int  DesiredValues [21][4] = {
-{0,0,0,0},              // only used for initial drawing of "where it should be"
-{250,1000,250,1000},    // 1, tean left starts here
-{870,1355,870,1355},    // 2
-{90,1750,90,1750},      // 3
-{450,300,450,300},      // 4
-{1250,830,1250,830},    // 5
-{1250,200,1250,200},    // 6
-{0,0,0,0},
-{0,0,0,0},
-{0,0,0,0},
-{0,0,0,0},                // 10, team right starts at next
-{2750,1000,2750,1000},    // 1
-{2130,1355,2130,1355},    // 2
-{2910,1750,2910,1750},    // 3
-{2550,300,2550,300},      // 4
-{1750,830,1750,830},      // 5
-{1750,200,1750,200},      // 6
-{0,0,0,0},
-{0,0,0,0},
-{0,0,0,0},
-{0,0,0,0},                // 20, end (total size array is 21)
+//int  DesiredValues [21][4] = {
+//{0,0,0,0},              // only used for initial drawing of "where it should be"
+//{250,1000,250,1000},    // 1, tean left starts here
+//{870,1355,870,1355},    // 2
+//{90,1750,90,1750},      // 3
+//{450,300,450,300},      // 4
+//{1250,830,1250,830},    // 5
+//{1250,200,1250,200},    // 6
+//{0,0,0,0},
+//{0,0,0,0},
+//{0,0,0,0},
+//{0,0,0,0},                // 10, team right starts at next
+//{2750,1000,2750,1000},    // 1
+//{2130,1355,2130,1355},    // 2
+//{2910,1750,2910,1750},    // 3
+//{2550,300,2550,300},      // 4
+//{1750,830,1750,830},      // 5
+//{1750,200,1750,200},      // 6
+//{0,0,0,0},
+//{0,0,0,0},
+//{0,0,0,0},
+//{0,0,0,0},                // 20, end (total size array is 21)
 
-                            };
+//                            };
 /* initialize measurement array */
 /* it will be used as following: 10 measurements, 4 values each measurement: X,Y TOP, X,Y BOTTOM */
 
@@ -262,10 +262,10 @@ void MainWindow::getBackButtonClicked()
     ui->realYBottomValue_2->setNum(MyCalibrationMeasurement->MeasurementPoints[iNumberOfMeasurements]->YRealBottom);
 
     /* set desired values */
-    ui->desiredXTopValue->setNum(DesiredValues[iNumberOfMeasurements][0]);
-    ui->desiredYTopValue->setNum(DesiredValues[iNumberOfMeasurements][1]);
-    ui->desiredXBottomValue->setNum(DesiredValues[iNumberOfMeasurements][2]);
-    ui->desiredYBottomValue->setNum(DesiredValues[iNumberOfMeasurements][3]);
+    ui->desiredXTopValue->setNum(MyCalibrationMeasurement->MeasurementPoints[iNumberOfMeasurements]->XDesired);
+    ui->desiredYTopValue->setNum(MyCalibrationMeasurement->MeasurementPoints[iNumberOfMeasurements]->YDesired);
+    ui->desiredXBottomValue->setNum(MyCalibrationMeasurement->MeasurementPoints[iNumberOfMeasurements]->XDesired);
+    ui->desiredYBottomValue->setNum(MyCalibrationMeasurement->MeasurementPoints[iNumberOfMeasurements]->YDesired);
 
     /* update calibrationStatusLabel */
     ui->calibrationStatusLabel->setText("Ready to calibrate");
@@ -301,10 +301,10 @@ void MainWindow::getNextButtonClicked()
     ui->realYBottomValue_2->setNum(MyCalibrationMeasurement->MeasurementPoints[iNumberOfMeasurements]->YRealBottom);
 
     /* set desired values */
-    ui->desiredXTopValue->setNum(DesiredValues[iNumberOfMeasurements][0]);
-    ui->desiredYTopValue->setNum(DesiredValues[iNumberOfMeasurements][1]);
-    ui->desiredXBottomValue->setNum(DesiredValues[iNumberOfMeasurements][2]);
-    ui->desiredYBottomValue->setNum(DesiredValues[iNumberOfMeasurements][3]);
+    ui->desiredXTopValue->setNum(MyCalibrationMeasurement->MeasurementPoints[iNumberOfMeasurements]->XDesired);
+    ui->desiredYTopValue->setNum(MyCalibrationMeasurement->MeasurementPoints[iNumberOfMeasurements]->YDesired);
+    ui->desiredXBottomValue->setNum(MyCalibrationMeasurement->MeasurementPoints[iNumberOfMeasurements]->XDesired);
+    ui->desiredYBottomValue->setNum(MyCalibrationMeasurement->MeasurementPoints[iNumberOfMeasurements]->YDesired);
 
 
     /* update calibrationStatusLabel */
@@ -639,10 +639,13 @@ void MainWindow::paintEvent(QPaintEvent *e)
 
         /* Update graphics data on GUI */
        QPainter painter(this);
-
+       ui->desiredXTopValue->setNum(MyCalibrationMeasurement->MeasurementPoints[iNumberOfMeasurements]->XDesired);
+       ui->desiredYTopValue->setNum(MyCalibrationMeasurement->MeasurementPoints[iNumberOfMeasurements]->YDesired);
+       ui->desiredXBottomValue->setNum(MyCalibrationMeasurement->MeasurementPoints[iNumberOfMeasurements]->XDesired);
+       ui->desiredYBottomValue->setNum(MyCalibrationMeasurement->MeasurementPoints[iNumberOfMeasurements]->YDesired);
        /* print desired coordinates */
-       painter.drawPixmap(OFFSET_X_VALUE_PICTURE_LABEL + OFFSET_GRAPHICS_X + (DesiredValues[iNumberOfMeasurements][0] / RATIO_PICTURE_TO_COORDINATES_X),  OFFSET_Y_VALUE_PICTURE_LABEL + OFFSET_GRAPHICS_Y + (DesiredValues[iNumberOfMeasurements][1] / RATIO_PICTURE_TO_COORDINATES_Y), 30, 30, QPixmap(":/it_should_be.jpg"));
-       painter.drawPixmap(OFFSET_X_VALUE_PICTURE_LABEL + OFFSET_GRAPHICS_X + (DesiredValues[iNumberOfMeasurements][2] / RATIO_PICTURE_TO_COORDINATES_X),  OFFSET_Y_VALUE_PICTURE_LABEL + OFFSET_GRAPHICS_Y + (DesiredValues[iNumberOfMeasurements][3] / RATIO_PICTURE_TO_COORDINATES_Y), 30, 30, QPixmap(":/it_should_be.jpg"));
+       painter.drawPixmap(OFFSET_X_VALUE_PICTURE_LABEL + OFFSET_GRAPHICS_X + (MyCalibrationMeasurement->MeasurementPoints[iNumberOfMeasurements]->XDesired / RATIO_PICTURE_TO_COORDINATES_X),  OFFSET_Y_VALUE_PICTURE_LABEL + OFFSET_GRAPHICS_Y + (MyCalibrationMeasurement->MeasurementPoints[iNumberOfMeasurements]->YDesired / RATIO_PICTURE_TO_COORDINATES_Y), 30, 30, QPixmap(":/it_should_be.jpg"));
+       painter.drawPixmap(OFFSET_X_VALUE_PICTURE_LABEL + OFFSET_GRAPHICS_X + (MyCalibrationMeasurement->MeasurementPoints[iNumberOfMeasurements]->XDesired / RATIO_PICTURE_TO_COORDINATES_X),  OFFSET_Y_VALUE_PICTURE_LABEL + OFFSET_GRAPHICS_Y + (MyCalibrationMeasurement->MeasurementPoints[iNumberOfMeasurements]->YDesired / RATIO_PICTURE_TO_COORDINATES_Y), 30, 30, QPixmap(":/it_should_be.jpg"));
        painter.drawPixmap( OFFSET_X_VALUE_PICTURE_LABEL + OFFSET_GRAPHICS_X + (iGraphicsXBottomValue / RATIO_PICTURE_TO_COORDINATES_X), OFFSET_Y_VALUE_PICTURE_LABEL + OFFSET_GRAPHICS_Y + (iGraphicsYBottomValue / RATIO_PICTURE_TO_COORDINATES_Y) ,30, 30, QPixmap(":/it_is.png"));
        painter.drawPixmap( OFFSET_X_VALUE_PICTURE_LABEL + OFFSET_GRAPHICS_X + (iGraphicsXTopValue / RATIO_PICTURE_TO_COORDINATES_X) , OFFSET_Y_VALUE_PICTURE_LABEL + OFFSET_GRAPHICS_Y + (iGraphicsYTopValue / RATIO_PICTURE_TO_COORDINATES_Y), 30, 30, QPixmap(":/it_is.png"));
 
