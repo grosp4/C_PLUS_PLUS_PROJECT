@@ -206,10 +206,10 @@ void MainWindow::getValueButtonClicked()
   MyMsgQueueRealValuesBottom->receive(&iXBottom, &iYBottom);
 
   /* save UPS Position data into array */
-  MyCalibrationMeasurement->MeasurementPoints[iNumberOfMeasurements].XRealTop = iXTop;
-  MyCalibrationMeasurement->MeasurementPoints[iNumberOfMeasurements].YRealTop = iYTop;
-  MyCalibrationMeasurement->MeasurementPoints[iNumberOfMeasurements].XRealBottom = iXBottom;
-  MyCalibrationMeasurement->MeasurementPoints[iNumberOfMeasurements].YRealBottom = iYBottom;
+  MyCalibrationMeasurement->MeasurementPoints[iNumberOfMeasurements]->XRealTop = iXTop;
+  MyCalibrationMeasurement->MeasurementPoints[iNumberOfMeasurements]->YRealTop = iYTop;
+  MyCalibrationMeasurement->MeasurementPoints[iNumberOfMeasurements]->XRealBottom = iXBottom;
+  MyCalibrationMeasurement->MeasurementPoints[iNumberOfMeasurements]->YRealBottom = iYBottom;
 
   /* print UPS Position data to second row of GUI */
   ui->realXTopValue_2->clear();
@@ -253,13 +253,13 @@ void MainWindow::getBackButtonClicked()
 
     /* get saved number and write them into the label */
     ui->realXTopValue_2->clear();
-    ui->realXTopValue_2->setNum(MyCalibrationMeasurement->MeasurementPoints[iNumberOfMeasurements].XRealTop);
+    ui->realXTopValue_2->setNum(MyCalibrationMeasurement->MeasurementPoints[iNumberOfMeasurements]->XRealTop);
     ui->realYTopValue_2->clear();
-    ui->realYTopValue_2->setNum(MyCalibrationMeasurement->MeasurementPoints[iNumberOfMeasurements].YRealTop);
+    ui->realYTopValue_2->setNum(MyCalibrationMeasurement->MeasurementPoints[iNumberOfMeasurements]->YRealTop);
     ui->realXBottomValue_2->clear();
-    ui->realXBottomValue_2->setNum(MyCalibrationMeasurement->MeasurementPoints[iNumberOfMeasurements].XRealBottom);
+    ui->realXBottomValue_2->setNum(MyCalibrationMeasurement->MeasurementPoints[iNumberOfMeasurements]->XRealBottom);
     ui->realYBottomValue_2->clear();
-    ui->realYBottomValue_2->setNum(MyCalibrationMeasurement->MeasurementPoints[iNumberOfMeasurements].YRealBottom);
+    ui->realYBottomValue_2->setNum(MyCalibrationMeasurement->MeasurementPoints[iNumberOfMeasurements]->YRealBottom);
 
     /* set desired values */
     ui->desiredXTopValue->setNum(DesiredValues[iNumberOfMeasurements][0]);
@@ -292,13 +292,13 @@ void MainWindow::getNextButtonClicked()
 
     /* get saved number and write them into the label */
     ui->realXTopValue_2->clear();
-    ui->realXTopValue_2->setNum(MyCalibrationMeasurement->MeasurementPoints[iNumberOfMeasurements].XRealTop);
+    ui->realXTopValue_2->setNum(MyCalibrationMeasurement->MeasurementPoints[iNumberOfMeasurements]->XRealTop);
     ui->realYTopValue_2->clear();
-    ui->realYTopValue_2->setNum(MyCalibrationMeasurement->MeasurementPoints[iNumberOfMeasurements].YRealTop);
+    ui->realYTopValue_2->setNum(MyCalibrationMeasurement->MeasurementPoints[iNumberOfMeasurements]->YRealTop);
     ui->realXBottomValue_2->clear();
-    ui->realXBottomValue_2->setNum(MyCalibrationMeasurement->MeasurementPoints[iNumberOfMeasurements].XRealBottom);
+    ui->realXBottomValue_2->setNum(MyCalibrationMeasurement->MeasurementPoints[iNumberOfMeasurements]->XRealBottom);
     ui->realYBottomValue_2->clear();
-    ui->realYBottomValue_2->setNum(MyCalibrationMeasurement->MeasurementPoints[iNumberOfMeasurements].YRealBottom);
+    ui->realYBottomValue_2->setNum(MyCalibrationMeasurement->MeasurementPoints[iNumberOfMeasurements]->YRealBottom);
 
     /* set desired values */
     ui->desiredXTopValue->setNum(DesiredValues[iNumberOfMeasurements][0]);

@@ -83,20 +83,20 @@ TextFile::~TextFile()
  *  \return       None
  *
  ******************************************************************************/
-void TextFile::write( MeasurementPoint &NextPoint )
+void TextFile::write( MeasurementPoint *NextPoint )
 {
-    if( NextPoint.TeamSite == TeamLeft )
+    if( NextPoint->Teamside == TeamLeft )
     {
         // write to Left File (UPS-Calculation should be informed too!!!
         if( FileLeft->open( QIODevice::Append ) == true )
         {
             QTextStream stream( FileLeft );
-            stream << NextPoint.XDesired <<";"
-                   << NextPoint.YDesired << ";"
-                   << NextPoint.XRealTop << ";"
-                   << NextPoint.YRealTop << ";"
-                   << NextPoint.XRealBottom << ";"
-                   << NextPoint.YRealBottom << ";"
+            stream << NextPoint->XDesired <<";"
+                   << NextPoint->YDesired << ";"
+                   << NextPoint->XRealTop << ";"
+                   << NextPoint->YRealTop << ";"
+                   << NextPoint->XRealBottom << ";"
+                   << NextPoint->YRealBottom << ";"
                    << "\r\n";
             FileLeft->close();
         }
@@ -107,12 +107,12 @@ void TextFile::write( MeasurementPoint &NextPoint )
         if( FileRight->open( QIODevice::Append ) == true )
         {
             QTextStream stream( FileRight );
-            stream << NextPoint.XDesired <<";"
-                   << NextPoint.YDesired << ";"
-                   << NextPoint.XRealTop << ";"
-                   << NextPoint.YRealTop << ";"
-                   << NextPoint.XRealBottom << ";"
-                   << NextPoint.YRealBottom << ";"
+            stream << NextPoint->XDesired <<";"
+                   << NextPoint->YDesired << ";"
+                   << NextPoint->XRealTop << ";"
+                   << NextPoint->YRealTop << ";"
+                   << NextPoint->XRealBottom << ";"
+                   << NextPoint->YRealBottom << ";"
                    << "\r\n";
             FileRight->close();
         }

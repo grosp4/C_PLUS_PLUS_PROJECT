@@ -25,7 +25,7 @@
 #include "MeasurementPoint.h"
 #include "TextFile.h"
 #include <QObject>
-
+#include "globaldefines.h"
 
 /* Class Constant Declaration--------------------------------------------------*/
 
@@ -44,8 +44,9 @@ public:
     ~CalibrationMeasurement();
 
 public:
-    MeasurementPoint MeasurementPoints[20]; // why is = {0} not possible???
+    MeasurementPoint* MeasurementPoints[MAX_MEASUREMENT_POINTS] = {0};
     TextFile *CalibrationOutputFile;
+
 
 public slots:
     void generateOutputFile();

@@ -35,22 +35,17 @@
  *
  ******************************************************************************/
 
-MeasurementPoint::MeasurementPoint(int XDesiredInit, int YDesiredInit):
+MeasurementPoint::MeasurementPoint(int XDesiredInit, int YDesiredInit, int Teamside):
     XDesired(XDesiredInit),
-    YDesired(YDesiredInit)
+    YDesired(YDesiredInit),
+    Teamside(Teamside)
 {
 
 }
 
 MeasurementPoint::MeasurementPoint()
 {
-    // sometimes the gui crashes if the following code is uncommented.
-//    XDesired = 0;
-//    YDesired = 0;
-//    XRealTop = 0;
-//    YRealTop = 0;
-//    XRealBottom = 0;
-//    YRealBottom = 0;
+
 }
 /*******************************************************************************
  *  Deconstrunctor :

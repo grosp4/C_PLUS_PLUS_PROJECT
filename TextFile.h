@@ -37,7 +37,7 @@ class TextFile : public QObject
 public:
     TextFile();
     ~TextFile();
-    void write(MeasurementPoint &NextPoint);
+    void write(MeasurementPoint *NextPoint);
 
     QFile *FileLeft;
     QFile *FileRight;

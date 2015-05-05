@@ -33,7 +33,7 @@ class MeasurementPoint : public QObject
 {
     Q_OBJECT
 public:
-    MeasurementPoint(int XDesiredinit, int YDesiredInit);
+    MeasurementPoint(int XDesiredinit, int YDesiredInit, int Teamside);
     MeasurementPoint();
     ~MeasurementPoint();
 
@@ -48,7 +48,7 @@ public:
     int YRealBottom;
 
     //int iPointNumber;
-    int TeamSite;
+    int Teamside;
 
 public:
     void getValues();
