@@ -19,7 +19,7 @@
  ******************************************************************************/
 /* Imports Header Files*/
 #include "HexamiteRS232PortClass.h"
-#include "rs232.h"
+#include "RS232Library.h"
 
 /* Imports Library */
 #include<iostream>
@@ -36,6 +36,10 @@
  *  Constructor :    HexamiteRS232Port()
  ******************************************************************************/
 /** \brief        Constructor for HexamiteRS232Port
+ *
+ *  \param        iNewPortNumber Number of the choosen COM-Port
+ *
+ *  \author       sches24
  *
  *  \return  	  None
  *
@@ -59,6 +63,8 @@ HexamiteRS232Port::HexamiteRS232Port(int iNewPortNumber)
  ******************************************************************************/
 /** \brief        Deconstructor for HexamiteRS232Port
  *
+ *  \author       sches24
+ *
  *  \return  	  None
  *
  ******************************************************************************/
@@ -74,7 +80,9 @@ HexamiteRS232Port::~HexamiteRS232Port()
  ******************************************************************************/
 /** \brief        Change port number
  *
- *  \param		  iNewPortNumber  Number of new Com-Port
+ *  \param		  iNewPortNumber  Number of new COM-Port
+ *
+ *  \author       sches24
  *
  *  \return  	  None
  *
@@ -86,6 +94,8 @@ HexamiteRS232Port::~HexamiteRS232Port()
  *
  *  \param		  iNewPortNumber  Number of new Com-Port
  *  \param		  strConfirmation  Confirmation String
+ *
+ *  \author       sches24
  *
  *  \return  	  None
  *
@@ -126,6 +136,8 @@ void HexamiteRS232Port::changeHexamiteRS232Port(int iNewPortNumber, std::string*
  *  \param		  strDataRx1  Data from RS232-Port line 1
  *  \param		  strDataRx1  Data from RS232-Port line 2
  *  \param		  strDataRx1  Data from RS232-Port line 3
+ *
+ *  \author       sches24
  *
  *  \return  	  None
  *
@@ -281,6 +293,8 @@ void HexamiteRS232Port::getHexamiteData(std::string* strDataRx1, std::string* st
  *
  *  \param		  strDataTx  Data for RS232-Port
  *
+ *  \author       sches24
+ *
  *  \return  	  None
  *
  ******************************************************************************/
@@ -352,6 +366,7 @@ void HexamiteRS232Port::sendHexamiteData(std::string strDataTx)
  ******************************************************************************/
 /** \brief        Turn the hexamite usb synchronizer on
  *
+ *  \author       sches24
  *
  *  \return  	  None
  *
@@ -369,6 +384,7 @@ void HexamiteRS232Port::turnHexamiteUsbSynchronizerOn(void)
  ******************************************************************************/
 /** \brief        Turn the hexamite usb synchronizer off
  *
+ *  \author       sches24
  *
  *  \return  	  None
  *
@@ -385,6 +401,7 @@ void HexamiteRS232Port::turnHexamiteUsbSynchronizerOff(void)
  ******************************************************************************/
 /** \brief        Get all last unfiltered data from Hexamite system.
  *
+ *  \author       sches24
  *
  *  \return  	  None
  *

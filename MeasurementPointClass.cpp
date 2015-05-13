@@ -1,23 +1,23 @@
 /******************************************************************************/
-/** \file       MeasurementPoint.cpp
- *  \brief
+/** \file       MeasurementPointClass.cpp
+ *  \brief      This Class save all Data from one measured Points
  *
  *******************************************************************************
  *
  *  \class      MeasurementPoint
  *
- *  \brief
+ *  \brief      This Class save all Data from one measured Points
  *
  *  \authors    grosp4, bartj2
  *
  *  \date       24.04.2015
  *
  *  \remark     Last Modification
- *               \li
+ *               \li grosp4, bartj2, 24.04.2015, Created
  *
  ******************************************************************************/
 /* Imports Header Files*/
-#include "MeasurementPoint.h"
+#include "MeasurementPointClass.h"
 
 /* Imports Library */
 #include <string>
@@ -27,9 +27,9 @@
 /* Private variables ---------------------------------------------------------*/
 
 /*******************************************************************************
- *  Constructor : MeasurementPoint
+ *  Constructor : MeasurementPointClass
  ******************************************************************************/
-/** \brief        Constructor of the Class
+/** \brief        Constructor of the Class MeasurementPointClass
  *
  *  \author       grosp4
  *
@@ -37,7 +37,7 @@
  *
  ******************************************************************************/
 
-MeasurementPoint::MeasurementPoint(int XDesiredInit, int YDesiredInit, int Teamside):
+MeasurementPointClass::MeasurementPointClass(int XDesiredInit, int YDesiredInit, int Teamside):
     XDesired(XDesiredInit),
     YDesired(YDesiredInit),
     Teamside(Teamside)

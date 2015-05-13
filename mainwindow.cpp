@@ -1,33 +1,27 @@
 /******************************************************************************/
-/** \file       MainWindow.c
- *  \brief     Everything about the GUI
+/** \file       mainwindow.cpp
+ *  \brief      This File contain Everything about the GUI
+ *
  *******************************************************************************
  *
- *  \brief     Everything about the GUI
+ *  \class      MainWindow
  *
- *  \mainpage   -
- *
- *  \details    -
- *
- *  \addtogroup  MainWindow.c
- *  \brief      -
+ *  \brief      This File contain Everything about the GUI
  *
  *  \authors    grosp4
  *
- *  \date       16.04.2015
+ *  \date       14.04.2015
  *
  *  \remark     Last Modification
  *               \li grosp4, 03.05.2015, Updated
- *
- *
  *
  ******************************************************************************/
 /* Imports Header Files*/
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "UltrasonicTagClass.hpp"
-#include "MsgQueue.hpp"
-#include "TextFile.h"
+#include "MsgQueueClass.hpp"
+#include "TextFileClass.h"
 
 /* Imports Library */
 #include <QtGui>
@@ -63,7 +57,7 @@ QString  MeasurementValues [21][4] = {"11"} ;
 
 
 /*******************************************************************************
- *  Constructor : MainWindow
+ *  Constructor : MainWindow()
  ******************************************************************************/
 /** \brief        Constructor of the Class
  *
@@ -77,19 +71,19 @@ MainWindow::MainWindow( QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    QString windowTitle = Fun[getvalues()];
+    QString windowTitle = "RoboNaviKali - " + Fun[getvalues()];
 
     this->setWindowTitle(windowTitle);
 
 
     // create msgQueues for RealValuesTop and ..Bottom:
-    MyMsgQueueRealValuesTop = new MsgQueue;
-    MyMsgQueueRealValuesBottom = new MsgQueue;
+    MyMsgQueueRealValuesTop = new MsgQueueClass;
+    MyMsgQueueRealValuesBottom = new MsgQueueClass;
     MyUltrasonicThread =
             new UltrasonicThread( this->MyMsgQueueRealValuesTop, this->MyMsgQueueRealValuesBottom);
     MyUltrasonicThread->start();
 
-    MyCalibrationMeasurement = new CalibrationMeasurement;
+    MyCalibrationMeasurement = new CalibrationMeasurementClass;
 
     /* set scroll layout for scroll area */
     ui->scrollAreaWidgetContents->setSizePolicy(QSizePolicy::Expanding,QSizePolicy::Expanding);
@@ -121,7 +115,7 @@ MainWindow::MainWindow( QWidget *parent) :
 }
 
 /*******************************************************************************
- *  Deconstrunctor : ~MainWindow
+ *  Deconstrunctor : ~MainWindow()
  ******************************************************************************/
 /** \brief        Deconstrunctor of the Class
  *
@@ -138,7 +132,7 @@ MainWindow::~MainWindow()
 }
 
 /*******************************************************************************
- *  Method :getValueButtonClicked
+ *  Method :getValueButtonClicked()
  ******************************************************************************/
 /** \brief        stores the values given by ultrasonic thread to GUI in local
  *                array and prints it to gui
@@ -182,7 +176,7 @@ void MainWindow::getValueButtonClicked()
 }
 
 /*******************************************************************************
- *  Method :getBackButtonClicked
+ *  Method :getBackButtonClicked()
  ******************************************************************************/
 /** \brief        decreases the current number and refresh with new data the GUI
  *                is used for the measurements points
@@ -221,7 +215,7 @@ void MainWindow::getBackButtonClicked()
 
 
 /*******************************************************************************
- *  Method :getNextButtonClicked
+ *  Method :getNextButtonClicked()
  ******************************************************************************/
 /** \brief        increases the current number and refresh with new data the GUI
  *                is used for the measurements points
@@ -261,7 +255,7 @@ void MainWindow::getNextButtonClicked()
 
 
 /*******************************************************************************
- *  Method :getvalues
+ *  Method :getvalues()
  ******************************************************************************/
 /** \brief        auxillary function for getting a random Number
  *
@@ -279,7 +273,7 @@ int MainWindow::getvalues()
 }
 
 /*******************************************************************************
- *  Method :getamountofmeasurements
+ *  Method :getamountofmeasurements()
  ******************************************************************************/
 /** \brief          returns the number of measurements
  *
@@ -295,12 +289,14 @@ int MainWindow::getamountofmeasurements()
 
 
 /*******************************************************************************
- *  Method :setamountofmeasurements
+ *  Method :setamountofmeasurements()
  ******************************************************************************/
 /** \brief          sets the amount of numbers of measurments in the data array
  *
  *
  *  \author         grosp4
+ *
+ *  \param          increase Value
  *
  *  \return         iNumberOfMeasurements
  *
@@ -369,7 +365,7 @@ int MainWindow::setamountofmeasurements(int increase)
 
 
 /*******************************************************************************
- *  Method :getPortValue
+ *  Method :getPortValue()
  ******************************************************************************/
 /** \brief          inreads the value of the number given by the User via GUI
  *                  forwards this information to the RS232 function
@@ -392,7 +388,7 @@ void MainWindow::getPortValue()
 
 
 /*******************************************************************************
- *  Method :getCommandlineValue
+ *  Method :getCommandlineValue()
  ******************************************************************************/
 /** \brief          inreads commands given by the user via Commandline
  *
@@ -411,12 +407,14 @@ void MainWindow::getCommandlineValue()
 
 
 /*******************************************************************************
- *  Method :printSerialMsg
+ *  Method :printSerialMsg()
  ******************************************************************************/
 /** \brief        This function is called another thread to write values given by RS232
  *                into the Log console.
  *
  *  \author       bartj2, grosp4
+ *
+ *  \param        myString String to Print out
  *
  *  \return       None
  *
@@ -436,7 +434,7 @@ void MainWindow::printSerialMsg(QString myString)
     }
 }
 /*******************************************************************************
- *  Method :WriteInScrollAreaSlot
+ *  Method :WriteInScrollAreaSlot()
  ******************************************************************************/
 /** \brief          This function is called by signal to write the Commandline text
  *                  into the Log console. Autoscroll is active by default
@@ -470,11 +468,15 @@ void MainWindow::WriteInScrollAreaSlot()
 }
 
 /*******************************************************************************
- *  Method :printRealValueTop
+ *  Method :printRealValueTop()
  ******************************************************************************/
 /** \brief          is called by another thread, sets values on the GUI, creates an event!
  *
  *  \author         grosp4, bartj2
+ *
+ *  \param          XTop    X-Coordinate
+ *
+ *  \param          YTop    Y-Coordinate
  *
  *  \return         None
  *
@@ -500,6 +502,10 @@ void MainWindow::printRealValueTop(int XTop, int YTop)
  *
  *  \author      grosp4, bartj2
  *
+ *  \param       XBottom    X-Coordinate
+ *
+ *  \param       YBottom    Y-Coordinate
+ *
  *  \return      None
  *
  ******************************************************************************/
@@ -520,11 +526,13 @@ void MainWindow::printRealValueBottom(int XBottom, int YBottom)
 }
 
 /*******************************************************************************
- *  Method :paintEvent
+ *  Method :paintEvent()
  ******************************************************************************/
 /** \brief      gets called by any event, does some painting
  *
  *  \author     grosp4
+ *
+ *  \param         e QEvent from GUI
  *
  *  \return     None
  *
@@ -579,11 +587,13 @@ void MainWindow::paintEvent(QPaintEvent *e)
 }
 
 /*******************************************************************************
- *  Method :customEvent
+ *  Method :customEvent()
  ******************************************************************************/
 /** \brief         Overridden Slot that is called when a Custom Event is caught
  *
  *  \author        grosp4
+ *
+ *  \param         e QEvent from GUI
  *
  *  \return        None
  *

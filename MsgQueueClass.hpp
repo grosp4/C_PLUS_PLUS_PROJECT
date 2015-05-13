@@ -1,17 +1,20 @@
-/** \file       MsgQueue.hpp
- *  \brief
+/** \file       MsgQueueClass.hpp
+ *  \brief      This Class include all Functions for the communication between
+ *              different Tasks.
+ *
  *******************************************************************************
  *
- *  \class
+ *  \class      MsgQueueClass
  *
- *  \brief
+ *  \brief      This Class include all Functions for the communication between
+ *              different Tasks.
  *
- *  \authors
+ *  \authors    bartj2
  *
- *  \date
+ *  \date       14.04.2015
  *
  *  \remark     Last Modification
- *               \li
+ *               \li grosp4, bartj2, 14.04.2015, Created
  *
  ******************************************************************************/
 /* Define to prevent recursive inclusion --------------------------------------*/
@@ -29,13 +32,12 @@
 /* Class definition -----------------------------------------------------------*/
 
 
-class MsgQueue : public QObject
+class MsgQueueClass : public QObject
 {
     Q_OBJECT
 
 public:
-    MsgQueue();
-    ~MsgQueue();
+    MsgQueueClass();
 
 private:
     QMutex MsgQueueMutex;

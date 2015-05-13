@@ -1,19 +1,21 @@
 /******************************************************************************/
 /** \file       UltrasonicThread.cpp
- *  \brief
+ *  \brief      This Task handle the whole communication with the Ultrasonic
+ *              System.
  *
  *******************************************************************************
  *
- *  \class
+ *  \class      UltrasonicThread
  *
- *  \brief
+ *  \brief      This Task handle the whole communication with the Ultrasonic
+ *              System.
  *
- *  \authors    bartj2
+ *  \authors    jeggy1, sches24, bartj2
  *
- *  \date
+ *  \date       14.04.2015
  *
  *  \remark     Last Modification
- *               \li
+ *               \li Created 14.04.2015, jeggy1, sches24, bartj2
  *
  ******************************************************************************/
 
@@ -40,7 +42,7 @@
  *  \return       None
  *
  ******************************************************************************/
-UltrasonicThread::UltrasonicThread( MsgQueue *QueueRealValuesTop, MsgQueue *QueueRealValuesBottom ):
+UltrasonicThread::UltrasonicThread( MsgQueueClass *QueueRealValuesTop, MsgQueueClass *QueueRealValuesBottom ):
     MyQueueRealValuesTop( QueueRealValuesTop ),
     MyQueueRealValuesBottom( QueueRealValuesBottom )
 {
@@ -73,7 +75,7 @@ UltrasonicThread::~UltrasonicThread()
  *
  *  \author     bartj2
  *
- *  \return       None
+ *  \return     None
  *
  ******************************************************************************/
 void UltrasonicThread::run()

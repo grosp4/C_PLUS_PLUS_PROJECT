@@ -1,23 +1,25 @@
-/** \file       MsgQueue.cpp
- *  \brief
+/** \file       MsgQueueClass.cpp
+ *  \brief      This Class include all Functions for the communication between
+ *              different Tasks.
  *
  *******************************************************************************
  *
- *  \class
+ *  \class      MsgQueueClass
  *
- *  \brief
+ *  \brief      This Class include all Functions for the communication between
+ *              different Tasks.
  *
  *  \authors    bartj2
  *
- *  \date
+ *  \date       14.04.2015
  *
  *  \remark     Last Modification
- *               \li
+ *               \li grosp4, bartj2, 14.04.2015, Created
  *
  ******************************************************************************/
 
 /* Imports Header Files*/
-#include "MsgQueue.hpp"
+#include "MsgQueueClass.hpp"
 
 /* Imports Library */
 #include <string>
@@ -28,36 +30,21 @@
 
 
 /*******************************************************************************
- *  Constructor :
+ *  Constructor :   MsgQueueClass()
  ******************************************************************************/
-/** \brief      Constructor of the Class
+/** \brief      Constructor of the MsgQueueClass
  *
  *  \author     bartj2
  *
- *  \return       None
+ *  \return     None
  *
  ******************************************************************************/
-MsgQueue::MsgQueue()
+MsgQueueClass::MsgQueueClass()
 {
     XRealValue = 0;
     YRealValue = 0;
 }
 
-/*******************************************************************************
- *  Destructor :
- ******************************************************************************/
-/** \brief        Destructor of the Class
- *
- *  \author      bartj2
- *
- *  \return       None
- *
- ******************************************************************************/
-MsgQueue::~MsgQueue()
-{
-
-
-}
 
 /*******************************************************************************
  *  Method : send()
@@ -66,10 +53,10 @@ MsgQueue::~MsgQueue()
  *
  *  \author     bartj2
  *
- *  \return       None
+ *  \return     None
  *
  ******************************************************************************/
-void MsgQueue::send(int X, int Y)
+void MsgQueueClass::send(int X, int Y)
 {
     this->MsgQueueMutex.lock();
 
@@ -86,10 +73,10 @@ void MsgQueue::send(int X, int Y)
  *
  *  \author     bartj2
  *
- *  \return       None
+ *  \return     None
  *
  ******************************************************************************/
-void MsgQueue::receive(int *X, int *Y)
+void MsgQueueClass::receive(int *X, int *Y)
 {
     this->MsgQueueMutex.lock();
 

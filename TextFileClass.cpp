@@ -1,23 +1,25 @@
-/** \file       TextFile.cpp
- *  \brief
+/** \file       TextFileClass.cpp
+ *  \brief      Includes all Data and Methods to save the meassured Data in
+ *              a *.txt-File
  *
  *******************************************************************************
  *
- *  \class
+ *  \class      TextFileClass
  *
- *  \brief
+ *  \brief      Includes all Data and Methods to save the meassured Data in
+ *              a *.txt-File
  *
- *  \authors
+ *  \authors    bartj2
  *
- *  \date
+ *  \date       13.04.2015
  *
  *  \remark     Last Modification
- *               \li
+ *               \li bartj2, 30.04.2015, Created
  *
  ******************************************************************************/
 /* Imports Header Files*/
-#include "MeasurementPoint.h"
-#include "TextFile.h"
+#include "MeasurementPointClass.h"
+#include "TextFileClass.h"
 #include "UltrasonicTagClass.hpp"
 
 /* Imports Library */
@@ -31,16 +33,16 @@
 /* Private variables ---------------------------------------------------------*/
 
 /*******************************************************************************
- *  Constructor :
+ *  Constructor : TextFileClass()
  ******************************************************************************/
-/** \brief        Constructor of the Class
+/** \brief        Constructor of the TextFileClass
  *
- *  \author
+ *  \author       Joel Baertschi
  *
  *  \return       None
  *
  ******************************************************************************/
-TextFile::TextFile()
+TextFileClass::TextFileClass()
 {
 
     QString FileNameLeft = "Messung_Tisch_links.txt";
@@ -70,23 +72,19 @@ TextFile::TextFile()
     }
 }
 
-
-TextFile::~TextFile()
-{
-
-}
-
 /*******************************************************************************
- *  Method : write
+ *  Method : write ()
  ******************************************************************************/
-/** \brief
+/** \brief        Write the given MeasurementPoint in a *.txt-File
  *
- *  \author
+ *  \author       Joel Baertschi
+ *
+ *  \param        NextPoint Pointer to the Measurment Data
  *
  *  \return       None
  *
  ******************************************************************************/
-void TextFile::write( MeasurementPoint *NextPoint )
+void TextFileClass::write( MeasurementPointClass *NextPoint )
 {
     if( NextPoint->Teamside == TeamLeft )
     {

@@ -23,8 +23,8 @@
 #define MAINWINDOW_H
 /* Imports Header Files*/
 #include "UltrasonicThread.hpp"
-#include "CalibrationMeasurement.h"
-#include "MsgQueue.hpp"
+#include "CalibrationMeasurementClass.h"
+#include "MsgQueueClass.hpp"
 
 
 /* Imports Library */
@@ -75,9 +75,9 @@ public slots:
 
 private:
     Ui::MainWindow *ui;
-    MsgQueue *MyMsgQueueRealValuesTop;
-    MsgQueue *MyMsgQueueRealValuesBottom;
-    CalibrationMeasurement *MyCalibrationMeasurement;
+    MsgQueueClass *MyMsgQueueRealValuesTop;
+    MsgQueueClass *MyMsgQueueRealValuesBottom;
+    CalibrationMeasurementClass *MyCalibrationMeasurement;
     UltrasonicThread *MyUltrasonicThread;
     int getvalues();
     int setamountofmeasurements(int increase);

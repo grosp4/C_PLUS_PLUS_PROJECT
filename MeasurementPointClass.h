@@ -1,22 +1,24 @@
-/** \file       MeasurementPoint.hpp
- *  \brief
+/******************************************************************************/
+/** \file       MeasurementPointClass.hpp
+ *  \brief      This Class save all Data from one measured Points
+ *
  *******************************************************************************
  *
  *  \class      MeasurementPoint
  *
- *  \brief
+ *  \brief      This Class save all Data from one measured Points
  *
- *  \authors    grosp4
+ *  \authors    grosp4, bartj2
  *
- *  \date
+ *  \date       24.04.2015
  *
  *  \remark     Last Modification
- *               \li
+ *               \li grosp4, bartj2, 24.04.2015, Created
  *
  ******************************************************************************/
 /* Define to prevent recursive inclusion --------------------------------------*/
-#ifndef MEASUREMENTPOINT_H
-#define MEASUREMENTPOINT_H
+#ifndef MEASUREMENTPOINT_CLASS_H
+#define MEASUREMENTPOINT_CLASS_H
 /* Imports Header Files*/
 /* Imports Library */
 #include <QObject>
@@ -25,11 +27,11 @@
 /* Class Type declaration -----------------------------------------------------*/
 /* Class Data declaration -----------------------------------------------------*/
 /* Class definition -----------------------------------------------------------*/
-class MeasurementPoint : public QObject
+class MeasurementPointClass : public QObject
 {
     Q_OBJECT
 public:
-    MeasurementPoint(int XDesiredinit, int YDesiredInit, int Teamside);
+    MeasurementPointClass(int XDesiredinit, int YDesiredInit, int Teamside);
 
 public:
     int XDesired = 0;
@@ -48,4 +50,4 @@ public:
 
 };
 
-#endif // MEASUREMENTPOINT_H
+#endif /* MEASUREMENTPOINT_CLASS_H */

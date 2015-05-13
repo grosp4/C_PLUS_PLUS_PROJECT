@@ -15,23 +15,23 @@ TEMPLATE = app
 SOURCES += main.cpp\
     mainwindow.cpp \
     HexamiteRS232PortClass.cpp \
-    rs232.c \
     UltrasonicTagClass.cpp \
     UltrasonicThread.cpp \
-    MeasurementPoint.cpp \
-    MsgQueue.cpp \
-    CalibrationMeasurement.cpp \
-    TextFile.cpp
+    TextFileClass.cpp \
+    MeasurementPointClass.cpp \
+    CalibrationMeasurementClass.cpp \
+    RS232Library.c \
+    MsgQueueClass.cpp
 
 HEADERS  += mainwindow.h \
     HexamiteRS232PortClass.h \
-    rs232.h \
     UltrasonicTagClass.hpp \
     UltrasonicThread.hpp \
-    MeasurementPoint.h \
-    MsgQueue.hpp \
-    CalibrationMeasurement.h \
-    TextFile.h
+    TextFileClass.h \
+    MeasurementPointClass.h \
+    CalibrationMeasurementClass.h \
+    RS232Library.h \
+    MsgQueueClass.hpp
 
 FORMS    += mainwindow.ui
 

@@ -1,17 +1,21 @@
+/******************************************************************************/
 /** \file       UltrasonicThread.hpp
- *  \brief
+ *  \brief      This Task handle the whole communication with the Ultrasonic
+ *              System.
+ *
  *******************************************************************************
  *
- *  \class
+ *  \class      UltrasonicThread
  *
- *  \brief
+ *  \brief      This Task handle the whole communication with the Ultrasonic
+ *              System.
  *
- *  \authors
+ *  \authors    jeggy1, sches24, bartj2
  *
- *  \date
+ *  \date       14.04.2015
  *
  *  \remark     Last Modification
- *               \li
+ *               \li Created 14.04.2015, jeggy1, sches24, bartj2
  *
  ******************************************************************************/
 /* Define to prevent recursive inclusion --------------------------------------*/
@@ -25,7 +29,7 @@
 
 /* Imports Header Files*/
 #include "HexamiteRS232PortClass.h"
-#include "MsgQueue.hpp"
+#include "MsgQueueClass.hpp"
 
 /* Class Constant Declaration--------------------------------------------------*/
 /* Class Type declaration -----------------------------------------------------*/
@@ -37,7 +41,7 @@ class UltrasonicThread : public QThread
     Q_OBJECT
 
 public:
-    UltrasonicThread( MsgQueue *QueueRealValuesTop, MsgQueue *QueueRealValuesBottom );
+    UltrasonicThread( MsgQueueClass *QueueRealValuesTop, MsgQueueClass *QueueRealValuesBottom );
     ~UltrasonicThread();
 
 public:
@@ -49,8 +53,8 @@ signals:
     void printRealValueBottom( int X, int Y);
 
 public:
-    MsgQueue *MyQueueRealValuesTop;
-    MsgQueue *MyQueueRealValuesBottom;
+    MsgQueueClass *MyQueueRealValuesTop;
+    MsgQueueClass *MyQueueRealValuesBottom;
     HexamiteRS232Port *MySerialPort;
     UltrasonicThread *MyUltrasonicThread;
 

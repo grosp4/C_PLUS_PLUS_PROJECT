@@ -1,57 +1,47 @@
-/** \file       CalibrationMeasurement.hpp
- *  \brief
+/** \file       TextFileClass.hpp
+ *  \brief      Includes all Data and Methods to save the meassured Data in
+ *              a *.txt-File
+ *
  *******************************************************************************
  *
- *  \class
+ *  \class      TextFileClass
  *
- *  \brief
+ *  \brief      Includes all Data and Methods to save the meassured Data in
+ *              a *.txt-File
  *
  *  \authors    bartj2
  *
- *  \date
+ *  \date       13.04.2015
  *
  *  \remark     Last Modification
- *               \li
+ *               \li bartj2, 30.04.2015, Created
  *
  ******************************************************************************/
 /* Define to prevent recursive inclusion --------------------------------------*/
-#ifndef CALIBRATIONMEASUREMENT_H
-#define CALIBRATIONMEASUREMENT_H
+#ifndef TEXTFILE_CLASS_H
+#define TEXTFILE_CLASS_H
+
 /* Imports Header Files*/
-#include "MeasurementPoint.h"
-#include "TextFile.h"
+#include "MeasurementPointClass.h"
 
 /* Imports Library */
 #include <string>
-#include <iostream>
+#include <QFile>
 #include <QObject>
 
 /* Class Constant Declaration--------------------------------------------------*/
 /* Class Type declaration -----------------------------------------------------*/
 /* Class Data declaration -----------------------------------------------------*/
 /* Class definition -----------------------------------------------------------*/
-
-
-#define MAX_MEASUREMENT_POINTS_PER_SITE     ( 10 )
-#define MAX_MEASUREMENT_POINTS              ( MAX_MEASUREMENT_POINTS_PER_SITE*2 )
-
-
-class CalibrationMeasurement : public QObject
+class TextFileClass : public QObject
 {
     Q_OBJECT
-
 public:
-    CalibrationMeasurement();
-    ~CalibrationMeasurement();
+    TextFileClass();
+    void write(MeasurementPointClass *NextPoint);
 
-public:
-    MeasurementPoint* MeasurementPoints[MAX_MEASUREMENT_POINTS] = {0};
-    TextFile *CalibrationOutputFile;
-
-
-public slots:
-    void generateOutputFile();
-
+    QFile *FileLeft;
+    QFile *FileRight;
 };
 
-#endif // CALIBRATIONMEASUREMENT_H
+#endif /* TEXTFILE_CLASS_H */
