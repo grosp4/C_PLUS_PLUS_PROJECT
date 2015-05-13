@@ -38,8 +38,8 @@
 #define ULTRASONIC_COM_TRANSMIT_ITEM_SIZE 30
 
 //Commands to turn on and off our synchronizer
-#define OUR_SYNCHRONYSER_ON 	"M8&s2$"
-#define OUR_SYNCHRONYSER_OFF	"M8&%"
+#define OUR_SYNCHRONYSER_ON 	"M2&s2$"
+#define OUR_SYNCHRONYSER_OFF	"M2&%"
 
 #include <QObject>
 
