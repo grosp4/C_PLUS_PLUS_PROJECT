@@ -39,7 +39,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>Port </string>
+     <string>COM- Port: </string>
     </property>
     <property name="alignment">
      <set>Qt::AlignCenter</set>
@@ -617,7 +617,7 @@
          <number>3</number>
         </property>
         <property name="text">
-         <string>James Norrington</string>
+         <string/>
         </property>
         <property name="scaledContents">
          <bool>false</bool>

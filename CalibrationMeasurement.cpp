@@ -23,7 +23,9 @@
 /* Imports Library */
 #include <string>
 #include <iostream>
-
+/* Private typedef -----------------------------------------------------------*/
+/* Private define ------------------------------------------------------------*/
+/* Private variables ---------------------------------------------------------*/
 
 /*******************************************************************************
  *  Constructor :
@@ -75,7 +77,10 @@ CalibrationMeasurement::CalibrationMeasurement()
  ******************************************************************************/
 CalibrationMeasurement::~CalibrationMeasurement()
 {
-     //delete [] MeasurementPoints;
+    for( int iCounter = 0; iCounter < MAX_MEASUREMENT_POINTS; iCounter++ )
+    {
+        delete MeasurementPoints[iCounter];
+    }
 }
 
 /*******************************************************************************

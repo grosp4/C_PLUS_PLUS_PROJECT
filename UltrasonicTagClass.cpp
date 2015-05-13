@@ -25,8 +25,9 @@
 #include <string>
 #include <iostream>
 #include <sstream>
-
-
+/* Private typedef -----------------------------------------------------------*/
+/* Private define ------------------------------------------------------------*/
+/* Private variables ---------------------------------------------------------*/
 /* Define and initialize Class attribute*/
 int  UltrasonicTagClass::iTeamStartPosition = TeamRight;
 

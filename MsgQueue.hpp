@@ -24,9 +24,6 @@
 #include <QObject>
 
 /* Class Constant Declaration--------------------------------------------------*/
-
-/* Define Coordinate System for Left Team */
-
 /* Class Type declaration -----------------------------------------------------*/
 /* Class Data declaration -----------------------------------------------------*/
 /* Class definition -----------------------------------------------------------*/

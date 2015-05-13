@@ -385,7 +385,7 @@ void MainWindow::getPortValue()
     myString = ui->PortEdit->text();
     ui->statusLabel->clear();
     ui->statusLabel->setText("Port has been set to " + myString );
-    //this->MyUltrasonicThread->MySerialPort->changeHexamiteRS232Port(myString.toInt());
+    this->MyUltrasonicThread->MySerialPort->changeHexamiteRS232Port(myString.toInt());
 }
 
 
@@ -425,6 +425,7 @@ void MainWindow::printSerialMsg(QString myString)
     QString tempString;
     QScrollBar *sb = ui->scrollArea->verticalScrollBar();
 
+
     /* activate the console and delete the dummy text */
     if (iconsoleHasBeenUsed == 0)
     {
@@ -436,12 +437,14 @@ void MainWindow::printSerialMsg(QString myString)
     }
     else
     {
-
-        tempString = ui->ConsoleLabelToWriteTo->text();
-        ui->ConsoleLabelToWriteTo->setText(tempString + "\n" + myString   );
-        ui->commandEdit->clear();
-        sb->setValue(sb->maximum());
-
+        /* check if received String is ready */
+        if( myString.isEmpty()!= 1)
+        {
+            tempString = ui->ConsoleLabelToWriteTo->text();
+            ui->ConsoleLabelToWriteTo->setText(tempString + "\n" + myString   );
+            ui->commandEdit->clear();
+            sb->setValue(sb->maximum());
+        }
     }
 }
 
