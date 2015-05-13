@@ -79,22 +79,42 @@ HexamiteRS232Port::~HexamiteRS232Port()
  *  \return  	  None
  *
  ******************************************************************************/
-void HexamiteRS232Port::changeHexamiteRS232Port(int iNewPortNumber)
+/*******************************************************************************
+ *  Method:       changeHexamiteRS232Port()
+ ******************************************************************************/
+/** \brief        Change port number
+ *
+ *  \param		  iNewPortNumber  Number of new Com-Port
+ *  \param		  strConfirmation  Confirmation String
+ *
+ *  \return  	  None
+ *
+ ******************************************************************************/
+void HexamiteRS232Port::changeHexamiteRS232Port(int iNewPortNumber, std::string* strConfirmation)
 {
-	/* Close old RS232-Port */
-	RS232_CloseComport(iPortNumber);
+    /* Define local Variable */
+    std::stringstream ss;
 
-	/* Change port number */
-	iPortNumber = iNewPortNumber - 1; // -1 because of the library
+    /* Close old RS232-Port */
+    RS232_CloseComport(iPortNumber);
 
-	/* Open new RS232-Port */
-	char mode[]={DATA_BITS_RS232,PARITY_RS232, STOP_BITS_RS232,0};
+    /* Change port number */
+    iPortNumber = iNewPortNumber - 1; // -1 because of the library
 
-	if(RS232_OpenComport(iPortNumber, BAUDRATE_RS232, mode))
-	{
-		std::cout << "Can not open the port!!!" << std::endl;
-	}
+    /* Open new RS232-Port */
+    char mode[]={DATA_BITS_RS232,PARITY_RS232, STOP_BITS_RS232,0};
+
+    if(RS232_OpenComport(iPortNumber, BAUDRATE_RS232, mode))
+    {
+      *strConfirmation = "Can not open the port!!!";
+    }
+    else
+    {
+      ss << iNewPortNumber;
+      *strConfirmation = "Port has been set to " + ss.str();
+    }
 }
+
 
 
 

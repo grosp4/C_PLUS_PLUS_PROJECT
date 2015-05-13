@@ -51,7 +51,7 @@ class HexamiteRS232Port : public QObject
 
 	public:
 	HexamiteRS232Port(int iNewPortNumber);
-	void changeHexamiteRS232Port(int iNewPortNumber);
+    void changeHexamiteRS232Port(int iNewPortNumber, std::string* strConfirmation);
 	void getHexamiteData(std::string* strDataRx1, std::string* strDataRx2, std::string* strDataRx3);
 	void sendHexamiteData(std::string strDataTx);
 	void turnHexamiteUsbSynchronizerOn(void);
