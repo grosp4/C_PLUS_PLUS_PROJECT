@@ -427,29 +427,14 @@ void MainWindow::printSerialMsg(QString myString)
     QString tempString;
     QScrollBar *sb = ui->scrollArea->verticalScrollBar();
 
-
-    /* activate the console and delete the dummy text */
-    if (iconsoleHasBeenUsed == 0)
+    /* check if received String is not Empty */
+    if( myString.isEmpty()!= 1)
     {
-        ui->ConsoleLabelToWriteTo->clear();
-        tempString = ui->ConsoleLabelToWriteTo->text();
-        ui->ConsoleLabelToWriteTo->setText(tempString + "\n" + myString   );
-        ui->commandEdit->clear();
-        iconsoleHasBeenUsed = 1;
-    }
-    else
-    {
-        /* check if received String is ready */
-        if( myString.isEmpty()!= 1)
-        {
-            tempString = ui->ConsoleLabelToWriteTo->text();
-            ui->ConsoleLabelToWriteTo->setText(tempString + "\n" + myString   );
-            ui->commandEdit->clear();
-            sb->setValue(sb->maximum());
-        }
+     tempString = ui->ConsoleLabelToWriteTo->text();
+     ui->ConsoleLabelToWriteTo->setText(tempString + "\n" + myString   );
+     sb->setValue(sb->maximum());
     }
 }
-
 /*******************************************************************************
  *  Method :WriteInScrollAreaSlot
  ******************************************************************************/
@@ -468,21 +453,16 @@ void MainWindow::WriteInScrollAreaSlot()
     QScrollBar *sb = ui->scrollArea->verticalScrollBar();
 
 
-    if (iconsoleHasBeenUsed == 0)
-    {
-        myString = ui->commandEdit->text();
-        ui->commandEdit->clear();
-        ui->ConsoleLabelToWriteTo->clear();
-        ui->ConsoleLabelToWriteTo->setText(myString );
-        ui->commandEdit->clear();
-        iconsoleHasBeenUsed = 1;
-    }
+    /* get String from Textfield */
+    myString = ui->commandEdit->text();
 
-    else
+
+    /* check if received String is not Empty */
+    if( myString.isEmpty()!= 1)
     {
-        myString = ui->commandEdit->text();
         tempString = ui->ConsoleLabelToWriteTo->text();
         ui->ConsoleLabelToWriteTo->setText(tempString + "\n" + myString   );
+        this->MyUltrasonicThread->MySerialPort->sendHexamiteData(myString.toLocal8Bit().constData());
         ui->commandEdit->clear();
         sb->setValue(sb->maximum());
     }
