@@ -17,11 +17,11 @@
  ******************************************************************************/
 
 /* Imports Header Files*/
+#include "MsgQueue.hpp"
 
 /* Imports Library */
 #include <string>
 #include <iostream>
-#include "MsgQueue.hpp"
 
 
 /*******************************************************************************

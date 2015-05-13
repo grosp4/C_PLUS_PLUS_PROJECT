@@ -28,7 +28,7 @@
 #include "UltrasonicThread.hpp"
 #include "MsgQueue.hpp"
 #include "CalibrationMeasurement.h"
-#include <globaldefines.h>
+//#include <globaldefines.h>
 
 #define RATIO_PICTURE_TO_COORDINATES_X          (6.2)
 #define RATIO_PICTURE_TO_COORDINATES_Y          (6.4)

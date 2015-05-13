@@ -22,28 +22,27 @@
  *
  *
  ******************************************************************************/
-
-/* Includes ------------------------------------------------------------------*/
+/* Imports Header Files*/
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include <QtGui>
-#include "testthread.hpp"
+#include "UltrasonicTagClass.hpp"
 #include "debug_configurations.hpp"
+#include "MsgQueue.hpp"
+#include "TextFile.h"
+
+/* Imports Library */
+#include <QtGui>
 #include <QPainter>
 #include <qwidget.h>
-#include "MsgQueue.hpp"
 #include <iostream>
 #include <QScrollBar>
 #include <QScrollArea>
 #include <QEvent>
-#include "TextFile.h"
-#include "UltrasonicTagClass.hpp"
-#include "globaldefines.h"
 #include <time.h>
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
-/* Private Easteregg -------------------------------------------------------------*/
+/* Private variables ---------------------------------------------------------*/
 QString Fun[9] = {
 "When Alexander Bell invented the telephone he had 3 missed calls from Chuck Norris",
 "There used to be a street named after Chuck Norris, but it was changed because nobody crosses Chuck Norris and lives.",
@@ -55,37 +54,9 @@ QString Fun[9] = {
 "Chuck Norris once urinated in a semi truck's gas tank as a joke....that truck is now known as Optimus Prime.",
 "Chuck Norris counted to infinity - twice."
 };
-/* Private variables ---------------------------------------------------------*/
 int iNumberOfMeasurements = 0;
 int iMaxNumberOfMeasurements = 0;
 int iconsoleHasBeenUsed  = 0;
-//int  DesiredValues [21][4] = {
-//{0,0,0,0},              // only used for initial drawing of "where it should be"
-//{250,1000,250,1000},    // 1, tean left starts here
-//{870,1355,870,1355},    // 2
-//{90,1750,90,1750},      // 3
-//{450,300,450,300},      // 4
-//{1250,830,1250,830},    // 5
-//{1250,200,1250,200},    // 6
-//{0,0,0,0},
-//{0,0,0,0},
-//{0,0,0,0},
-//{0,0,0,0},                // 10, team right starts at next
-//{2750,1000,2750,1000},    // 1
-//{2130,1355,2130,1355},    // 2
-//{2910,1750,2910,1750},    // 3
-//{2550,300,2550,300},      // 4
-//{1750,830,1750,830},      // 5
-//{1750,200,1750,200},      // 6
-//{0,0,0,0},
-//{0,0,0,0},
-//{0,0,0,0},
-//{0,0,0,0},                // 20, end (total size array is 21)
-
-//                            };
-/* initialize measurement array */
-/* it will be used as following: 10 measurements, 4 values each measurement: X,Y TOP, X,Y BOTTOM */
-
 QString  MeasurementValues [21][4] = {"11"} ;
 
 /* Private function prototypes -----------------------------------------------*/
@@ -102,17 +73,9 @@ QString  MeasurementValues [21][4] = {"11"} ;
  *  \return       None
  *
  ******************************************************************************/
-#ifdef TEST_THREAD_HELLO_WORLD
-MainWindow::MainWindow(testthread *OtherTestThread, QWidget *parent) :
-    QMainWindow(parent), MyTestThread(OtherTestThread),
-    ui(new Ui::MainWindow)
-#else
 MainWindow::MainWindow( QWidget *parent) :
     QMainWindow(parent),
-    ui(new Ui::MainWindow)//,
-    //MyUltrasonicThread(NewUltrasonicThread)
-#endif
-
+    ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
     QString windowTitle = Fun[getvalues()];
@@ -156,10 +119,6 @@ MainWindow::MainWindow( QWidget *parent) :
     connect( MyUltrasonicThread, SIGNAL(printRealValueBottom(int,int)),
              this, SLOT(printRealValueBottom(int,int)));
 
-#ifdef TEST_THREAD_HELLO_WORLD
-    connect(ui->getvaluesbutton, SIGNAL(clicked()), MyTestThread, SLOT(print()) );
-#endif
-
 }
 
 /*******************************************************************************
@@ -174,16 +133,10 @@ MainWindow::MainWindow( QWidget *parent) :
  ******************************************************************************/
 MainWindow::~MainWindow()
 {
-    //MyUltrasonicThread->terminate(); // programmabsturz hier!
-    //delete MyUltrasonicThread;
+    MyUltrasonicThread->terminate();
+    delete MyUltrasonicThread;
     delete ui;
 }
-
-/************************************************************** MainWindow Functions ************************************************************/
-
-
-
-
 
 /*******************************************************************************
  *  Method :getValueButtonClicked
@@ -228,10 +181,6 @@ void MainWindow::getValueButtonClicked()
   ui->calibrationStatusLabel->setText("Values have been added to database \ntake next values by pressing NEXT ");
 
 }
-
-
-
-
 
 /*******************************************************************************
  *  Method :getBackButtonClicked
@@ -306,7 +255,6 @@ void MainWindow::getNextButtonClicked()
     ui->desiredXBottomValue->setNum(MyCalibrationMeasurement->MeasurementPoints[iNumberOfMeasurements]->XDesired);
     ui->desiredYBottomValue->setNum(MyCalibrationMeasurement->MeasurementPoints[iNumberOfMeasurements]->YDesired);
 
-
     /* update calibrationStatusLabel */
     ui->calibrationStatusLabel->setText("Ready to calibrate");
 }
@@ -314,7 +262,7 @@ void MainWindow::getNextButtonClicked()
 
 
 /*******************************************************************************
- *  Method :getvalues       - FUN -
+ *  Method :getvalues
  ******************************************************************************/
 /** \brief        auxillary function for getting a random Number
  *
@@ -458,12 +406,6 @@ void MainWindow::getCommandlineValue()
     myString = ui->commandEdit->text();
     ui->statusLabel->clear();
     ui->statusLabel->setText("Command" + myString +" has been sent" );
-
-
-
-#ifdef TEST_THREAD_HELLO_WORLD
-    MyTestThread->print();
-#endif
 }
 
 
@@ -502,11 +444,6 @@ void MainWindow::printSerialMsg(QString myString)
         sb->setValue(sb->maximum());
 
     }
-
-
-
-
-
 }
 
 /*******************************************************************************

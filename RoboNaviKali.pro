@@ -13,8 +13,7 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        mainwindow.cpp \
-    testthread.cpp \
+    mainwindow.cpp \
     HexamiteRS232PortClass.cpp \
     rs232.c \
     UltrasonicTagClass.cpp \
@@ -25,8 +24,6 @@ SOURCES += main.cpp\
     TextFile.cpp
 
 HEADERS  += mainwindow.h \
-    debug_configurations.hpp \
-    testthread.hpp \
     HexamiteRS232PortClass.h \
     rs232.h \
     UltrasonicTagClass.hpp \
@@ -34,15 +31,12 @@ HEADERS  += mainwindow.h \
     MeasurementPoint.h \
     MsgQueue.hpp \
     CalibrationMeasurement.h \
-    TextFile.h \
-    globaldefines.h
+    TextFile.h
 
 FORMS    += mainwindow.ui
 
-IMAGES += madeingermany.jpeg
-
 RESOURCES += \
-    picturefile.qrc
+            picturefile.qrc
 
 CONFIG += c++11
 

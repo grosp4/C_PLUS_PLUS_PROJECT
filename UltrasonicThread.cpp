@@ -59,8 +59,7 @@ UltrasonicThread::~UltrasonicThread()
 {
     MySerialPort->turnHexamiteUsbSynchronizerOff();
     sleep(1);
-    //delete MySerialPort; // wenn diese Zeile einkommentiert ist, kommt
-       // nach beendigung des GUIs "test.exe" funktioniert nicht mehr. (nicht immer reproduzierbar)
+    delete MySerialPort;
 }
 
 
@@ -77,7 +76,6 @@ UltrasonicThread::~UltrasonicThread()
 void UltrasonicThread::run()
 {
     /* Define Local Variable */
-    std::string sUSARTString;
     std::string sSerialData1;
     std::string sSerialData2;
     std::string sSerialData3;
@@ -101,12 +99,6 @@ void UltrasonicThread::run()
 
     while(1)
     {
-        //DEBUG:
-        //std::cout << "Hello, I am the Ultrasonic Thread." << std::endl;
-        //msleep(1000);
-
-
-
         /* Get USART-String */
         MySerialPort->getHexamiteData(&sSerialData1, &sSerialData2, &sSerialData3);
 
@@ -116,9 +108,9 @@ void UltrasonicThread::run()
         //strUnfilteredData->clear();
 
         /* Put data on screen */
-//        std::cout << sSerialData1 << std::endl;
-//        std::cout << sSerialData2 << std::endl;
-//        std::cout << sSerialData3 << std::endl;
+        //        std::cout << sSerialData1 << std::endl;
+        //        std::cout << sSerialData2 << std::endl;
+           //        std::cout << sSerialData3 << std::endl;
         /* check if next printing is needed */
         if( Stopwatch.elapsed() >= 1000 ) // if 1000ms elapsed since last start of stopwatch.
         {
@@ -131,27 +123,16 @@ void UltrasonicThread::run()
             Stopwatch.restart();
         }
 
-
-
-
         /* Check for Calculation*/
         if(TagRobotBigEnemy.checkSerialMessage(sSerialData1, sSerialData2, sSerialData3))
         {
              TagRobotBigEnemy.calculatePosition();
-
-//             std::cout <<  "Enemy Big Robot"  << std::endl;
-//             std::cout <<  "X-Position: " << TagRobotBigEnemy.getX_Position() << std::endl;
-//             std::cout <<  "Y-Position: " << TagRobotBigEnemy.getY_Position() << std::endl;
              emit printRealValueTop(TagRobotBigEnemy.getX_Position(), TagRobotBigEnemy.getY_Position());
              this->MyQueueRealValuesTop->send(TagRobotBigEnemy.getX_Position(), TagRobotBigEnemy.getY_Position() );
         }
         else if(TagRobotSmallEnemy.checkSerialMessage(sSerialData1, sSerialData2, sSerialData3))
         {
              TagRobotSmallEnemy.calculatePosition();
-
-//             std::cout <<  "Enemy Small Robot"  << std::endl;
-//             std::cout <<  "X-Position: " << TagRobotSmallEnemy.getX_Position() << std::endl;
-//             std::cout <<  "Y-Position: " << TagRobotSmallEnemy.getY_Position() << std::endl;
              emit printRealValueBottom(TagRobotSmallEnemy.getX_Position(), TagRobotSmallEnemy.getY_Position());
              this->MyQueueRealValuesBottom->send( TagRobotSmallEnemy.getX_Position(), TagRobotSmallEnemy.getY_Position() );
         }

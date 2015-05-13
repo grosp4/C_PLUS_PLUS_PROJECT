@@ -18,14 +18,10 @@
 #ifndef MEASUREMENTPOINT_H
 #define MEASUREMENTPOINT_H
 
-
 /* Imports Library */
-#include <string>
 #include <QObject>
 
 /* Class Constant Declaration--------------------------------------------------*/
-
-
 /* Class Type declaration -----------------------------------------------------*/
 /* Class Data declaration -----------------------------------------------------*/
 /* Class definition -----------------------------------------------------------*/
@@ -34,21 +30,18 @@ class MeasurementPoint : public QObject
     Q_OBJECT
 public:
     MeasurementPoint(int XDesiredinit, int YDesiredInit, int Teamside);
-    MeasurementPoint();
-    ~MeasurementPoint();
 
 public:
-    int XDesired;
-    int YDesired;
+    int XDesired = 0;
+    int YDesired = 0;
 
-    int XRealTop;
-    int YRealTop;
+    int XRealTop = 0;
+    int YRealTop = 0;
 
-    int XRealBottom;
-    int YRealBottom;
+    int XRealBottom = 0;
+    int YRealBottom = 0;
 
-    //int iPointNumber;
-    int Teamside;
+    int Teamside = 0;
 
 public:
     void getValues();

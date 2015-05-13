@@ -16,13 +16,12 @@
  *               \li
  *
  ******************************************************************************/
-
 /* Imports Header Files*/
+#include "MeasurementPoint.h"
 
 /* Imports Library */
 #include <string>
 #include <iostream>
-#include "MeasurementPoint.h"
 
 /*******************************************************************************
  *  Constructor : MeasurementPoint
@@ -42,35 +41,4 @@ MeasurementPoint::MeasurementPoint(int XDesiredInit, int YDesiredInit, int Teams
 {
 
 }
-
-MeasurementPoint::MeasurementPoint()
-{
-
-}
-/*******************************************************************************
- *  Deconstrunctor :
- ******************************************************************************/
-/** \brief        Deconstrunctor of the Class
- *
- *  \author       grosp4
- *
- *  \return       None
- *
- ******************************************************************************/
-
-MeasurementPoint::~MeasurementPoint()
-{
-
-}
-
-/*******************************************************************************
- *  Method :
- ******************************************************************************/
-/** \brief
- *
- *  \author
- *
- *  \return       None
- *
- ******************************************************************************/
 

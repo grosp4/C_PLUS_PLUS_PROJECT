@@ -26,13 +26,9 @@
 #include "MsgQueue.hpp"
 
 /* Class Constant Declaration--------------------------------------------------*/
-
 /* Define Coordinate System for Left Team */
-
 /* Class Type declaration -----------------------------------------------------*/
 /* Class Data declaration -----------------------------------------------------*/
-
-
 /* Class definition -----------------------------------------------------------*/
 
 class UltrasonicThread : public QThread

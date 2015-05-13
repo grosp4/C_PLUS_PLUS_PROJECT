@@ -17,22 +17,18 @@
 
  *
  ******************************************************************************/
-/*
- *  method:
- *
- *@{
- ******************************************************************************/
+/* Imports Header Files*/
+#include "HexamiteRS232PortClass.h"
+#include "rs232.h"
 
-
-//
+/* Imports Library */
 #include<iostream>
 #include<sstream>
 #include<string>
 #include<cstring>
 #include<windows.h>
 #include<iomanip>
-#include "HexamiteRS232PortClass.h"
-#include "rs232.h"
+
 
 
 /*******************************************************************************

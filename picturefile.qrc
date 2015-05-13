@@ -1,7 +1,5 @@
 <RCC>
     <qresource prefix="/">
-        <file>emily_batty_1.jpg</file>
-        <file>madeingermany.jpg</file>
         <file>Map_Left.jpg</file>
         <file>Map_Right.jpg</file>
         <file>it_is.png</file>

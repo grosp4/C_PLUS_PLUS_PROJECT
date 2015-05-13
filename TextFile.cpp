@@ -15,18 +15,17 @@
  *               \li
  *
  ******************************************************************************/
-
 /* Imports Header Files*/
+#include "MeasurementPoint.h"
+#include "TextFile.h"
+#include "UltrasonicTagClass.hpp"
 
 /* Imports Library */
 #include <string>
 #include <iostream>
-#include "MeasurementPoint.h"
-#include "TextFile.h"
 #include <QString>
 #include <QFile>
 #include <QTextStream>
-#include "UltrasonicTagClass.hpp"
 /*******************************************************************************
  *  Constructor :
  ******************************************************************************/

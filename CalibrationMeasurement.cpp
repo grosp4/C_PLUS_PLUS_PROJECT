@@ -15,16 +15,14 @@
  *               \li
  *
  ******************************************************************************/
-
 /* Imports Header Files*/
+#include "mainwindow.h"
+#include "UltrasonicTagClass.hpp"
+#include "CalibrationMeasurement.h"
 
 /* Imports Library */
 #include <string>
 #include <iostream>
-#include "UltrasonicTagClass.hpp"
-#include "mainwindow.h"
-#include "CalibrationMeasurement.h"
-#include "globaldefines.h"
 
 
 /*******************************************************************************
@@ -51,6 +49,7 @@ CalibrationMeasurement::CalibrationMeasurement()
     MeasurementPoints[8] = new MeasurementPoint(0,0, TeamLeft);
     MeasurementPoints[9] = new MeasurementPoint(0,0, TeamLeft);
     MeasurementPoints[10] = new MeasurementPoint(0,0, TeamLeft);
+
     /* TeamRight */
     MeasurementPoints[11] = new MeasurementPoint(2750,1000, TeamRight);
     MeasurementPoints[12] = new MeasurementPoint(2130,1355, TeamRight);
@@ -76,7 +75,7 @@ CalibrationMeasurement::CalibrationMeasurement()
  ******************************************************************************/
 CalibrationMeasurement::~CalibrationMeasurement()
 {
-    // delete[] MeasurementPoints;
+     //delete [] MeasurementPoints;
 }
 
 /*******************************************************************************

@@ -26,49 +26,19 @@
  *
  ******************************************************************************/
 
-
-
 /* Includes ------------------------------------------------------------------*/
 #include "mainwindow.h"
+
+/* Imports Library */
 #include <QApplication>
 #include <QThread>
-#include "debug_configurations.hpp"
-#include "testthread.hpp"
-#include <iostream>
-#include "UltrasonicThread.hpp"
-
 /* Private functions ---------------------------------------------------------*/
 
 int main(int argc, char *argv[])
 {
-
-
-#ifdef TEST_THREAD_HELLO_WORLD // ################################################
-    // Create new thread:
-    std::cout << "\n\nStart Test Thread..." << std::endl;
-    testthread MyTestThread;
-    MyTestThread.start();
-
-
+    /* start Application and show GUI*/
     QApplication a(argc, argv);
-    MainWindow GUI( &MyTestThread );
-
-
-#else
-
-
-    QApplication a(argc, argv);
-
-    //UltrasonicThread NewUltrasonicThread;
-    //MainWindow GUI(&NewUltrasonicThread);
     MainWindow GUI;
-    //NewUltrasonicThread.start();
-
-
-
-
-
-#endif
 
     GUI.show();   
     return a.exec();

@@ -25,15 +25,15 @@
 #include "MeasurementPoint.h"
 #include "TextFile.h"
 #include <QObject>
-#include "globaldefines.h"
-
 /* Class Constant Declaration--------------------------------------------------*/
-
-/* Define Coordinate System for Left Team */
-
 /* Class Type declaration -----------------------------------------------------*/
 /* Class Data declaration -----------------------------------------------------*/
 /* Class definition -----------------------------------------------------------*/
+
+
+#define MAX_MEASUREMENT_POINTS_PER_SITE     ( 10 )
+#define MAX_MEASUREMENT_POINTS              ( MAX_MEASUREMENT_POINTS_PER_SITE*2 )
+
 
 class CalibrationMeasurement : public QObject
 {
