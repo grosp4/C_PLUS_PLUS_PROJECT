@@ -18,18 +18,21 @@
  *
  ********************************************************************************/
 
-
+/* Define to prevent recursive inclusion --------------------------------------*/
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
-
-#include <QMainWindow>
-#include "debug_configurations.hpp"
-#include "testthread.hpp"
+/* Imports Header Files*/
 #include "UltrasonicThread.hpp"
-#include "MsgQueue.hpp"
 #include "CalibrationMeasurement.h"
-//#include <globaldefines.h>
+#include "MsgQueue.hpp"
 
+
+/* Imports Library */
+#include <QMainWindow>
+#include <QObject>
+
+
+/* Class Constant Declaration--------------------------------------------------*/
 #define RATIO_PICTURE_TO_COORDINATES_X          (6.2)
 #define RATIO_PICTURE_TO_COORDINATES_Y          (6.4)
 #define OFFSET_X_VALUE_PICTURE_LABEL            (360)
@@ -37,6 +40,9 @@
 
 #define OFFSET_GRAPHICS_X                         (-30)
 #define OFFSET_GRAPHICS_Y                         (-30)
+/* Class Type declaration -----------------------------------------------------*/
+/* Class Data declaration -----------------------------------------------------*/
+/* Class definition -----------------------------------------------------------*/
 namespace Ui {
 class MainWindow;
 }
@@ -46,20 +52,11 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
 public:
-#ifdef TEST_THREAD_HELLO_WORLD
-    explicit MainWindow(testthread *OtherTestThread, QWidget *parent = 0);
-#else
-    //explicit MainWindow(UltrasonicThread *NewUltrasonicThread, QWidget *parent = 0);
     explicit MainWindow(QWidget *parent = 0);
-#endif
-
     ~MainWindow();
 
 
 public:
-    #ifdef TEST_THREAD_HELLO_WORLD
-    testthread *MyTestThread; // holder for TestThread
-    #endif
    void paintEvent(QPaintEvent *e);
    void customEvent(QEvent* e);
    static const int MyEvent=1001;

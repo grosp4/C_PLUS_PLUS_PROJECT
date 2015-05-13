@@ -18,11 +18,15 @@
 #ifndef TEXTFILE_H
 #define TEXTFILE_H
 
+
+#include "MeasurementPoint.h"
+
 /* Imports Library */
 #include <string>
 #include <QFile>
-#include "MeasurementPoint.h"
 #include <QObject>
+
+
 
 /* Class Constant Declaration--------------------------------------------------*/
 

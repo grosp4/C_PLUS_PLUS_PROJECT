@@ -17,14 +17,15 @@
 /* Define to prevent recursive inclusion --------------------------------------*/
 #ifndef CALIBRATIONMEASUREMENT_H
 #define CALIBRATIONMEASUREMENT_H
+/* Imports Header Files*/
+#include "MeasurementPoint.h"
+#include "TextFile.h"
 
 /* Imports Library */
 #include <string>
-//#include "mainwindow.h"
 #include <iostream>
-#include "MeasurementPoint.h"
-#include "TextFile.h"
 #include <QObject>
+
 /* Class Constant Declaration--------------------------------------------------*/
 /* Class Type declaration -----------------------------------------------------*/
 /* Class Data declaration -----------------------------------------------------*/

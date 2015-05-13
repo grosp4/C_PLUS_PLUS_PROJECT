@@ -26,7 +26,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "UltrasonicTagClass.hpp"
-#include "debug_configurations.hpp"
 #include "MsgQueue.hpp"
 #include "TextFile.h"
 

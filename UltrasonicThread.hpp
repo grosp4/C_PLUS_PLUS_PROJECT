@@ -18,15 +18,16 @@
 #ifndef ULTRASONICTHREAD_HPP
 #define ULTRASONICTHREAD_HPP
 
-/* Imports Library */
+/* Imports Header Files*/
 #include <string>
 #include <QThread>
 #include <QString>
+
+/* Imports Header Files*/
 #include "HexamiteRS232PortClass.h"
 #include "MsgQueue.hpp"
 
 /* Class Constant Declaration--------------------------------------------------*/
-/* Define Coordinate System for Left Team */
 /* Class Type declaration -----------------------------------------------------*/
 /* Class Data declaration -----------------------------------------------------*/
 /* Class definition -----------------------------------------------------------*/
