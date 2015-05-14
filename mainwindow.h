@@ -66,6 +66,7 @@ public slots:
     void getValueButtonClicked();
     void getBackButtonClicked();
     void getNextButtonClicked();
+    void generateOutputFile();
     void getPortValue();
     void getCommandlineValue();
     void WriteInScrollAreaSlot();

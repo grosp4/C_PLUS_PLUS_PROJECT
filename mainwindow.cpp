@@ -98,9 +98,7 @@ MainWindow::MainWindow( QWidget *parent) :
     connect(ui->portButton,SIGNAL(clicked()),this,SLOT(getPortValue()));
     connect(ui->sendButton,SIGNAL(clicked()),this,SLOT(getCommandlineValue()));
     connect(ui->sendButton,SIGNAL(clicked()),this,SLOT(WriteInScrollAreaSlot()));
-    connect(ui->generateOutputfile, SIGNAL(clicked()),
-            MyCalibrationMeasurement, SLOT(generateOutputFile()));
-
+    connect(ui->generateOutputfile,SIGNAL(clicked()),this,SLOT(generateOutputFile()));
 
     // Communication for serial message stream to GUI:
     connect( MyUltrasonicThread, SIGNAL(printSerialMsg(QString)),
@@ -173,6 +171,7 @@ void MainWindow::getValueButtonClicked()
   ui->calibrationStatusLabel->setText("Values have been added to database \ntake next values by pressing NEXT ");
 
 }
+
 
 /*******************************************************************************
  *  Method :getBackButtonClicked()
@@ -257,6 +256,24 @@ void MainWindow::getNextButtonClicked()
     repaint();
 }
 
+/*******************************************************************************
+ *  Method :generateOutputFile()
+ ******************************************************************************/
+/** \brief        generate the Output File for saving the Data
+ *
+ *  \author       grosp4/bartj2
+ *
+ *  \return       None
+ *
+ ******************************************************************************/
+void MainWindow::generateOutputFile()
+{
+     /* print User Info */
+    MyCalibrationMeasurement->generateOutputFile();
+
+    /* print User Info */
+    ui->calibrationStatusLabel->setText("Output File generated");
+}
 
 
 /*******************************************************************************
@@ -525,8 +542,6 @@ void MainWindow::printRealValueBottom(int XBottom, int YBottom)
     ui->realYBottomValue->setNum(YBottom);
 
     QApplication::postEvent(this,new QEvent(QEvent::Type(MyEvent)));
-
-
 
 }
 

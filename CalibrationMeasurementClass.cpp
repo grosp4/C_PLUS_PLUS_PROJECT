@@ -39,7 +39,7 @@
 CalibrationMeasurementClass::CalibrationMeasurementClass()
 {
     /* TeamLeft */
-    MeasurementPoints[0] = new MeasurementPointClass(0,0, TeamLeft);
+    MeasurementPoints[0] = new MeasurementPointClass(10,0, TeamLeft);
     MeasurementPoints[1] = new MeasurementPointClass(250,1000, TeamLeft);
     MeasurementPoints[2] = new MeasurementPointClass(870, 1355, TeamLeft);
     MeasurementPoints[3] = new MeasurementPointClass(90, 1750, TeamLeft);
