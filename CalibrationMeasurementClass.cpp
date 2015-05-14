@@ -49,19 +49,18 @@ CalibrationMeasurementClass::CalibrationMeasurementClass()
     MeasurementPoints[7] = new MeasurementPointClass(0,0, TeamLeft);
     MeasurementPoints[8] = new MeasurementPointClass(0,0, TeamLeft);
     MeasurementPoints[9] = new MeasurementPointClass(0,0, TeamLeft);
-    MeasurementPoints[10] = new MeasurementPointClass(0,0, TeamLeft);
 
     /* TeamRight */
-    MeasurementPoints[11] = new MeasurementPointClass(2750,1000, TeamRight);
-    MeasurementPoints[12] = new MeasurementPointClass(2130,1355, TeamRight);
-    MeasurementPoints[13] = new MeasurementPointClass(2910,1750, TeamRight);
-    MeasurementPoints[14] = new MeasurementPointClass(2550,300, TeamRight);
-    MeasurementPoints[15] = new MeasurementPointClass(1750,830, TeamRight);
-    MeasurementPoints[16] = new MeasurementPointClass(1750,200, TeamRight);
+    MeasurementPoints[10] = new MeasurementPointClass(2750,1000, TeamRight);
+    MeasurementPoints[11] = new MeasurementPointClass(2130,1355, TeamRight);
+    MeasurementPoints[12] = new MeasurementPointClass(2910,1750, TeamRight);
+    MeasurementPoints[13] = new MeasurementPointClass(2550,300, TeamRight);
+    MeasurementPoints[14] = new MeasurementPointClass(1750,830, TeamRight);
+    MeasurementPoints[15] = new MeasurementPointClass(1750,200, TeamRight);
+    MeasurementPoints[16] = new MeasurementPointClass(0,0, TeamRight);
     MeasurementPoints[17] = new MeasurementPointClass(0,0, TeamRight);
     MeasurementPoints[18] = new MeasurementPointClass(0,0, TeamRight);
     MeasurementPoints[19] = new MeasurementPointClass(0,0, TeamRight);
-    MeasurementPoints[20] = new MeasurementPointClass(0,0, TeamRight);
 }
 
 /*******************************************************************************

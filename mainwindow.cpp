@@ -190,7 +190,7 @@ void MainWindow::getBackButtonClicked()
     int iValue = 9999;
     /* decrase number of Measurements */
     iValue = setamountofmeasurements(0);
-    ui->NumberLabel->setNum(iValue);
+    ui->NumberLabel->setNum((iValue + 1));
 
     /* get saved number and write them into the label */
     ui->realXTopValue_2->clear();
@@ -232,7 +232,7 @@ void MainWindow::getNextButtonClicked()
     int iValue = 9999;
     /* increase number of Measurements */
     iValue = setamountofmeasurements(1);
-    ui->NumberLabel->setNum(iValue);
+    ui->NumberLabel->setNum((iValue + 1));
 
     /* get saved number and write them into the label */
     ui->realXTopValue_2->clear();
@@ -310,10 +310,10 @@ int MainWindow::setamountofmeasurements(int increase)
 {
     if (increase)
     {
-        if ( (iNumberOfMeasurements >= MAX_MEASUREMENT_POINTS_PER_SITE)&& (iNumberOfMeasurements < MAX_MEASUREMENT_POINTS) )
+        if ( (iNumberOfMeasurements >= (MAX_MEASUREMENT_POINTS_PER_SITE-1)) && (iNumberOfMeasurements < (MAX_MEASUREMENT_POINTS-1) ))
         {
             iNumberOfMeasurements = iNumberOfMeasurements + 1;
-            iMaxNumberOfMeasurements = iMaxNumberOfMeasurements +1;
+            iMaxNumberOfMeasurements = iMaxNumberOfMeasurements + 1;
             ui->TeamnameLabel->setText(("TEAM RIGHT"));
 
             /* inform UPS Calculation Thread about change of team site */
@@ -321,10 +321,10 @@ int MainWindow::setamountofmeasurements(int increase)
         }
 
 
-        if ( iNumberOfMeasurements < MAX_MEASUREMENT_POINTS_PER_SITE)
+        if ( iNumberOfMeasurements < (MAX_MEASUREMENT_POINTS_PER_SITE -1))
         {
             iNumberOfMeasurements = iNumberOfMeasurements + 1;
-            iMaxNumberOfMeasurements = iMaxNumberOfMeasurements +1;
+            iMaxNumberOfMeasurements = iMaxNumberOfMeasurements + 1;
             ui->TeamnameLabel->setText(("TEAM LEFT"));
 
             /* inform UPS Calculation Thread about change of team site */
@@ -340,7 +340,7 @@ int MainWindow::setamountofmeasurements(int increase)
     }
     else
     {
-        if((iNumberOfMeasurements > 1) && (iNumberOfMeasurements < (MAX_MEASUREMENT_POINTS_PER_SITE +2 ) ) )
+        if((iNumberOfMeasurements > 0) && (iNumberOfMeasurements < (MAX_MEASUREMENT_POINTS_PER_SITE + 1 ) ) )
         {
             iNumberOfMeasurements = iNumberOfMeasurements - 1;
             iMaxNumberOfMeasurements = iMaxNumberOfMeasurements - 1;
@@ -349,7 +349,7 @@ int MainWindow::setamountofmeasurements(int increase)
             /* inform UPS Calculation Thread about change of team site */
             UltrasonicTagClass::setTeamStartPosition(TeamLeft);
         }
-        if(iNumberOfMeasurements >= (MAX_MEASUREMENT_POINTS_PER_SITE +2) )
+        if(iNumberOfMeasurements >= (MAX_MEASUREMENT_POINTS_PER_SITE + 1) )
         {
             iNumberOfMeasurements = iNumberOfMeasurements - 1;
             iMaxNumberOfMeasurements = iMaxNumberOfMeasurements - 1;
@@ -549,11 +549,9 @@ void MainWindow::paintEvent(QPaintEvent *e)
     QPainter painter(this);
     painter.drawPixmap(310, 620 ,30,30,QPixmap(":/it_is.png"));
     painter.drawPixmap(310,575,30,30,QPixmap(":/it_should_be.jpg"));
-    QMainWindow::paintEvent(e);
-
 
     /* if the event is called while we have less than MAX_MEASUREMENT_POINTS_PER_SITE */
-    if( iNumberOfMeasurements <= MAX_MEASUREMENT_POINTS_PER_SITE)
+    if( iNumberOfMeasurements <= (MAX_MEASUREMENT_POINTS_PER_SITE-1))
     {
       painter.drawPixmap(199,60,761,469,QPixmap(":/Map_Left"));
     }
@@ -562,28 +560,20 @@ void MainWindow::paintEvent(QPaintEvent *e)
       painter.drawPixmap(199,60,761,469,QPixmap(":/Map_Right"));
     }
 
-    /* if a custom event has been called */
-    if(bpaintflag)
-    {
+    /* Update graphics data on GUI */
+    ui->NumberLabel->setNum((iNumberOfMeasurements+1));
+    ui->desiredXTopValue->setNum(MyCalibrationMeasurement->MeasurementPoints[iNumberOfMeasurements]->XDesired);
+    ui->desiredYTopValue->setNum(MyCalibrationMeasurement->MeasurementPoints[iNumberOfMeasurements]->YDesired);
+    ui->desiredXBottomValue->setNum(MyCalibrationMeasurement->MeasurementPoints[iNumberOfMeasurements]->XDesired);
+    ui->desiredYBottomValue->setNum(MyCalibrationMeasurement->MeasurementPoints[iNumberOfMeasurements]->YDesired);
 
-        /* Update graphics data on GUI */
-       QPainter painter(this);
-       ui->desiredXTopValue->setNum(MyCalibrationMeasurement->MeasurementPoints[iNumberOfMeasurements]->XDesired);
-       ui->desiredYTopValue->setNum(MyCalibrationMeasurement->MeasurementPoints[iNumberOfMeasurements]->YDesired);
-       ui->desiredXBottomValue->setNum(MyCalibrationMeasurement->MeasurementPoints[iNumberOfMeasurements]->XDesired);
-       ui->desiredYBottomValue->setNum(MyCalibrationMeasurement->MeasurementPoints[iNumberOfMeasurements]->YDesired);
-       /* print desired coordinates */
-       painter.drawPixmap(OFFSET_X_VALUE_PICTURE_LABEL + OFFSET_GRAPHICS_X + (MyCalibrationMeasurement->MeasurementPoints[iNumberOfMeasurements]->XDesired / RATIO_PICTURE_TO_COORDINATES_X),  OFFSET_Y_VALUE_PICTURE_LABEL + OFFSET_GRAPHICS_Y + (MyCalibrationMeasurement->MeasurementPoints[iNumberOfMeasurements]->YDesired / RATIO_PICTURE_TO_COORDINATES_Y), 30, 30, QPixmap(":/it_should_be.jpg"));
-       painter.drawPixmap(OFFSET_X_VALUE_PICTURE_LABEL + OFFSET_GRAPHICS_X + (MyCalibrationMeasurement->MeasurementPoints[iNumberOfMeasurements]->XDesired / RATIO_PICTURE_TO_COORDINATES_X),  OFFSET_Y_VALUE_PICTURE_LABEL + OFFSET_GRAPHICS_Y + (MyCalibrationMeasurement->MeasurementPoints[iNumberOfMeasurements]->YDesired / RATIO_PICTURE_TO_COORDINATES_Y), 30, 30, QPixmap(":/it_should_be.jpg"));
-       painter.drawPixmap( OFFSET_X_VALUE_PICTURE_LABEL + OFFSET_GRAPHICS_X + (iGraphicsXBottomValue / RATIO_PICTURE_TO_COORDINATES_X), OFFSET_Y_VALUE_PICTURE_LABEL + OFFSET_GRAPHICS_Y + (iGraphicsYBottomValue / RATIO_PICTURE_TO_COORDINATES_Y) ,30, 30, QPixmap(":/it_is.png"));
-       painter.drawPixmap( OFFSET_X_VALUE_PICTURE_LABEL + OFFSET_GRAPHICS_X + (iGraphicsXTopValue / RATIO_PICTURE_TO_COORDINATES_X) , OFFSET_Y_VALUE_PICTURE_LABEL + OFFSET_GRAPHICS_Y + (iGraphicsYTopValue / RATIO_PICTURE_TO_COORDINATES_Y), 30, 30, QPixmap(":/it_is.png"));
+    /* print desired coordinates */
+    painter.drawPixmap(OFFSET_X_VALUE_PICTURE_LABEL + OFFSET_GRAPHICS_X + (MyCalibrationMeasurement->MeasurementPoints[iNumberOfMeasurements]->XDesired / RATIO_PICTURE_TO_COORDINATES_X),  OFFSET_Y_VALUE_PICTURE_LABEL + OFFSET_GRAPHICS_Y + (MyCalibrationMeasurement->MeasurementPoints[iNumberOfMeasurements]->YDesired / RATIO_PICTURE_TO_COORDINATES_Y), 30, 30, QPixmap(":/it_should_be.jpg"));
+    painter.drawPixmap(OFFSET_X_VALUE_PICTURE_LABEL + OFFSET_GRAPHICS_X + (MyCalibrationMeasurement->MeasurementPoints[iNumberOfMeasurements]->XDesired / RATIO_PICTURE_TO_COORDINATES_X),  OFFSET_Y_VALUE_PICTURE_LABEL + OFFSET_GRAPHICS_Y + (MyCalibrationMeasurement->MeasurementPoints[iNumberOfMeasurements]->YDesired / RATIO_PICTURE_TO_COORDINATES_Y), 30, 30, QPixmap(":/it_should_be.jpg"));
+    painter.drawPixmap( OFFSET_X_VALUE_PICTURE_LABEL + OFFSET_GRAPHICS_X + (iGraphicsXBottomValue / RATIO_PICTURE_TO_COORDINATES_X), OFFSET_Y_VALUE_PICTURE_LABEL + OFFSET_GRAPHICS_Y + (iGraphicsYBottomValue / RATIO_PICTURE_TO_COORDINATES_Y) ,30, 30, QPixmap(":/it_is.png"));
+    painter.drawPixmap( OFFSET_X_VALUE_PICTURE_LABEL + OFFSET_GRAPHICS_X + (iGraphicsXTopValue / RATIO_PICTURE_TO_COORDINATES_X) , OFFSET_Y_VALUE_PICTURE_LABEL + OFFSET_GRAPHICS_Y + (iGraphicsYTopValue / RATIO_PICTURE_TO_COORDINATES_Y), 30, 30, QPixmap(":/it_is.png"));
 
-       /* reset flag for painting*/
-       bpaintflag = false;
-    }
-
-
-
+    QMainWindow::paintEvent(e);
 }
 
 /*******************************************************************************
@@ -602,9 +592,6 @@ void MainWindow::customEvent(QEvent* e)
   {
       if(e->type() == (QEvent::Type)1001)
       {
-          /* if the specific custom event has been called, set the painting flag */
-        bpaintflag = true;
         update();
-
       }
   }
