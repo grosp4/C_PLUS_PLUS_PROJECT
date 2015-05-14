@@ -35,8 +35,8 @@
 /* Class Constant Declaration--------------------------------------------------*/
 #define RATIO_PICTURE_TO_COORDINATES_X          (6.2)
 #define RATIO_PICTURE_TO_COORDINATES_Y          (6.4)
-#define OFFSET_X_VALUE_PICTURE_LABEL            (360)
-#define OFFSET_Y_VALUE_PICTURE_LABEL            (155)
+#define OFFSET_X_VALUE_PICTURE_LABEL            (350)
+#define OFFSET_Y_VALUE_PICTURE_LABEL            (153)
 
 #define OFFSET_GRAPHICS_X                         (-30)
 #define OFFSET_GRAPHICS_Y                         (-30)

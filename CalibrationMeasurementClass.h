@@ -27,7 +27,7 @@
 #include <QObject>
 
 /* Class Constant Declaration--------------------------------------------------*/
-#define MAX_MEASUREMENT_POINTS_PER_SITE     ( 10 )
+#define MAX_MEASUREMENT_POINTS_PER_SITE     ( 6 )
 #define MAX_MEASUREMENT_POINTS              ( MAX_MEASUREMENT_POINTS_PER_SITE*2 )
 /* Class Type declaration -----------------------------------------------------*/
 /* Class Data declaration -----------------------------------------------------*/

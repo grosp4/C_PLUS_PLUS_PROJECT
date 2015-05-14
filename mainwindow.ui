@@ -144,7 +144,7 @@
       <x>1180</x>
       <y>160</y>
       <width>51</width>
-      <height>111</height>
+      <height>71</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="desired_values_2">
@@ -162,27 +162,13 @@
        </property>
       </widget>
      </item>
-     <item>
-      <widget class="QLabel" name="desiredXBottomValue">
-       <property name="text">
-        <string>xx</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QLabel" name="desiredYBottomValue">
-       <property name="text">
-        <string>xx</string>
-       </property>
-      </widget>
-     </item>
     </layout>
    </widget>
    <widget class="QPushButton" name="getvaluesbutton">
     <property name="geometry">
      <rect>
       <x>1010</x>
-      <y>280</y>
+      <y>260</y>
       <width>101</width>
       <height>23</height>
      </rect>
@@ -442,35 +428,21 @@
       <x>1010</x>
       <y>160</y>
       <width>131</width>
-      <height>111</height>
+      <height>71</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="desired_values">
      <item>
-      <widget class="QLabel" name="desiredXTop">
+      <widget class="QLabel" name="desiredX">
        <property name="text">
-        <string>desired X TOP</string>
+        <string>desired X </string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QLabel" name="desiredYTop">
+      <widget class="QLabel" name="desiredY">
        <property name="text">
-        <string>desired Y TOP</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QLabel" name="desiredXBottom">
-       <property name="text">
-        <string>desired X BOTTOM</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QLabel" name="desiredYBottom">
-       <property name="text">
-        <string>desired Y BOTTOM</string>
+        <string>desired Y </string>
        </property>
       </widget>
      </item>

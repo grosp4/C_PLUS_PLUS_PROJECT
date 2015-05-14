@@ -204,8 +204,6 @@ void MainWindow::getBackButtonClicked()
     /* set desired values */
     ui->desiredXTopValue->setNum(MyCalibrationMeasurement->MeasurementPoints[iNumberOfMeasurements]->XDesired);
     ui->desiredYTopValue->setNum(MyCalibrationMeasurement->MeasurementPoints[iNumberOfMeasurements]->YDesired);
-    ui->desiredXBottomValue->setNum(MyCalibrationMeasurement->MeasurementPoints[iNumberOfMeasurements]->XDesired);
-    ui->desiredYBottomValue->setNum(MyCalibrationMeasurement->MeasurementPoints[iNumberOfMeasurements]->YDesired);
 
     /* update calibrationStatusLabel */
     ui->calibrationStatusLabel->setText("Ready to calibrate");
@@ -246,8 +244,6 @@ void MainWindow::getNextButtonClicked()
     /* set desired values */
     ui->desiredXTopValue->setNum(MyCalibrationMeasurement->MeasurementPoints[iNumberOfMeasurements]->XDesired);
     ui->desiredYTopValue->setNum(MyCalibrationMeasurement->MeasurementPoints[iNumberOfMeasurements]->YDesired);
-    ui->desiredXBottomValue->setNum(MyCalibrationMeasurement->MeasurementPoints[iNumberOfMeasurements]->XDesired);
-    ui->desiredYBottomValue->setNum(MyCalibrationMeasurement->MeasurementPoints[iNumberOfMeasurements]->YDesired);
 
     /* update calibrationStatusLabel */
     ui->calibrationStatusLabel->setText("Ready to calibrate");
@@ -579,8 +575,6 @@ void MainWindow::paintEvent(QPaintEvent *e)
     ui->NumberLabel->setNum((iNumberOfMeasurements+1));
     ui->desiredXTopValue->setNum(MyCalibrationMeasurement->MeasurementPoints[iNumberOfMeasurements]->XDesired);
     ui->desiredYTopValue->setNum(MyCalibrationMeasurement->MeasurementPoints[iNumberOfMeasurements]->YDesired);
-    ui->desiredXBottomValue->setNum(MyCalibrationMeasurement->MeasurementPoints[iNumberOfMeasurements]->XDesired);
-    ui->desiredYBottomValue->setNum(MyCalibrationMeasurement->MeasurementPoints[iNumberOfMeasurements]->YDesired);
 
     /* print desired coordinates */
     painter.drawPixmap(OFFSET_X_VALUE_PICTURE_LABEL + OFFSET_GRAPHICS_X + (MyCalibrationMeasurement->MeasurementPoints[iNumberOfMeasurements]->XDesired / RATIO_PICTURE_TO_COORDINATES_X),  OFFSET_Y_VALUE_PICTURE_LABEL + OFFSET_GRAPHICS_Y + (MyCalibrationMeasurement->MeasurementPoints[iNumberOfMeasurements]->YDesired / RATIO_PICTURE_TO_COORDINATES_Y), 30, 30, QPixmap(":/it_should_be.jpg"));
