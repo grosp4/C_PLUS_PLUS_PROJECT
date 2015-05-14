@@ -74,19 +74,6 @@ HexamiteRS232Port::~HexamiteRS232Port()
 	RS232_CloseComport(iPortNumber);
 }
 
-
-/*******************************************************************************
- *  Method:       changeHexamiteRS232Port()
- ******************************************************************************/
-/** \brief        Change port number
- *
- *  \param		  iNewPortNumber  Number of new COM-Port
- *
- *  \author       sches24
- *
- *  \return  	  None
- *
- ******************************************************************************/
 /*******************************************************************************
  *  Method:       changeHexamiteRS232Port()
  ******************************************************************************/
@@ -122,7 +109,10 @@ void HexamiteRS232Port::changeHexamiteRS232Port(int iNewPortNumber, std::string*
     {
       ss << iNewPortNumber;
       *strConfirmation = "Port has been set to " + ss.str();
+      this->turnHexamiteUsbSynchronizerOn();
     }
+
+
 }
 
 
