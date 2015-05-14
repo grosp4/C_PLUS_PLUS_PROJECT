@@ -725,6 +725,32 @@
      <set>Qt::AlignCenter</set>
     </property>
    </widget>
+   <widget class="QWidget" name="layoutWidget_4">
+    <property name="geometry">
+     <rect>
+      <x>560</x>
+      <y>560</y>
+      <width>206</width>
+      <height>71</height>
+     </rect>
+    </property>
+    <layout class="QVBoxLayout" name="verticalLayout_3">
+     <item>
+      <widget class="QLabel" name="Transmitter_1">
+       <property name="text">
+        <string>Bottom-Transmitter:  Enemy Big , ID: T20</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="Transmitter_2">
+       <property name="text">
+        <string>Top-Transmitter:       Enemy Small, ID: T21</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
    <zorder>layoutWidget</zorder>
    <zorder>layoutWidget</zorder>
    <zorder>layoutWidget</zorder>
@@ -759,6 +785,7 @@
    <zorder>RealvaluesLabel_3</zorder>
    <zorder>line_6</zorder>
    <zorder>label</zorder>
+   <zorder>layoutWidget_4</zorder>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
  </widget>
