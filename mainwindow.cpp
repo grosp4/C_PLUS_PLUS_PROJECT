@@ -210,6 +210,9 @@ void MainWindow::getBackButtonClicked()
 
     /* update calibrationStatusLabel */
     ui->calibrationStatusLabel->setText("Ready to calibrate");
+
+    /* repaint the picture */
+    repaint();
 }
 
 
@@ -249,6 +252,9 @@ void MainWindow::getNextButtonClicked()
 
     /* update calibrationStatusLabel */
     ui->calibrationStatusLabel->setText("Ready to calibrate");
+
+    /* repaint the picture */
+    repaint();
 }
 
 
