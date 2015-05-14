@@ -49,7 +49,6 @@ QString Fun[9] = {
 };
 int iNumberOfMeasurements = 0;
 int iMaxNumberOfMeasurements = 0;
-int iconsoleHasBeenUsed  = 0;
 QString  MeasurementValues [21][4] = {"11"} ;
 
 /* Private function prototypes -----------------------------------------------*/
@@ -547,24 +546,19 @@ void MainWindow::paintEvent(QPaintEvent *e)
     QMainWindow::paintEvent(e);
 
 
-    /* prints initial field at startup */
-    if (iconsoleHasBeenUsed == 0)
+    /* if the event is called while we have less than MAX_MEASUREMENT_POINTS_PER_SITE */
+    if( iNumberOfMeasurements <= MAX_MEASUREMENT_POINTS_PER_SITE)
     {
-        painter.drawPixmap(199,60,761,469,QPixmap(":/Map_Left"));
+      painter.drawPixmap(199,60,761,469,QPixmap(":/Map_Left"));
+    }
+    else
+    {
+      painter.drawPixmap(199,60,761,469,QPixmap(":/Map_Right"));
     }
 
     /* if a custom event has been called */
     if(bpaintflag)
     {
-        /* if the event is called while we have less than MAX_MEASUREMENT_POINTS_PER_SITE */
-        if( iNumberOfMeasurements <= MAX_MEASUREMENT_POINTS_PER_SITE)
-        {
-          painter.drawPixmap(199,60,761,469,QPixmap(":/Map_Left"));
-        }
-        else
-        {
-          painter.drawPixmap(199,60,761,469,QPixmap(":/Map_Right"));
-        }
 
         /* Update graphics data on GUI */
        QPainter painter(this);
