@@ -30,7 +30,11 @@
 #include <QTextStream>
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
+#define FILE_NAME_START_POSITION_LEFT       "Measurement_StartPositionLeft.txt"
+#define FILE_NAME_START_POSITION_RIGHT      "Measurement_StartPositionRight.txt"
 /* Private variables ---------------------------------------------------------*/
+
+
 
 /*******************************************************************************
  *  Constructor : TextFileClass()
@@ -44,9 +48,16 @@
  ******************************************************************************/
 TextFileClass::TextFileClass()
 {
+    /* remove existing File for Measurement Left Position */
+    if (QFile::exists(FILE_NAME_START_POSITION_LEFT))
+    {
+      QFile::remove(FILE_NAME_START_POSITION_LEFT);
+    }
 
-    QString FileNameLeft = "Measurement_StartPositionLeft.txt";
+    /* creating new File for Measurement Left Position */
+    QString FileNameLeft = FILE_NAME_START_POSITION_LEFT;
     FileLeft = new QFile( FileNameLeft );
+
     if ( FileLeft->open(QIODevice::ReadWrite) == true )
     {
         QTextStream stream( FileLeft );
@@ -58,7 +69,16 @@ TextFileClass::TextFileClass()
         std::cout << "Could not open file 'left'." << std::endl;
     }
 
-    QString FileNameRight = "Measurement_StartPositionRight.txt";
+
+    /* remove existing File for Measurement Right Position */
+    if (QFile::exists(FILE_NAME_START_POSITION_RIGHT))
+    {
+      QFile::remove(FILE_NAME_START_POSITION_RIGHT);
+    }
+
+
+    /* creating new File for Measurement Right Position */
+    QString FileNameRight = FILE_NAME_START_POSITION_RIGHT;
     FileRight = new QFile( FileNameRight );
     if( FileRight->open(QIODevice::ReadWrite) == true)
     {
