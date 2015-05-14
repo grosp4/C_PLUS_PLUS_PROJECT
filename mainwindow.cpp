@@ -31,6 +31,7 @@
 #include <QScrollBar>
 #include <QScrollArea>
 #include <QEvent>
+#include <QTime>
 #include <time.h>
 
 /* Private typedef -----------------------------------------------------------*/
@@ -100,10 +101,10 @@ MainWindow::MainWindow( QWidget *parent) :
     connect(ui->sendButton,SIGNAL(clicked()),this,SLOT(WriteInScrollAreaSlot()));
     connect(ui->generateOutputfile,SIGNAL(clicked()),this,SLOT(generateOutputFile()));
 
-    // Communication for serial message stream to GUI:
+    /* Communication for serial message stream to GUI:*/
     connect( MyUltrasonicThread, SIGNAL(printSerialMsg(QString)),
              this, SLOT(printSerialMsg(QString)));
-    // Communication for printing current real values to GUI:
+    /* Communication for printing current real values to GUI:*/
     connect( MyUltrasonicThread, SIGNAL(printRealValueTop(int,int)),
              this, SLOT(printRealValueTop(int,int)));
     connect( MyUltrasonicThread, SIGNAL(printRealValueBottom(int,int)),
@@ -561,15 +562,21 @@ void MainWindow::paintEvent(QPaintEvent *e)
     painter.drawPixmap(310, 620 ,30,30,QPixmap(":/it_is.png"));
     painter.drawPixmap(310,575,30,30,QPixmap(":/it_should_be.jpg"));
 
-    /* if the event is called while we have less than MAX_MEASUREMENT_POINTS_PER_SITE */
-    if( iNumberOfMeasurements <= (MAX_MEASUREMENT_POINTS_PER_SITE-1))
-    {
-      painter.drawPixmap(199,60,761,469,QPixmap(":/Map_Left"));
-    }
-    else
-    {
-      painter.drawPixmap(199,60,761,469,QPixmap(":/Map_Right"));
-    }
+
+
+        /* if the event is called while we have less than MAX_MEASUREMENT_POINTS_PER_SITE */
+        if( iNumberOfMeasurements <= (MAX_MEASUREMENT_POINTS_PER_SITE-1))
+        {
+         painter.drawPixmap(199,60,761,469,QPixmap(":/Map_Left"));
+        }
+        else
+        {
+         painter.drawPixmap(199,60,761,469,QPixmap(":/Map_Right"));
+        }
+        /* reset flag for painting*/
+        bpaintflag = false;
+
+
 
     /* Update graphics data on GUI */
     ui->NumberLabel->setNum((iNumberOfMeasurements+1));

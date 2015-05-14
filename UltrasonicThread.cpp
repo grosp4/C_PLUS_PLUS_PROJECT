@@ -107,15 +107,6 @@ void UltrasonicThread::run()
         /* Get USART-String */
         MySerialPort->getHexamiteData(&sSerialData1, &sSerialData2, &sSerialData3);
 
-        /* not working... */
-        //MySerialPort->getAllLastUnfilteredHexamiteData(strUnfilteredData);
-        //std::cout << "\nUnfilt.: " << *strUnfilteredData;
-        //strUnfilteredData->clear();
-
-        /* Put data on screen */
-        //        std::cout << sSerialData1 << std::endl;
-        //        std::cout << sSerialData2 << std::endl;
-           //        std::cout << sSerialData3 << std::endl;
         /* check if next printing is needed */
         if( Stopwatch.elapsed() >= 1000 ) // if 1000ms elapsed since last start of stopwatch.
         {
