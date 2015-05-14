@@ -45,7 +45,7 @@
 TextFileClass::TextFileClass()
 {
 
-    QString FileNameLeft = "Messung_Tisch_links.txt";
+    QString FileNameLeft = "Measurement_StartPositionLeft.txt";
     FileLeft = new QFile( FileNameLeft );
     if ( FileLeft->open(QIODevice::ReadWrite) == true )
     {
@@ -58,7 +58,7 @@ TextFileClass::TextFileClass()
         std::cout << "Could not open file 'left'." << std::endl;
     }
 
-    QString FileNameRight = "Messung_Tisch_rechts.txt";
+    QString FileNameRight = "Measurement_StartPositionRight.txt";
     FileRight = new QFile( FileNameRight );
     if( FileRight->open(QIODevice::ReadWrite) == true)
     {
