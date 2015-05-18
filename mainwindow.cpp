@@ -50,7 +50,6 @@ QString Fun[9] = {
 };
 int iNumberOfMeasurements = 0;
 int iMaxNumberOfMeasurements = 0;
-QString  MeasurementValues [21][4] = {"11"} ;
 
 /* Private function prototypes -----------------------------------------------*/
 /* Private functions ---------------------------------------------------------*/
@@ -511,7 +510,6 @@ void MainWindow::printRealValueTop(int XTop, int YTop)
     ui->realYTopValue->clear();
     ui->realYTopValue->setNum(YTop);
 
-    QApplication::postEvent(this,new QEvent(QEvent::Type(MyEvent)));
 }
 
 /*******************************************************************************
@@ -537,8 +535,6 @@ void MainWindow::printRealValueBottom(int XBottom, int YBottom)
     ui->realXBottomValue->setNum(XBottom);
     ui->realYBottomValue->clear();
     ui->realYBottomValue->setNum(YBottom);
-
-    QApplication::postEvent(this,new QEvent(QEvent::Type(MyEvent)));
 
 }
 
@@ -592,22 +588,3 @@ void MainWindow::paintEvent(QPaintEvent *e)
     QMainWindow::paintEvent(e);
 }
 
-/*******************************************************************************
- *  Method :customEvent()
- ******************************************************************************/
-/** \brief         Overridden Slot that is called when a Custom Event is caught
- *
- *  \author        grosp4
- *
- *  \param         e QEvent from GUI
- *
- *  \return        None
- *
- ******************************************************************************/
-void MainWindow::customEvent(QEvent* e)
-  {
-      if(e->type() == (QEvent::Type)1001)
-      {
-        update();
-      }
-  }

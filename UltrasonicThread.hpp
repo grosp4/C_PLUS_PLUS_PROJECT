@@ -56,7 +56,6 @@ public:
     MsgQueueClass *MyQueueRealValuesTop;
     MsgQueueClass *MyQueueRealValuesBottom;
     HexamiteRS232Port *MySerialPort;
-    UltrasonicThread *MyUltrasonicThread;
 
 };
 

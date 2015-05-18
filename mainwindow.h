@@ -58,8 +58,6 @@ public:
 
 public:
    void paintEvent(QPaintEvent *e);
-   void customEvent(QEvent* e);
-   static const int MyEvent=1001;
 
 
 public slots:

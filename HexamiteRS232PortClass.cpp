@@ -156,7 +156,7 @@ void HexamiteRS232Port::getHexamiteData(std::string* strDataRx1, std::string* st
 		strAllLastUnfilteredData += (char *)cDataRxTemp;
 
 		/* Clear buffer, when too big */
-		if(strAllLastUnfilteredData.length() > 100000)
+        if(strAllLastUnfilteredData.length() > 500)
 		{
 			strAllLastUnfilteredData.clear();
 		}
@@ -404,3 +404,4 @@ void HexamiteRS232Port::getAllLastUnfilteredHexamiteData(std::string* strUnfilte
 	/* Clear buffer */
 	strAllLastUnfilteredData.clear();
 }
+
