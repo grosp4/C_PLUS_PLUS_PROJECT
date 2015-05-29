@@ -26,21 +26,21 @@
 #include <string>
 
 /* Class Constant Declaration--------------------------------------------------*/
-/* Define Coordinate System for Left Team */
-#define X_RECEIVER_TOP_LEFT			( -62 )		/*!< X-Position Receiver Top Left */
-#define Y_RECEIVER_TOP_LEFT			( -62 )		/*!< Y-Position Receiver Top Left */
-#define X_RECEIVER_MIDDLE_RIGHT		( 3062 ) 	/*!< X-Position Receiver Middle Right */
-#define Y_RECEIVER_MIDDLE_RIGHT		( 1000 )	/*!< Y-Position Receiver Middle Right */
-#define X_RECEIVER_BOTTOM_LEFT		( -62 )		/*!< X-Position Receiver Bottom Left */
-#define Y_RECEIVER_BOTTOM_LEFT		( 2062 )	/*!< Y-Position Receiver Bottom Left */
+/* Define Coordinate System for RightTeam */
+#define X_RECEIVER_TOP_LEFT			( -62 + 20)		/*!< X-Position Receiver Top Left (position beacon and position of receiver)*/
+#define Y_RECEIVER_TOP_LEFT			( -62 + 20)		/*!< Y-Position Receiver Top Left (position beacon and position of receiver)*/
+#define X_RECEIVER_MIDDLE_RIGHT		( 3062 - 40) 	/*!< X-Position Receiver Middle Right (position beacon and position of receiver)*/
+#define Y_RECEIVER_MIDDLE_RIGHT		( 1000 )        /*!< Y-Position Receiver Middle Right (position beacon and position of receiver)*/
+#define X_RECEIVER_BOTTOM_LEFT		( -62  + 20)    /*!< X-Position Receiver Bottom Left (position beacon and position of receiver)*/
+#define Y_RECEIVER_BOTTOM_LEFT		( 2062 - 20)	/*!< Y-Position Receiver Bottom Left (position beacon and position of receiver)*/
 
-/* Define Coordinate System for Right Team */
-#define X_RECEIVER_TOP_RIGHT		( 3062 )	/*!< X-Position Receiver Top Right */
-#define Y_RECEIVER_TOP_RIGHT		( -62 )		/*!< Y-Position Receiver Top Right */
-#define X_RECEIVER_MIDDLE_LEFT		( -62 )		/*!< X-Position Receiver Middle Left */
-#define Y_RECEIVER_MIDDLE_LEFT		( 1000 )	/*!< Y-Position Receiver Middle Left */
-#define X_RECEIVER_BOTTOM_RIGHT		( 3062 )	/*!< X-Position Receiver Bottom Right */
-#define Y_RECEIVER_BOTTOM_RIGHT		( 2062 )	/*!< Y-Position Receiver Bottom Right */
+/* Define Coordinate System for Left Team */
+#define X_RECEIVER_TOP_RIGHT		( 3062 - 20)    /*!< X-Position Receiver Top Right (position beacon and position of receiver)*/
+#define Y_RECEIVER_TOP_RIGHT		( -62 + 20)     /*!< Y-Position Receiver Top Right (position beacon and position of receiver)*/
+#define X_RECEIVER_MIDDLE_LEFT		( -62 + 40)     /*!< X-Position Receiver Middle Left (position beacon and position of receiver)*/
+#define Y_RECEIVER_MIDDLE_LEFT		( 1000 )        /*!< Y-Position Receiver Middle Left (position beacon and position of receiver)*/
+#define X_RECEIVER_BOTTOM_RIGHT		( 3062 - 20)	/*!< X-Position Receiver Bottom Right (position beacon and position of receiver)*/
+#define Y_RECEIVER_BOTTOM_RIGHT		( 2062 - 20)	/*!< Y-Position Receiver Bottom Right (position beacon and position of receiver)*/
 
 /* ID's of the Receivers */
 #define ULTRASONIC_ID_RECEIVER1		"R41"		/*!< ID's Receiver 1, Team Right: Middle Right / Team Left: Middle Left*/
