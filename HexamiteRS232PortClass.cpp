@@ -152,8 +152,12 @@ void HexamiteRS232Port::getHexamiteData(std::string* strDataRx1, std::string* st
 		/* Receive message */
 		iNReceivedBytes = RS232_PollComport(iPortNumber, cDataRxTemp, sizeof(cDataRxTemp));
 
-		/* Store all data */
-		strAllLastUnfilteredData += (char *)cDataRxTemp;
+        /* Check if there are new Data */
+        if (iNReceivedBytes > 0)
+        {
+         strAllLastUnfilteredData += (char *)cDataRxTemp;
+        }
+
 
 		/* Clear buffer, when too big */
         if(strAllLastUnfilteredData.length() > 500)
@@ -399,7 +403,7 @@ void HexamiteRS232Port::turnHexamiteUsbSynchronizerOff(void)
 void HexamiteRS232Port::getAllLastUnfilteredHexamiteData(std::string* strUnfilteredData)
 {
 	/* Take all unfiltered data */
-	*strUnfilteredData = strAllLastUnfilteredData;
+    *strUnfilteredData = strAllLastUnfilteredData;
 
 	/* Clear buffer */
 	strAllLastUnfilteredData.clear();

@@ -81,6 +81,7 @@ UltrasonicThread::~UltrasonicThread()
 void UltrasonicThread::run()
 {
     /* Define Local Variable */
+    std::string sSerialAllUnfilteredHexamiteData;
     std::string sSerialData1;
     std::string sSerialData2;
     std::string sSerialData3;
@@ -110,11 +111,13 @@ void UltrasonicThread::run()
         /* check if next printing is needed */
         if( Stopwatch.elapsed() >= 1000 ) // if 1000ms elapsed since last start of stopwatch.
         {
+
+            MySerialPort->getAllLastUnfilteredHexamiteData(&sSerialAllUnfilteredHexamiteData);
             // print Msg:
-            emit printSerialMsg( QString("") );
-            emit printSerialMsg( QString(sSerialData1.c_str()) );
-            emit printSerialMsg( QString(sSerialData2.c_str()) );
-            emit printSerialMsg( QString(sSerialData3.c_str()) );
+            emit printSerialMsg( QString(sSerialAllUnfilteredHexamiteData.c_str()) );
+            //emit printSerialMsg( QString(sSerialData1.c_str()) );
+            //emit printSerialMsg( QString(sSerialData2.c_str()) );
+            //emit printSerialMsg( QString(sSerialData3.c_str()) );
             // restart Stopwatch:
             Stopwatch.restart();
         }

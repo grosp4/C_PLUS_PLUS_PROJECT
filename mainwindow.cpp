@@ -446,8 +446,7 @@ void MainWindow::printSerialMsg(QString myString)
     /* check if received String is not Empty */
     if( myString.isEmpty()!= 1)
     {
-     tempString = ui->ConsoleLabelToWriteTo->text();
-     ui->ConsoleLabelToWriteTo->setText(tempString + "\n" + myString   );
+     ui->ConsoleLabelToWriteTo->setText(myString);
      sb->setValue(sb->maximum());
     }
 }
