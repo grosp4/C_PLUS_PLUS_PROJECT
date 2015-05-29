@@ -501,14 +501,16 @@ void MainWindow::WriteInScrollAreaSlot()
  ******************************************************************************/
 void MainWindow::printRealValueTop(int XTop, int YTop)
 {
+    /* Update value*/
     iGraphicsXTopValue =XTop;
     iGraphicsYTopValue =YTop;
-
-
     ui->realXTopValue->clear();
     ui->realXTopValue->setNum(XTop);
     ui->realYTopValue->clear();
     ui->realYTopValue->setNum(YTop);
+
+    /* repaint the picture */
+    repaint();
 
 }
 
@@ -528,7 +530,7 @@ void MainWindow::printRealValueTop(int XTop, int YTop)
  ******************************************************************************/
 void MainWindow::printRealValueBottom(int XBottom, int YBottom)
 {
-
+    /* Update value*/
     iGraphicsXBottomValue = XBottom;
     iGraphicsYBottomValue = YBottom;
     ui->realXBottomValue->clear();
@@ -536,6 +538,8 @@ void MainWindow::printRealValueBottom(int XBottom, int YBottom)
     ui->realYBottomValue->clear();
     ui->realYBottomValue->setNum(YBottom);
 
+    /* repaint the picture */
+    repaint();
 }
 
 /*******************************************************************************

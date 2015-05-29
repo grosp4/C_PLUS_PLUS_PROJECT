@@ -93,7 +93,7 @@ void UltrasonicThread::run()
     UltrasonicTagClass::setTeamStartPosition(TeamLeft);
 
     /* Initialize USART-Interface with COM-Port 14 */
-    MySerialPort = new HexamiteRS232Port(6);
+    MySerialPort = new HexamiteRS232Port(10);
 
     /*  Turn on Hexamite synchronizer  */
     MySerialPort->turnHexamiteUsbSynchronizerOn();
