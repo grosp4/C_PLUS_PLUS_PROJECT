@@ -115,9 +115,7 @@ void UltrasonicThread::run()
             MySerialPort->getAllLastUnfilteredHexamiteData(&sSerialAllUnfilteredHexamiteData);
             // print Msg:
             emit printSerialMsg( QString(sSerialAllUnfilteredHexamiteData.c_str()) );
-            //emit printSerialMsg( QString(sSerialData1.c_str()) );
-            //emit printSerialMsg( QString(sSerialData2.c_str()) );
-            //emit printSerialMsg( QString(sSerialData3.c_str()) );
+
             // restart Stopwatch:
             Stopwatch.restart();
         }
