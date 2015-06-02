@@ -730,7 +730,7 @@
      <rect>
       <x>520</x>
       <y>560</y>
-      <width>206</width>
+      <width>302</width>
       <height>71</height>
      </rect>
     </property>
@@ -738,14 +738,14 @@
      <item>
       <widget class="QLabel" name="Transmitter_2">
        <property name="text">
-        <string>Top-Transmitter:       Enemy Small, ID: T21</string>
+        <string>Top-Transmitter: Enemy Big , ID: T20</string>
        </property>
       </widget>
      </item>
      <item>
       <widget class="QLabel" name="Transmitter_1">
        <property name="text">
-        <string>Bottom-Transmitter:  Enemy Big , ID: T20</string>
+        <string>Bottom-Transmitter: Enemy Small, ID: T21</string>
        </property>
       </widget>
      </item>
