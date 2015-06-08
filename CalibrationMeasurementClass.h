@@ -27,14 +27,14 @@
 #include <QObject>
 
 /* Class Constant Declaration--------------------------------------------------*/
-#define MEASUREMENT                               /* define wiche MeasurePoint is used */
+#define MEASUREMENT_RASTER                               /* define wiche MeasurePoint is used */
 
-#ifdef  MEASUREMENT
-#define MAX_MEASUREMENT_POINTS_PER_SITE     ( 6 )
-#endif
-
-#ifdef  CALIBRATION
-#define MAX_MEASUREMENT_POINTS_PER_SITE     ( 9 )
+#ifdef  MEASUREMENT_POINTS
+    #define MAX_MEASUREMENT_POINTS_PER_SITE     ( 6 )
+#elif defined (MEASUREMENT_RASTER)
+    #define MAX_MEASUREMENT_POINTS_PER_SITE     ( 77 )
+#elif defined (CALIBRATION)
+    #define MAX_MEASUREMENT_POINTS_PER_SITE     ( 9 )
 #endif
 
 #define MAX_MEASUREMENT_POINTS              ( MAX_MEASUREMENT_POINTS_PER_SITE*2 )
