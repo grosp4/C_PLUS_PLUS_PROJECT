@@ -84,10 +84,9 @@ private:
 
     /* private variables */
     bool bpaintflag = 0 ;
-    int iGraphicsXBottomValue = 0;
-    int iGraphicsXTopValue = 0;
-    int iGraphicsYTopValue = 0;
-    int iGraphicsYBottomValue = 0;
+    int iGraphicsRealXValue = 0;
+    int iGraphicsRealYValue = 0;
+
 };
 
 enum {FALSE = 0, TRUE = 1 };

@@ -130,12 +130,12 @@
      <rect>
       <x>970</x>
       <y>320</y>
-      <width>71</width>
+      <width>91</width>
       <height>21</height>
      </rect>
     </property>
     <property name="text">
-     <string>real values</string>
+     <string>Measured Values</string>
     </property>
    </widget>
    <widget class="QWidget" name="layoutWidget">
@@ -281,14 +281,14 @@
      <item>
       <widget class="QLabel" name="lblRealXLabel">
        <property name="text">
-        <string>real  X-Value</string>
+        <string>measured  X-Value</string>
        </property>
       </widget>
      </item>
      <item>
       <widget class="QLabel" name="lblRealYLabel">
        <property name="text">
-        <string>real  Y-Value</string>
+        <string>measuredl  Y-Value</string>
        </property>
       </widget>
      </item>

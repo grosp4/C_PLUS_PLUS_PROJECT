@@ -99,11 +99,10 @@ MainWindow::MainWindow( QWidget *parent) :
     connect(ui->btnGenerateOutputFile,SIGNAL(clicked()),this,SLOT(generateOutputFile()));
 
     /* Communication for serial message stream to GUI:*/
-    connect( MyUltrasonicThread, SIGNAL(printSerialMsg(QString)),
-             this, SLOT(printSerialMsg(QString)));
+    connect( MyUltrasonicThread, SIGNAL(printSerialMsg(QString)), this, SLOT(printSerialMsg(QString)));
+
     /* Communication for printing current real values to GUI:*/
-    connect( MyUltrasonicThread, SIGNAL(printRealValues(int,int)),
-             this, SLOT(printRealValues(int,int)));
+    connect( MyUltrasonicThread, SIGNAL(printRealValues(int,int)), this, SLOT(printRealValues(int,int)));
 }
 
 /*******************************************************************************
@@ -481,8 +480,8 @@ void MainWindow::WriteInScrollAreaSlot()
 void MainWindow::printRealValues(int XRealValue, int YRealValue)
 {
     /* Update value*/
-    iGraphicsXTopValue =XRealValue;
-    iGraphicsYTopValue =YRealValue;
+    iGraphicsRealXValue =XRealValue;
+    iGraphicsRealYValue =YRealValue;
     ui->lblRealXValue->clear();
     ui->lblRealXValue->setNum(XRealValue);
     ui->lblRealYValue->clear();
@@ -536,9 +535,7 @@ void MainWindow::paintEvent(QPaintEvent *e)
 
     /* print desired coordinates */
     painter.drawPixmap(OFFSET_X_VALUE_PICTURE_LABEL + OFFSET_GRAPHICS_X + (MyCalibrationMeasurement->MeasurementPoints[iNumberOfMeasurements]->XDesired / RATIO_PICTURE_TO_COORDINATES_X),  OFFSET_Y_VALUE_PICTURE_LABEL + OFFSET_GRAPHICS_Y + (MyCalibrationMeasurement->MeasurementPoints[iNumberOfMeasurements]->YDesired / RATIO_PICTURE_TO_COORDINATES_Y), 30, 30, QPixmap(":/it_should_be.jpg"));
-    painter.drawPixmap(OFFSET_X_VALUE_PICTURE_LABEL + OFFSET_GRAPHICS_X + (MyCalibrationMeasurement->MeasurementPoints[iNumberOfMeasurements]->XDesired / RATIO_PICTURE_TO_COORDINATES_X),  OFFSET_Y_VALUE_PICTURE_LABEL + OFFSET_GRAPHICS_Y + (MyCalibrationMeasurement->MeasurementPoints[iNumberOfMeasurements]->YDesired / RATIO_PICTURE_TO_COORDINATES_Y), 30, 30, QPixmap(":/it_should_be.jpg"));
-    painter.drawPixmap( OFFSET_X_VALUE_PICTURE_LABEL + OFFSET_GRAPHICS_X + (iGraphicsXBottomValue / RATIO_PICTURE_TO_COORDINATES_X), OFFSET_Y_VALUE_PICTURE_LABEL + OFFSET_GRAPHICS_Y + (iGraphicsYBottomValue / RATIO_PICTURE_TO_COORDINATES_Y) ,30, 30, QPixmap(":/it_is.png"));
-    painter.drawPixmap( OFFSET_X_VALUE_PICTURE_LABEL + OFFSET_GRAPHICS_X + (iGraphicsXTopValue / RATIO_PICTURE_TO_COORDINATES_X) , OFFSET_Y_VALUE_PICTURE_LABEL + OFFSET_GRAPHICS_Y + (iGraphicsYTopValue / RATIO_PICTURE_TO_COORDINATES_Y), 30, 30, QPixmap(":/it_is.png"));
+    painter.drawPixmap( OFFSET_X_VALUE_PICTURE_LABEL + OFFSET_GRAPHICS_X + (iGraphicsRealXValue / RATIO_PICTURE_TO_COORDINATES_X) , OFFSET_Y_VALUE_PICTURE_LABEL + OFFSET_GRAPHICS_Y + (iGraphicsRealYValue / RATIO_PICTURE_TO_COORDINATES_Y), 30, 30, QPixmap(":/it_is.png"));
 
     QMainWindow::paintEvent(e);
 }
