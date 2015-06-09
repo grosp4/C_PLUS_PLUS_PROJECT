@@ -69,8 +69,7 @@ public slots:
     void getCommandlineValue();
     void WriteInScrollAreaSlot();
     void printSerialMsg(QString myString);
-    void printRealValueTop(int XTop, int YTop);
-    void printRealValueBottom(int XBottom, int YBottom);
+    void printRealValues(int XRealValue, int YRealValue);
 
 private:
     Ui::MainWindow *ui;

@@ -42,9 +42,8 @@
  *  \return       None
  *
  ******************************************************************************/
-UltrasonicThread::UltrasonicThread( MsgQueueClass *QueueRealValuesTop, MsgQueueClass *QueueRealValuesBottom ):
-    MyQueueRealValuesTop( QueueRealValuesTop ),
-    MyQueueRealValuesBottom( QueueRealValuesBottom )
+UltrasonicThread::UltrasonicThread( MsgQueueClass *QueueRealValues):
+    MyQueueRealValues( QueueRealValues )
 {
 
 }
@@ -88,8 +87,6 @@ void UltrasonicThread::run()
 
     /* Create Object from UltrasonicTag Class*/
     UltrasonicTagClass TagRobotBigEnemy("P20");			/*!<  ID Tag Number T20 */
-    UltrasonicTagClass TagRobotSmallEnemy("P21");		/*!<  ID Tag Number T21 */
-
     /* Set Team start Position for the UltrasonicTag Class */
     UltrasonicTagClass::setTeamStartPosition(TeamLeft);
 
@@ -124,14 +121,8 @@ void UltrasonicThread::run()
         if(TagRobotBigEnemy.checkSerialMessage(sSerialData1, sSerialData2, sSerialData3))
         {
              TagRobotBigEnemy.calculatePosition();
-             emit printRealValueTop(TagRobotBigEnemy.getX_Position(), TagRobotBigEnemy.getY_Position());
-             this->MyQueueRealValuesTop->send(TagRobotBigEnemy.getX_Position(), TagRobotBigEnemy.getY_Position() );
-        }
-        else if(TagRobotSmallEnemy.checkSerialMessage(sSerialData1, sSerialData2, sSerialData3))
-        {
-             TagRobotSmallEnemy.calculatePosition();
-             emit printRealValueBottom(TagRobotSmallEnemy.getX_Position(), TagRobotSmallEnemy.getY_Position());
-             this->MyQueueRealValuesBottom->send( TagRobotSmallEnemy.getX_Position(), TagRobotSmallEnemy.getY_Position() );
+             emit printRealValues(TagRobotBigEnemy.getX_Position(), TagRobotBigEnemy.getY_Position());
+             this->MyQueueRealValues->send(TagRobotBigEnemy.getX_Position(), TagRobotBigEnemy.getY_Position() );
         }
 
     }

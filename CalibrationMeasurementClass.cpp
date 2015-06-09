@@ -231,10 +231,6 @@ CalibrationMeasurementClass::CalibrationMeasurementClass()
      MeasurementPoints[152] = new MeasurementPointClass(2500,1750, TeamRight);
      MeasurementPoints[153] = new MeasurementPointClass(2750,1750, TeamRight);
 
-
-
-
-
  /* MeasurePoints for a Calibration */
 #elif defined   (CALIBRATION)
      /* TeamLeft */

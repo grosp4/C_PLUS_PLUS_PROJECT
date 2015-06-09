@@ -61,7 +61,7 @@ TextFileClass::TextFileClass()
     if ( FileLeft->open(QIODevice::ReadWrite) == true )
     {
         QTextStream stream( FileLeft );
-        stream << "x_soll   y_soll   x_ist_R1   y_ist_R1   x_ist_R2   y_ist_R2\r\n";
+        stream << "x_soll   y_soll   x_ist   y_ist \r\n";
         FileLeft->close();
     }
     else
@@ -83,7 +83,7 @@ TextFileClass::TextFileClass()
     if( FileRight->open(QIODevice::ReadWrite) == true)
     {
         QTextStream stream( FileRight );
-        stream << "x_soll   y_soll   x_ist_R1   y_ist_R1   x_ist_R2   y_ist_R2\r\n";
+        stream << "x_soll   y_soll   x_ist   y_ist\r\n";
         FileRight->close();
     }
     else
@@ -114,10 +114,8 @@ void TextFileClass::write( MeasurementPointClass *NextPoint )
             QTextStream stream( FileLeft );
             stream << NextPoint->XDesired <<";"
                    << NextPoint->YDesired << ";"
-                   << NextPoint->XRealTop << ";"
-                   << NextPoint->YRealTop << ";"
-                   << NextPoint->XRealBottom << ";"
-                   << NextPoint->YRealBottom << ";"
+                   << NextPoint->XReal << ";"
+                   << NextPoint->YReal << ";"
                    << "\r\n";
             FileLeft->close();
         }
@@ -130,10 +128,8 @@ void TextFileClass::write( MeasurementPointClass *NextPoint )
             QTextStream stream( FileRight );
             stream << NextPoint->XDesired <<";"
                    << NextPoint->YDesired << ";"
-                   << NextPoint->XRealTop << ";"
-                   << NextPoint->YRealTop << ";"
-                   << NextPoint->XRealBottom << ";"
-                   << NextPoint->YRealBottom << ";"
+                   << NextPoint->XReal << ";"
+                   << NextPoint->YReal << ";"
                    << "\r\n";
             FileRight->close();
         }

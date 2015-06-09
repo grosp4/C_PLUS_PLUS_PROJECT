@@ -77,9 +77,7 @@ MainWindow::MainWindow( QWidget *parent) :
 
     // create msgQueues for RealValuesTop and ..Bottom:
     MyMsgQueueRealValuesTop = new MsgQueueClass;
-    MyMsgQueueRealValuesBottom = new MsgQueueClass;
-    MyUltrasonicThread =
-            new UltrasonicThread( this->MyMsgQueueRealValuesTop, this->MyMsgQueueRealValuesBottom);
+    MyUltrasonicThread = new UltrasonicThread( this->MyMsgQueueRealValuesTop);
     MyUltrasonicThread->start();
 
     MyCalibrationMeasurement = new CalibrationMeasurementClass;
@@ -92,23 +90,20 @@ MainWindow::MainWindow( QWidget *parent) :
     ui->scrollAreaWidgetContents->adjustSize();
 
     /* connect a signal to a slot  */
-    connect(ui->getvaluesbutton,SIGNAL(clicked()),this,SLOT(getValueButtonClicked()));
-    connect(ui->backButton,SIGNAL(clicked()),this,SLOT(getBackButtonClicked()));
-    connect(ui->nextButon,SIGNAL(clicked()),this,SLOT(getNextButtonClicked()));
+    connect(ui->btnGetValues,SIGNAL(clicked()),this,SLOT(getValueButtonClicked()));
+    connect(ui->btnBack,SIGNAL(clicked()),this,SLOT(getBackButtonClicked()));
+    connect(ui->btnNext,SIGNAL(clicked()),this,SLOT(getNextButtonClicked()));
     connect(ui->portButton,SIGNAL(clicked()),this,SLOT(getPortValue()));
-    connect(ui->sendButton,SIGNAL(clicked()),this,SLOT(getCommandlineValue()));
-    connect(ui->sendButton,SIGNAL(clicked()),this,SLOT(WriteInScrollAreaSlot()));
-    connect(ui->generateOutputfile,SIGNAL(clicked()),this,SLOT(generateOutputFile()));
+    connect(ui->btnSendCommand,SIGNAL(clicked()),this,SLOT(getCommandlineValue()));
+    connect(ui->btnSendCommand,SIGNAL(clicked()),this,SLOT(WriteInScrollAreaSlot()));
+    connect(ui->btnGenerateOutputFile,SIGNAL(clicked()),this,SLOT(generateOutputFile()));
 
     /* Communication for serial message stream to GUI:*/
     connect( MyUltrasonicThread, SIGNAL(printSerialMsg(QString)),
              this, SLOT(printSerialMsg(QString)));
     /* Communication for printing current real values to GUI:*/
-    connect( MyUltrasonicThread, SIGNAL(printRealValueTop(int,int)),
-             this, SLOT(printRealValueTop(int,int)));
-    connect( MyUltrasonicThread, SIGNAL(printRealValueBottom(int,int)),
-             this, SLOT(printRealValueBottom(int,int)));
-
+    connect( MyUltrasonicThread, SIGNAL(printRealValues(int,int)),
+             this, SLOT(printRealValues(int,int)));
 }
 
 /*******************************************************************************
@@ -143,32 +138,24 @@ void MainWindow::getValueButtonClicked()
 {
 
   /* get UPS Position data */
-  int iXTop = 0, iYTop = 0, iXBottom = 0, iYBottom = 0;
+  int iXReal = 0, iYReal = 0;
 
-  MyMsgQueueRealValuesTop->receive(&iXTop, &iYTop);
-  MyMsgQueueRealValuesBottom->receive(&iXBottom, &iYBottom);
+  MyMsgQueueRealValuesTop->receive(&iXReal, &iYReal);
 
   /* save UPS Position data into array */
-  MyCalibrationMeasurement->MeasurementPoints[iNumberOfMeasurements]->XRealTop = iXTop;
-  MyCalibrationMeasurement->MeasurementPoints[iNumberOfMeasurements]->YRealTop = iYTop;
-  MyCalibrationMeasurement->MeasurementPoints[iNumberOfMeasurements]->XRealBottom = iXBottom;
-  MyCalibrationMeasurement->MeasurementPoints[iNumberOfMeasurements]->YRealBottom = iYBottom;
+  MyCalibrationMeasurement->MeasurementPoints[iNumberOfMeasurements]->XReal = iXReal;
+  MyCalibrationMeasurement->MeasurementPoints[iNumberOfMeasurements]->YReal = iYReal;
 
   /* print UPS Position data to second row of GUI */
-  ui->realXTopValue_2->clear();
-  ui->realXTopValue_2->setNum(iXTop);
+  ui->lblRealXValue->clear();
+  ui->lblRealXValue->setNum(iXReal);
 
-  ui->realYTopValue_2->clear();
-  ui->realYTopValue_2->setNum(iYTop);
+  ui->lblRealYValue->clear();
+  ui->lblRealYValue->setNum(iYReal);
 
-  ui->realXBottomValue_2->clear();
-  ui->realXBottomValue_2->setNum(iXBottom);
-
-  ui->realYBottomValue_2->clear();
-  ui->realYBottomValue_2->setNum(iYBottom);
 
   /* print User Info */
-  ui->calibrationStatusLabel->setText("Values have been added to database \ntake next values by pressing NEXT ");
+  ui->lblCalibrationStatus->setText("Values have been added to database \ntake next values by pressing NEXT ");
 
 }
 
@@ -189,24 +176,21 @@ void MainWindow::getBackButtonClicked()
     int iValue = 9999;
     /* decrase number of Measurements */
     iValue = setamountofmeasurements(0);
-    ui->NumberLabel->setNum((iValue + 1));
+    ui->lblMeassureNumber->setNum((iValue + 1));
 
     /* get saved number and write them into the label */
-    ui->realXTopValue_2->clear();
-    ui->realXTopValue_2->setNum(MyCalibrationMeasurement->MeasurementPoints[iNumberOfMeasurements]->XRealTop);
-    ui->realYTopValue_2->clear();
-    ui->realYTopValue_2->setNum(MyCalibrationMeasurement->MeasurementPoints[iNumberOfMeasurements]->YRealTop);
-    ui->realXBottomValue_2->clear();
-    ui->realXBottomValue_2->setNum(MyCalibrationMeasurement->MeasurementPoints[iNumberOfMeasurements]->XRealBottom);
-    ui->realYBottomValue_2->clear();
-    ui->realYBottomValue_2->setNum(MyCalibrationMeasurement->MeasurementPoints[iNumberOfMeasurements]->YRealBottom);
+    ui->lblRealXValue->clear();
+    ui->lblRealXValue->setNum(MyCalibrationMeasurement->MeasurementPoints[iNumberOfMeasurements]->XReal);
+    ui->lblRealYValue->clear();
+    ui->lblRealYValue->setNum(MyCalibrationMeasurement->MeasurementPoints[iNumberOfMeasurements]->YReal);
 
     /* set desired values */
-    ui->desiredXTopValue->setNum(MyCalibrationMeasurement->MeasurementPoints[iNumberOfMeasurements]->XDesired);
-    ui->desiredYTopValue->setNum(MyCalibrationMeasurement->MeasurementPoints[iNumberOfMeasurements]->YDesired);
+    ui->lblDesiredXValue->setNum(MyCalibrationMeasurement->MeasurementPoints[iNumberOfMeasurements]->XDesired);
+    ui->lblDesiredYValue->setNum(MyCalibrationMeasurement->MeasurementPoints[iNumberOfMeasurements]->YDesired);
+
 
     /* update calibrationStatusLabel */
-    ui->calibrationStatusLabel->setText("Ready to calibrate");
+    ui->lblCalibrationStatus->setText("Ready to calibrate");
 
     /* repaint the picture */
     repaint();
@@ -229,24 +213,20 @@ void MainWindow::getNextButtonClicked()
     int iValue = 9999;
     /* increase number of Measurements */
     iValue = setamountofmeasurements(1);
-    ui->NumberLabel->setNum((iValue + 1));
+    ui->lblMeassureNumber->setNum((iValue + 1));
 
     /* get saved number and write them into the label */
-    ui->realXTopValue_2->clear();
-    ui->realXTopValue_2->setNum(MyCalibrationMeasurement->MeasurementPoints[iNumberOfMeasurements]->XRealTop);
-    ui->realYTopValue_2->clear();
-    ui->realYTopValue_2->setNum(MyCalibrationMeasurement->MeasurementPoints[iNumberOfMeasurements]->YRealTop);
-    ui->realXBottomValue_2->clear();
-    ui->realXBottomValue_2->setNum(MyCalibrationMeasurement->MeasurementPoints[iNumberOfMeasurements]->XRealBottom);
-    ui->realYBottomValue_2->clear();
-    ui->realYBottomValue_2->setNum(MyCalibrationMeasurement->MeasurementPoints[iNumberOfMeasurements]->YRealBottom);
+    ui->lblRealXValue->clear();
+    ui->lblRealXValue->setNum(MyCalibrationMeasurement->MeasurementPoints[iNumberOfMeasurements]->XReal);
+    ui->lblRealYValue->clear();
+    ui->lblRealYValue->setNum(MyCalibrationMeasurement->MeasurementPoints[iNumberOfMeasurements]->YReal);
 
     /* set desired values */
-    ui->desiredXTopValue->setNum(MyCalibrationMeasurement->MeasurementPoints[iNumberOfMeasurements]->XDesired);
-    ui->desiredYTopValue->setNum(MyCalibrationMeasurement->MeasurementPoints[iNumberOfMeasurements]->YDesired);
+    ui->lblDesiredXValue->setNum(MyCalibrationMeasurement->MeasurementPoints[iNumberOfMeasurements]->XDesired);
+    ui->lblDesiredYValue->setNum(MyCalibrationMeasurement->MeasurementPoints[iNumberOfMeasurements]->YDesired);
 
     /* update calibrationStatusLabel */
-    ui->calibrationStatusLabel->setText("Ready to calibrate");
+    ui->lblCalibrationStatus->setText("Ready to calibrate");
 
     /* repaint the picture */
     repaint();
@@ -268,7 +248,7 @@ void MainWindow::generateOutputFile()
     MyCalibrationMeasurement->generateOutputFile();
 
     /* print User Info */
-    ui->calibrationStatusLabel->setText("Output File generated");
+    ui->lblStatus->setText("Output File generated");
 }
 
 
@@ -327,7 +307,7 @@ int MainWindow::setamountofmeasurements(int increase)
         {
             iNumberOfMeasurements = iNumberOfMeasurements + 1;
             iMaxNumberOfMeasurements = iMaxNumberOfMeasurements + 1;
-            ui->TeamnameLabel->setText(("TEAM RIGHT"));
+            ui->lblTeamSide->setText(("TEAM RIGHT"));
 
             /* inform UPS Calculation Thread about change of team site */
             UltrasonicTagClass::setTeamStartPosition(TeamRight);
@@ -338,7 +318,7 @@ int MainWindow::setamountofmeasurements(int increase)
         {
             iNumberOfMeasurements = iNumberOfMeasurements + 1;
             iMaxNumberOfMeasurements = iMaxNumberOfMeasurements + 1;
-            ui->TeamnameLabel->setText(("TEAM LEFT"));
+            ui->lblTeamSide->setText(("TEAM LEFT"));
 
             /* inform UPS Calculation Thread about change of team site */
             UltrasonicTagClass::setTeamStartPosition(TeamLeft);
@@ -357,7 +337,7 @@ int MainWindow::setamountofmeasurements(int increase)
         {
             iNumberOfMeasurements = iNumberOfMeasurements - 1;
             iMaxNumberOfMeasurements = iMaxNumberOfMeasurements - 1;
-            ui->TeamnameLabel->setText(("TEAM LEFT"));
+            ui->lblTeamSide->setText(("TEAM LEFT"));
 
             /* inform UPS Calculation Thread about change of team site */
             UltrasonicTagClass::setTeamStartPosition(TeamLeft);
@@ -366,7 +346,7 @@ int MainWindow::setamountofmeasurements(int increase)
         {
             iNumberOfMeasurements = iNumberOfMeasurements - 1;
             iMaxNumberOfMeasurements = iMaxNumberOfMeasurements - 1;
-            ui->TeamnameLabel->setText(("TEAM RIGHT"));
+            ui->lblTeamSide->setText(("TEAM RIGHT"));
 
             /* inform UPS Calculation Thread about change of team site */
             UltrasonicTagClass::setTeamStartPosition(TeamRight);
@@ -398,10 +378,10 @@ void MainWindow::getPortValue()
     std:: string TempString;
     QString myString;
 
-    myString = ui->PortEdit->text();
-    ui->statusLabel->clear();
+    myString = ui->textfieldPortEdit->text();
+    ui->lblStatus->clear();
     this->MyUltrasonicThread->MySerialPort->changeHexamiteRS232Port(myString.toInt(), &TempString);
-    ui->statusLabel->setText( QString::fromStdString(TempString));
+    ui->lblStatus->setText( QString::fromStdString(TempString));
 }
 
 
@@ -418,9 +398,9 @@ void MainWindow::getPortValue()
 void MainWindow::getCommandlineValue()
 {
     QString myString;
-    myString = ui->commandEdit->text();
-    ui->statusLabel->clear();
-    ui->statusLabel->setText("Command" + myString +" has been sent" );
+    myString = ui->textfieldCommandEdit->text();
+    ui->lblStatus->clear();
+    ui->lblStatus->setText("Command" + myString +" has been sent" );
 }
 
 
@@ -446,7 +426,7 @@ void MainWindow::printSerialMsg(QString myString)
     /* check if received String is not Empty */
     if( myString.isEmpty()!= 1)
     {
-     ui->ConsoleLabelToWriteTo->setText(myString);
+     ui->lblConsoleToWriteTo->setText(myString);
      sb->setValue(sb->maximum());
     }
 }
@@ -469,23 +449,23 @@ void MainWindow::WriteInScrollAreaSlot()
 
 
     /* get String from Textfield */
-    myString = ui->commandEdit->text();
+    myString = ui->textfieldCommandEdit->text();
 
 
     /* check if received String is not Empty */
     if( myString.isEmpty()!= 1)
     {
-        tempString = ui->ConsoleLabelToWriteTo->text();
-        ui->ConsoleLabelToWriteTo->setText(tempString + "\n" + myString   );
+        tempString = ui->lblConsoleToWriteTo->text();
+        ui->lblConsoleToWriteTo->setText(tempString + "\n" + myString   );
         this->MyUltrasonicThread->MySerialPort->sendHexamiteData(myString.toLocal8Bit().constData());
-        ui->commandEdit->clear();
+        ui->textfieldCommandEdit->clear();
         sb->setValue(sb->maximum());
     }
 
 }
 
 /*******************************************************************************
- *  Method :printRealValueTop()
+ *  Method :printRealValue()
  ******************************************************************************/
 /** \brief          is called by another thread, sets values on the GUI, creates an event!
  *
@@ -498,47 +478,19 @@ void MainWindow::WriteInScrollAreaSlot()
  *  \return         None
  *
  ******************************************************************************/
-void MainWindow::printRealValueTop(int XTop, int YTop)
+void MainWindow::printRealValues(int XRealValue, int YRealValue)
 {
     /* Update value*/
-    iGraphicsXTopValue =XTop;
-    iGraphicsYTopValue =YTop;
-    ui->realXTopValue->clear();
-    ui->realXTopValue->setNum(XTop);
-    ui->realYTopValue->clear();
-    ui->realYTopValue->setNum(YTop);
+    iGraphicsXTopValue =XRealValue;
+    iGraphicsYTopValue =YRealValue;
+    ui->lblRealXValue->clear();
+    ui->lblRealXValue->setNum(XRealValue);
+    ui->lblRealYValue->clear();
+    ui->lblRealYValue->setNum(YRealValue);
 
     /* repaint the picture */
     repaint();
 
-}
-
-/*******************************************************************************
- *  Method :printRealValueBottom
- ******************************************************************************/
-/** \brief       is called by another thread, sets values on the GUI, creates an event!
- *
- *  \author      grosp4, bartj2
- *
- *  \param       XBottom    X-Coordinate
- *
- *  \param       YBottom    Y-Coordinate
- *
- *  \return      None
- *
- ******************************************************************************/
-void MainWindow::printRealValueBottom(int XBottom, int YBottom)
-{
-    /* Update value*/
-    iGraphicsXBottomValue = XBottom;
-    iGraphicsYBottomValue = YBottom;
-    ui->realXBottomValue->clear();
-    ui->realXBottomValue->setNum(XBottom);
-    ui->realYBottomValue->clear();
-    ui->realYBottomValue->setNum(YBottom);
-
-    /* repaint the picture */
-    repaint();
 }
 
 /*******************************************************************************
@@ -578,9 +530,9 @@ void MainWindow::paintEvent(QPaintEvent *e)
 
 
     /* Update graphics data on GUI */
-    ui->NumberLabel->setNum((iNumberOfMeasurements+1));
-    ui->desiredXTopValue->setNum(MyCalibrationMeasurement->MeasurementPoints[iNumberOfMeasurements]->XDesired);
-    ui->desiredYTopValue->setNum(MyCalibrationMeasurement->MeasurementPoints[iNumberOfMeasurements]->YDesired);
+    ui->lblMeassureNumber->setNum((iNumberOfMeasurements+1));
+    ui->lblDesiredXValue->setNum(MyCalibrationMeasurement->MeasurementPoints[iNumberOfMeasurements]->XDesired);
+    ui->lblDesiredYValue->setNum(MyCalibrationMeasurement->MeasurementPoints[iNumberOfMeasurements]->YDesired);
 
     /* print desired coordinates */
     painter.drawPixmap(OFFSET_X_VALUE_PICTURE_LABEL + OFFSET_GRAPHICS_X + (MyCalibrationMeasurement->MeasurementPoints[iNumberOfMeasurements]->XDesired / RATIO_PICTURE_TO_COORDINATES_X),  OFFSET_Y_VALUE_PICTURE_LABEL + OFFSET_GRAPHICS_Y + (MyCalibrationMeasurement->MeasurementPoints[iNumberOfMeasurements]->YDesired / RATIO_PICTURE_TO_COORDINATES_Y), 30, 30, QPixmap(":/it_should_be.jpg"));

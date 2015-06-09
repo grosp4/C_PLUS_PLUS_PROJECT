@@ -37,11 +37,8 @@ public:
     int XDesired = 0;
     int YDesired = 0;
 
-    int XRealTop = 0;
-    int YRealTop = 0;
-
-    int XRealBottom = 0;
-    int YRealBottom = 0;
+    int XReal = 0;
+    int YReal = 0;
 
     int Teamside = 0;
 

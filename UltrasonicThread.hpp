@@ -41,7 +41,7 @@ class UltrasonicThread : public QThread
     Q_OBJECT
 
 public:
-    UltrasonicThread( MsgQueueClass *QueueRealValuesTop, MsgQueueClass *QueueRealValuesBottom );
+    UltrasonicThread( MsgQueueClass *QueueRealValues);
     ~UltrasonicThread();
 
 public:
@@ -49,12 +49,10 @@ public:
 
 signals:
     void printSerialMsg(QString NewSerialMsg);
-    void printRealValueTop(int X, int Y );
-    void printRealValueBottom( int X, int Y);
+    void printRealValues(int X, int Y );
 
 public:
-    MsgQueueClass *MyQueueRealValuesTop;
-    MsgQueueClass *MyQueueRealValuesBottom;
+    MsgQueueClass *MyQueueRealValues;
     HexamiteRS232Port *MySerialPort;
 
 };
